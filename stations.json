@@ -1,0 +1,2645 @@
+{
+  "content": "FullStationScan",
+  "FrequencyRegion": "Unknown",
+  "Location": {
+    "StreetNo": "53",
+    "Street": "Elfleda Road",
+    "PostalCode": "CB58NA",
+    "City": "Cambridge",
+    "Country": "UK",
+    "Floor": "indoor 1",
+    "gps_latitude": "",
+    "gps_longitude": ""
+  },
+  "ensembleList": [
+    {
+      "EnsembleNo": 0,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 27,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 174928,
+        "tune_index": 0,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 1,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 29,
+        "snr": 0,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 176640,
+        "tune_index": 1,
+        "fft_offset": 0,
+        "readAntCap": 1,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 2,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 28,
+        "snr": 0,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 178352,
+        "tune_index": 2,
+        "fft_offset": 0,
+        "readAntCap": 1,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 3,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 28,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 180064,
+        "tune_index": 3,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 4,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 25,
+        "snr": 0,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 181936,
+        "tune_index": 4,
+        "fft_offset": 0,
+        "readAntCap": 11,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 5,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 25,
+        "snr": 0,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 183648,
+        "tune_index": 5,
+        "fft_offset": 0,
+        "readAntCap": 11,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 6,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 25,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 185360,
+        "tune_index": 6,
+        "fft_offset": 0,
+        "readAntCap": 13,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 7,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 29,
+        "snr": 0,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 187072,
+        "tune_index": 7,
+        "fft_offset": 0,
+        "readAntCap": 6,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 8,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 31,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 188928,
+        "tune_index": 8,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 9,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 25,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 190640,
+        "tune_index": 9,
+        "fft_offset": 0,
+        "readAntCap": 11,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 10,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 27,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 192352,
+        "tune_index": 10,
+        "fft_offset": 0,
+        "readAntCap": 6,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 11,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 28,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 194064,
+        "tune_index": 11,
+        "fft_offset": 0,
+        "readAntCap": 6,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 12,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 26,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 195936,
+        "tune_index": 12,
+        "fft_offset": 0,
+        "readAntCap": 1,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 13,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 25,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 197648,
+        "tune_index": 13,
+        "fft_offset": 0,
+        "readAntCap": 11,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 14,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 31,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 199360,
+        "tune_index": 14,
+        "fft_offset": 0,
+        "readAntCap": 9,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 15,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 30,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 201072,
+        "tune_index": 15,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 16,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 32,
+        "snr": 0,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 202928,
+        "tune_index": 16,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 17,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 29,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 204640,
+        "tune_index": 17,
+        "fft_offset": 0,
+        "readAntCap": 6,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 18,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 1,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 1,
+        "valid": 1,
+        "rssi": 50,
+        "snr": 246,
+        "FIC_quality": 100,
+        "cnr": 20,
+        "FIB_error_count": 0,
+        "tune_freq": 206352,
+        "tune_index": 18,
+        "fft_offset": 1,
+        "readAntCap": 13,
+        "cu_level": 0,
+        "fast_dect": 10
+      },
+      "DigitalServiceList": {
+        "ServiceListVersion": 39,
+        "NumberServices": 12,
+        "ServiceList": [
+          {
+            "ServiceNo": 0,
+            "ServId": 50902,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1750,
+            "CountryID": 12,
+            "ProgramType": 11,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Radio Caroline  ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 1,
+                "TMID": 0,
+                "SubChId": 1,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 1,
+            "ServId": 51089,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1937,
+            "CountryID": 12,
+            "ProgramType": 9,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Camb 105 Radio  ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 2,
+                "TMID": 0,
+                "SubChId": 2,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 2,
+            "ServId": 49284,
+            "AudioOrDataFlag": 0,
+            "ServRef": 132,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "ZackFM          ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 3,
+                "TMID": 0,
+                "SubChId": 3,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 3,
+            "ServId": 52674,
+            "AudioOrDataFlag": 0,
+            "ServRef": 3522,
+            "CountryID": 12,
+            "ProgramType": 27,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Angel Vintage   ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 4,
+                "TMID": 0,
+                "SubChId": 4,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 4,
+            "ServId": 51427,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2275,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Boss ATLANTIS   ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 5,
+                "TMID": 0,
+                "SubChId": 5,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 5,
+            "ServId": 51412,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2260,
+            "CountryID": 12,
+            "ProgramType": 7,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Resonance Extra ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 6,
+                "TMID": 0,
+                "SubChId": 6,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 6,
+            "ServId": 51850,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2698,
+            "CountryID": 12,
+            "ProgramType": 9,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "HCR104fm        ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 7,
+                "TMID": 0,
+                "SubChId": 7,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 7,
+            "ServId": 49626,
+            "AudioOrDataFlag": 0,
+            "ServRef": 474,
+            "CountryID": 12,
+            "ProgramType": 1,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "News Radio UK   ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 8,
+                "TMID": 0,
+                "SubChId": 8,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 8,
+            "ServId": 52181,
+            "AudioOrDataFlag": 0,
+            "ServRef": 3029,
+            "CountryID": 12,
+            "ProgramType": 27,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "CarolineFlashbak",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 9,
+                "TMID": 0,
+                "SubChId": 9,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 9,
+            "ServId": 50415,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1263,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Eruption Radio  ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 10,
+                "TMID": 0,
+                "SubChId": 10,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 10,
+            "ServId": 51164,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2012,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Radio Xtra      ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 11,
+                "TMID": 0,
+                "SubChId": 11,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 11,
+            "ServId": 50162,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1010,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "GlitterBeam     ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 12,
+                "TMID": 0,
+                "SubChId": 12,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 1
+              }
+            ]
+          }
+        ]
+      },
+      "ensembleTime": {
+        "year": 2023,
+        "month": 12,
+        "day": 29,
+        "hour": 21,
+        "minute": 51,
+        "second": 59
+      }
+    },
+    {
+      "EnsembleNo": 19,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 28,
+        "snr": 0,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 208064,
+        "tune_index": 19,
+        "fft_offset": 0,
+        "readAntCap": 9,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 20,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 23,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 209936,
+        "tune_index": 20,
+        "fft_offset": 0,
+        "readAntCap": 13,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 21,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 28,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 210096,
+        "tune_index": 21,
+        "fft_offset": 0,
+        "readAntCap": 9,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 22,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 28,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 211648,
+        "tune_index": 22,
+        "fft_offset": 0,
+        "readAntCap": 9,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 23,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 31,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 213360,
+        "tune_index": 23,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 6
+      }
+    },
+    {
+      "EnsembleNo": 24,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 31,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 215072,
+        "tune_index": 24,
+        "fft_offset": 0,
+        "readAntCap": 6,
+        "cu_level": 0,
+        "fast_dect": 6
+      }
+    },
+    {
+      "EnsembleNo": 25,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 35,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 216928,
+        "tune_index": 25,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 6
+      }
+    },
+    {
+      "EnsembleNo": 26,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 35,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 217088,
+        "tune_index": 26,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 6
+      }
+    },
+    {
+      "EnsembleNo": 27,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 29,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 218640,
+        "tune_index": 27,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 28,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 1,
+        "acqINT": 1,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 1,
+        "acq": 1,
+        "valid": 1,
+        "rssi": 38,
+        "snr": 246,
+        "FIC_quality": 42,
+        "cnr": 9,
+        "FIB_error_count": 12,
+        "tune_freq": 220352,
+        "tune_index": 28,
+        "fft_offset": 254,
+        "readAntCap": 1,
+        "cu_level": 0,
+        "fast_dect": 8
+      },
+      "DigitalServiceList": {
+        "ServiceListVersion": 66,
+        "NumberServices": 11,
+        "ServiceList": [
+          {
+            "ServiceNo": 0,
+            "ServId": 50234,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1082,
+            "CountryID": 12,
+            "ProgramType": 9,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio Cambs",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 6,
+                "TMID": 0,
+                "SubChId": 6,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 1,
+            "ServId": 50130,
+            "AudioOrDataFlag": 0,
+            "ServRef": 978,
+            "CountryID": 12,
+            "ProgramType": 12,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Gold Cambs",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 2,
+                "TMID": 0,
+                "SubChId": 2,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 2,
+            "ServId": 50026,
+            "AudioOrDataFlag": 0,
+            "ServRef": 874,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Heart Cambridge",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 1,
+                "TMID": 0,
+                "SubChId": 1,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 3,
+            "ServId": 52706,
+            "AudioOrDataFlag": 0,
+            "ServRef": 3554,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "HITS RADIO UK",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 3,
+                "TMID": 0,
+                "SubChId": 3,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 4,
+            "ServId": 53221,
+            "AudioOrDataFlag": 0,
+            "ServRef": 4069,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Grt Hits Cambs",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 4,
+                "TMID": 0,
+                "SubChId": 4,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 5,
+            "ServId": 52713,
+            "AudioOrDataFlag": 0,
+            "ServRef": 3561,
+            "CountryID": 12,
+            "ProgramType": 25,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Smooth Country",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 5,
+                "TMID": 0,
+                "SubChId": 5,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 6,
+            "ServId": 51690,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2538,
+            "CountryID": 12,
+            "ProgramType": 20,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Radio Maria Eng",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 7,
+                "TMID": 0,
+                "SubChId": 7,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 7,
+            "ServId": 49386,
+            "AudioOrDataFlag": 0,
+            "ServRef": 234,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Dubai Now",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 8,
+                "TMID": 0,
+                "SubChId": 8,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 8,
+            "ServId": 49390,
+            "AudioOrDataFlag": 0,
+            "ServRef": 238,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Star Radio (Cam)",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 10,
+                "TMID": 0,
+                "SubChId": 10,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 9,
+            "ServId": 50303,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1151,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Capital UK",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 12,
+                "TMID": 0,
+                "SubChId": 12,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 10,
+            "ServId": 3787456702,
+            "AudioOrDataFlag": 1,
+            "ServRef": 190,
+            "CountryID": 12,
+            "ECC": 225,
+            "ProgramType": 0,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "EPG Cambridge",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 49155,
+                "TMID": 3,
+                "SCId": 3,
+                "DGFlag": 0,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 60,
+                "muA_info_valid": 1
+              }
+            ]
+          }
+        ]
+      },
+      "ensembleTime": {
+        "year": 2023,
+        "month": 12,
+        "day": 29,
+        "hour": 21,
+        "minute": 52,
+        "second": 30
+      }
+    },
+    {
+      "EnsembleNo": 29,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 1,
+        "acqINT": 1,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 1,
+        "acq": 1,
+        "valid": 1,
+        "rssi": 37,
+        "snr": 246,
+        "FIC_quality": 42,
+        "cnr": 7,
+        "FIB_error_count": 12,
+        "tune_freq": 222064,
+        "tune_index": 29,
+        "fft_offset": 255,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 8
+      },
+      "DigitalServiceList": {
+        "ServiceListVersion": 117,
+        "NumberServices": 24,
+        "ServiceList": [
+          {
+            "ServiceNo": 0,
+            "ServId": 49825,
+            "AudioOrDataFlag": 0,
+            "ServRef": 673,
+            "CountryID": 12,
+            "ProgramType": 13,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Classic FM      ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 1,
+                "TMID": 0,
+                "SubChId": 1,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 1,
+            "ServId": 49344,
+            "AudioOrDataFlag": 0,
+            "ServRef": 192,
+            "CountryID": 12,
+            "ProgramType": 4,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "talkSPORT       ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 2,
+                "TMID": 0,
+                "SubChId": 2,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 2,
+            "ServId": 49346,
+            "AudioOrDataFlag": 0,
+            "ServRef": 194,
+            "CountryID": 12,
+            "ProgramType": 9,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "LBC             ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 15,
+                "TMID": 0,
+                "SubChId": 15,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 3,
+            "ServId": 49600,
+            "AudioOrDataFlag": 0,
+            "ServRef": 448,
+            "CountryID": 12,
+            "ProgramType": 11,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Absolute Radio  ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 3,
+                "TMID": 0,
+                "SubChId": 3,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 4,
+            "ServId": 50624,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1472,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "KISS            ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 10,
+                "TMID": 0,
+                "SubChId": 10,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 5,
+            "ServId": 49350,
+            "AudioOrDataFlag": 0,
+            "ServRef": 198,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Magic           ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 11,
+                "TMID": 0,
+                "SubChId": 11,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 6,
+            "ServId": 53222,
+            "AudioOrDataFlag": 0,
+            "ServRef": 4070,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "KISSTORY        ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 13,
+                "TMID": 0,
+                "SubChId": 13,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 7,
+            "ServId": 53201,
+            "AudioOrDataFlag": 0,
+            "ServRef": 4049,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Heart UK        ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 5,
+                "TMID": 0,
+                "SubChId": 5,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 8,
+            "ServId": 50880,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1728,
+            "CountryID": 12,
+            "ProgramType": 12,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Smooth UK       ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 6,
+                "TMID": 0,
+                "SubChId": 6,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 9,
+            "ServId": 52968,
+            "AudioOrDataFlag": 0,
+            "ServRef": 3816,
+            "CountryID": 12,
+            "ProgramType": 12,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Gold UK         ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 8,
+                "TMID": 0,
+                "SubChId": 8,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 10,
+            "ServId": 53224,
+            "AudioOrDataFlag": 0,
+            "ServRef": 4072,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Heart Dance     ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 4,
+                "TMID": 0,
+                "SubChId": 4,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 11,
+            "ServId": 49628,
+            "AudioOrDataFlag": 0,
+            "ServRef": 476,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Heart  80s      ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 14,
+                "TMID": 0,
+                "SubChId": 14,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 12,
+            "ServId": 52201,
+            "AudioOrDataFlag": 0,
+            "ServRef": 3049,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Heart  90s      ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 18,
+                "TMID": 0,
+                "SubChId": 18,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 13,
+            "ServId": 50043,
+            "AudioOrDataFlag": 0,
+            "ServRef": 891,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Capital XTRA    ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 16,
+                "TMID": 0,
+                "SubChId": 16,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 14,
+            "ServId": 51945,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2793,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Heart  70s      ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 19,
+                "TMID": 0,
+                "SubChId": 19,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 15,
+            "ServId": 50381,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1229,
+            "CountryID": 12,
+            "ProgramType": 11,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Radio X         ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 17,
+                "TMID": 0,
+                "SubChId": 17,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 16,
+            "ServId": 51434,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2282,
+            "CountryID": 12,
+            "ProgramType": 1,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "LBC News        ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 21,
+                "TMID": 0,
+                "SubChId": 21,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 17,
+            "ServId": 50650,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1498,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Capital UK      ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 22,
+                "TMID": 0,
+                "SubChId": 22,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 18,
+            "ServId": 51691,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2539,
+            "CountryID": 12,
+            "ProgramType": 15,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Smooth Chill    ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 12,
+                "TMID": 0,
+                "SubChId": 12,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 19,
+            "ServId": 51693,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2541,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Capital DANCE   ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 23,
+                "TMID": 0,
+                "SubChId": 23,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 20,
+            "ServId": 50378,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1226,
+            "CountryID": 12,
+            "ProgramType": 20,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "UCB 1           ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 7,
+                "TMID": 0,
+                "SubChId": 7,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 21,
+            "ServId": 50416,
+            "AudioOrDataFlag": 0,
+            "ServRef": 1264,
+            "CountryID": 12,
+            "ProgramType": 1,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "GB News Radio   ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 24,
+                "TMID": 0,
+                "SubChId": 24,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 22,
+            "ServId": 52184,
+            "AudioOrDataFlag": 0,
+            "ServRef": 3032,
+            "CountryID": 12,
+            "ProgramType": 20,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "UCB 2           ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 9,
+                "TMID": 0,
+                "SubChId": 9,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 23,
+            "ServId": 51699,
+            "AudioOrDataFlag": 0,
+            "ServRef": 2547,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "Heart 00s       ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 20,
+                "TMID": 0,
+                "SubChId": 20,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 63,
+                "muA_info_valid": 0
+              }
+            ]
+          }
+        ]
+      },
+      "ensembleTime": {
+        "year": 2023,
+        "month": 12,
+        "day": 29,
+        "hour": 21,
+        "minute": 52,
+        "second": 30
+      }
+    },
+    {
+      "EnsembleNo": 30,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 1,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 1,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 27,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 223936,
+        "tune_index": 30,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 31,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 27,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 224096,
+        "tune_index": 31,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 6
+      }
+    },
+    {
+      "EnsembleNo": 32,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 1,
+        "acqINT": 1,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 1,
+        "valid": 1,
+        "rssi": 40,
+        "snr": 246,
+        "FIC_quality": 63,
+        "cnr": 11,
+        "FIB_error_count": 12,
+        "tune_freq": 225648,
+        "tune_index": 32,
+        "fft_offset": 1,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 8
+      },
+      "DigitalServiceList": {
+        "ServiceListVersion": 146,
+        "NumberServices": 12,
+        "ServiceList": [
+          {
+            "ServiceNo": 0,
+            "ServId": 3787955806,
+            "AudioOrDataFlag": 1,
+            "ServRef": 499294,
+            "CountryID": 12,
+            "ECC": 225,
+            "ProgramType": 0,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Guide       ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 49153,
+                "TMID": 3,
+                "SCId": 1,
+                "DGFlag": 0,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 60,
+                "muA_info_valid": 1
+              }
+            ]
+          },
+          {
+            "ServiceNo": 1,
+            "ServId": 49697,
+            "AudioOrDataFlag": 0,
+            "ServRef": 545,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 1,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio 1     ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 1,
+                "TMID": 0,
+                "SubChId": 1,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 2,
+            "ServId": 49698,
+            "AudioOrDataFlag": 0,
+            "ServRef": 546,
+            "CountryID": 12,
+            "ProgramType": 10,
+            "LinkingInfo": 1,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio 2     ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 2,
+                "TMID": 0,
+                "SubChId": 2,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 3,
+            "ServId": 49699,
+            "AudioOrDataFlag": 0,
+            "ServRef": 547,
+            "CountryID": 12,
+            "ProgramType": 7,
+            "LinkingInfo": 1,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio 3     ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 3,
+                "TMID": 0,
+                "SubChId": 3,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 4,
+            "ServId": 49700,
+            "AudioOrDataFlag": 0,
+            "ServRef": 548,
+            "CountryID": 12,
+            "ProgramType": 9,
+            "LinkingInfo": 1,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio 4     ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 4,
+                "TMID": 0,
+                "SubChId": 4,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 5,
+            "ServId": 49707,
+            "AudioOrDataFlag": 0,
+            "ServRef": 555,
+            "CountryID": 12,
+            "ProgramType": 11,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio 6Music",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 11,
+                "TMID": 0,
+                "SubChId": 11,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 6,
+            "ServId": 49708,
+            "AudioOrDataFlag": 0,
+            "ServRef": 556,
+            "CountryID": 12,
+            "ProgramType": 9,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio 4Extra",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 12,
+                "TMID": 0,
+                "SubChId": 12,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 7,
+            "ServId": 49706,
+            "AudioOrDataFlag": 0,
+            "ServRef": 554,
+            "CountryID": 12,
+            "ProgramType": 0,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio 1Xtra ",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 10,
+                "TMID": 0,
+                "SubChId": 10,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 8,
+            "ServId": 49718,
+            "AudioOrDataFlag": 0,
+            "ServRef": 566,
+            "CountryID": 12,
+            "ProgramType": 9,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC AsianNetwork",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 7,
+                "TMID": 0,
+                "SubChId": 7,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 9,
+            "ServId": 49701,
+            "AudioOrDataFlag": 0,
+            "ServRef": 549,
+            "CountryID": 12,
+            "ProgramType": 1,
+            "LinkingInfo": 1,
+            "NumberComponents": 2,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC Radio 5 Live",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 5,
+                "TMID": 0,
+                "SubChId": 5,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              },
+              {
+                "ComponentNo": 1,
+                "comp_ID": 8,
+                "TMID": 0,
+                "SubChId": 8,
+                "CA_flag": 0,
+                "ps": 0,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 10,
+            "ServId": 49720,
+            "AudioOrDataFlag": 0,
+            "ServRef": 568,
+            "CountryID": 12,
+            "ProgramType": 9,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC WorldService",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 9,
+                "TMID": 0,
+                "SubChId": 9,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          },
+          {
+            "ServiceNo": 11,
+            "ServId": 49704,
+            "AudioOrDataFlag": 0,
+            "ServRef": 552,
+            "CountryID": 12,
+            "ProgramType": 4,
+            "LinkingInfo": 0,
+            "NumberComponents": 1,
+            "CAId": 0,
+            "local": 0,
+            "SICharset": 0,
+            "Label": "BBC R5LiveSportX",
+            "ComponentList": [
+              {
+                "ComponentNo": 0,
+                "comp_ID": 8,
+                "TMID": 0,
+                "SubChId": 8,
+                "CA_flag": 0,
+                "ps": 1,
+                "ASCTyDSCTy": 0,
+                "muA_info_valid": 0
+              }
+            ]
+          }
+        ]
+      },
+      "ensembleTime": {
+        "year": 2023,
+        "month": 12,
+        "day": 29,
+        "hour": 21,
+        "minute": 52,
+        "second": 30
+      }
+    },
+    {
+      "EnsembleNo": 33,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 20,
+        "snr": 0,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 227360,
+        "tune_index": 33,
+        "fft_offset": 0,
+        "readAntCap": 13,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 34,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 22,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 229072,
+        "tune_index": 34,
+        "fft_offset": 0,
+        "readAntCap": 9,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 35,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 22,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 230784,
+        "tune_index": 35,
+        "fft_offset": 0,
+        "readAntCap": 11,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 36,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 21,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 232496,
+        "tune_index": 36,
+        "fft_offset": 0,
+        "readAntCap": 11,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 37,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 25,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 234208,
+        "tune_index": 37,
+        "fft_offset": 0,
+        "readAntCap": 9,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 38,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 20,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 235776,
+        "tune_index": 38,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 39,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 17,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 237488,
+        "tune_index": 39,
+        "fft_offset": 0,
+        "readAntCap": 6,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    },
+    {
+      "EnsembleNo": 40,
+      "DigradStatus": {
+        "hardmuteINT": 0,
+        "FICerrINT": 0,
+        "acqINT": 0,
+        "rssihINT": 0,
+        "rssilINT": 0,
+        "hardmute": 0,
+        "FICerr": 0,
+        "acq": 0,
+        "valid": 0,
+        "rssi": 18,
+        "snr": 246,
+        "FIC_quality": 0,
+        "cnr": 0,
+        "FIB_error_count": 0,
+        "tune_freq": 239200,
+        "tune_index": 40,
+        "fft_offset": 0,
+        "readAntCap": 3,
+        "cu_level": 0,
+        "fast_dect": 0
+      }
+    }
+  ]
+}
