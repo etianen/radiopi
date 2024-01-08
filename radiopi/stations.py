@@ -7,6 +7,8 @@ from pathlib import Path
 from rich.console import Console
 from rich.table import Table
 
+from radiopi.config import Config
+
 
 @dataclasses.dataclass()
 class Station:
@@ -16,9 +18,9 @@ class Station:
     label: str
 
 
-def load_stations() -> list[Station]:
+def load_stations(config: Config) -> list[Station]:
     # Load station data.
-    data = json.loads(Path("stations.json").read_bytes())
+    data = json.loads(Path(config.station_list_path).read_bytes())
     # Build the station mapping.
     stations: list[Station] = []
     for ensemble_data in data["ensembleList"]:
@@ -45,7 +47,7 @@ def load_stations() -> list[Station]:
     return stations
 
 
-def show_stations() -> None:
+def show_stations(config: Config) -> None:
     # Create the table.
     table = Table(title="Stations")
     table.add_column("Label", style="bold")
