@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from argparse import ArgumentParser
 
-from radiopi import run
+from radiopi.run import run_cmd
 
 
 def main() -> None:
@@ -13,7 +13,7 @@ def main() -> None:
     )
     # Create subparsers.
     subparsers = parser.add_subparsers(metavar="COMMAND", required=True)
-    for cmd in (run.main,):
+    for cmd in (run_cmd,):
         cmd_parser = subparsers.add_parser("run", description=cmd.__doc__, help=cmd.__doc__)
         cmd_parser.set_defaults(cmd=cmd)
     # Parse args.

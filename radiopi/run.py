@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 
-def main() -> None:
+def run_cmd() -> None:
     """
     Runs the RadioPi control daemon.
     """
