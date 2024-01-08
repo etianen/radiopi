@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 
 from gpiozero import Button, Device
-from gpiozero.pins.mock import MockFactory
 
 from radiopi.radio import Radio
 
@@ -12,22 +11,18 @@ logger = logging.getLogger(__name__)
 
 try:
     # Try to use the real pin factory.
-    from gpiozero.pins.rpigpio import RPiGPIOFactory
+    from gpiozero.pins.rpigpio import RPiGPIOFactory as PinFactory
 except ImportError:
+    logger.warning("`RPi.GPIO` is not installed, using mock pin factory")
     # Fall back to a mock pin factory.
     # We're either not running on an RPi, or important things are not installed!
-    PinFactory = MockFactory
-else:
-    # Use the real pin factory.
-    PinFactory = RPiGPIOFactory
+    from gpiozero.pins.mock import MockFactory as PinFactory
 
 
 def init_gpio(radio: Radio) -> None:
     logger.info("Initializing GPIO...")
     # Configure `gpiozero`.
-    if PinFactory is MockFactory:
-        logger.warning("`RPi.GPIO` is not installed, using mock pin factory")
-    Device.pin_factory = RPiGPIOFactory()
+    Device.pin_factory = PinFactory()
     # Enable toggle play switch.
     toggle_play_switch = Button(21)
     toggle_play_switch.when_pressed = radio.toggle_play
