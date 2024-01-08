@@ -19,23 +19,23 @@ except ImportError:
     from gpiozero.pins.mock import MockFactory as PinFactory
 
 
-def init_gpio(radio: Radio) -> None:
-    logger.info("Initializing GPIO...")
-    # Configure `gpiozero`.
-    Device.pin_factory = PinFactory()
-    # Enable toggle play switch.
-    toggle_play_switch = Button(21)
-    toggle_play_switch.when_pressed = radio.toggle_play
-    # Enable next station switch.
-    next_station_switch = Button(16, hold_time=1, hold_repeat=True)
-    next_station_switch.when_pressed = radio.next_station
-    next_station_switch.when_held = radio.next_station
-    # Enable previous station switch.
-    prev_station_switch = Button(12, hold_time=1, hold_repeat=True)
-    prev_station_switch.when_pressed = radio.prev_station
-    prev_station_switch.when_held = radio.prev_station
-    # Enable shutdown switch.
-    shutdown_switch = Button(26, hold_time=1, hold_repeat=False)
-    shutdown_switch.when_held = radio.shutdown
-    # All done!
-    logger.info("GPIO initialized!")
+class GPIO:
+    def __init__(self, radio: Radio) -> None:
+        logger.info("Initializing GPIO...")
+        Device.pin_factory = PinFactory()
+        # Enable toggle play switch.
+        self.toggle_play_switch = Button(21)
+        self.toggle_play_switch.when_pressed = radio.toggle_play
+        # Enable next station switch.
+        self.next_station_switch = Button(16, hold_time=1, hold_repeat=True)
+        self.next_station_switch.when_pressed = radio.next_station
+        self.next_station_switch.when_held = radio.next_station
+        # Enable previous station switch.
+        self.prev_station_switch = Button(12, hold_time=1, hold_repeat=True)
+        self.prev_station_switch.when_pressed = radio.prev_station
+        self.prev_station_switch.when_held = radio.prev_station
+        # Enable shutdown switch.
+        self.shutdown_switch = Button(26, hold_time=1, hold_repeat=False)
+        self.shutdown_switch.when_held = radio.shutdown
+        # All done!
+        logger.info("GPIO initialized!")

@@ -3,16 +3,18 @@ from __future__ import annotations
 import logging
 from signal import pause
 
-from radiopi.gpio import init_gpio
+from radiopi.gpio import GPIO
 from radiopi.radio import Radio
 
 
 def main() -> None:
     # Configure logging.
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.DEBUG)
-    # Initialize.
+    # Initialize radio.
     radio = Radio()
-    init_gpio(radio)
+    # Initialize GPIO.
+    # We need to keep a reference to this around to stop the GC closing all the button references.
+    gpio = GPIO(radio)  # noqa: F841
     # Wait for something to happen.
     try:
         pause()

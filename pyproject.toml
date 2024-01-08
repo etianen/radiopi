@@ -32,6 +32,7 @@ module = ["gpiozero.*"]
 ignore_missing_imports = true
 
 [tool.ruff]
+exclude = [".venv"]
 line-length = 120
 select = ["E", "F", "W", "I"]
 
