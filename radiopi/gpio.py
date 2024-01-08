@@ -12,15 +12,14 @@ logger = logging.getLogger(__name__)
 
 try:
     # Try to use the real pin factory.
-    from gpiozero.pins.rpigpio import RPiGPIOFactory as PinFactory
+    from gpiozero.pins.rpigpio import RPiGPIOFactory
 except ImportError:
     # Fall back to a mock pin factory.
     # We're either not running on an RPi, or important things are not installed!
     PinFactory = MockFactory
-
-
-def foo() -> None:
-    print("FOOOO")
+else:
+    # Use the real pin factory.
+    PinFactory = RPiGPIOFactory
 
 
 def init_gpio(radio: Radio) -> None:
