@@ -24,18 +24,18 @@ class GPIO:
         logger.info("Initializing GPIO...")
         Device.pin_factory = PinFactory()
         # Enable toggle play switch.
-        self.toggle_play_switch = Button(21)
-        self.toggle_play_switch.when_pressed = radio.toggle_play
+        self._toggle_play_switch = Button(21)
+        self._toggle_play_switch.when_pressed = radio.toggle_play
         # Enable next station switch.
-        self.next_station_switch = Button(16, hold_time=1, hold_repeat=True)
-        self.next_station_switch.when_pressed = radio.next_station
-        self.next_station_switch.when_held = radio.next_station
+        self._next_station_switch = Button(16, hold_time=1, hold_repeat=True)
+        self._next_station_switch.when_pressed = radio.next_station
+        self._next_station_switch.when_held = radio.next_station
         # Enable previous station switch.
-        self.prev_station_switch = Button(12, hold_time=1, hold_repeat=True)
-        self.prev_station_switch.when_pressed = radio.prev_station
-        self.prev_station_switch.when_held = radio.prev_station
+        self._prev_station_switch = Button(12, hold_time=1, hold_repeat=True)
+        self._prev_station_switch.when_pressed = radio.prev_station
+        self._prev_station_switch.when_held = radio.prev_station
         # Enable shutdown switch.
-        self.shutdown_switch = Button(26, hold_time=1, hold_repeat=False)
-        self.shutdown_switch.when_held = radio.shutdown
+        self._shutdown_switch = Button(26, hold_time=1, hold_repeat=False)
+        self._shutdown_switch.when_held = radio.shutdown
         # All done!
         logger.info("GPIO initialized!")
