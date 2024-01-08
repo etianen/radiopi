@@ -14,6 +14,8 @@ gpiozero = "^2.0"
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.8.0"
 ruff = "^0.1.11"
+pytest = "^7.4.4"
+pytest-cov = "^4.1.0"
 
 [tool.poetry.scripts]
 radiopi = "radiopi:main"
@@ -31,6 +33,11 @@ platform = "linux"
 [[tool.mypy.overrides]]
 module = ["gpiozero.*"]
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+console_output_style = "classic"
+addopts = "--tb native"
 
 [tool.ruff]
 include = ["radiopi/**/*.py"]
