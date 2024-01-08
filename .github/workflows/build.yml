@@ -7,10 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    # Install toolchain.
     - uses: actions/setup-python@v5
       with:
         python-version: "3.9"
     - run: pipx install poetry
+    # Install dependencies.
     - run: poetry check
     - run: poetry check --lock
     - run: poetry install
+    # Run lints.
+    - run: poetry run ruff check
+    - run: poetry run ruff format --check
+    - run: poetry run mypy
