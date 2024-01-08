@@ -16,7 +16,7 @@ class Station:
 
 def load_stations() -> list[Station]:
     # Load station data.
-    data = json.loads((Path(__file__).parent / "stations.json").read_bytes())
+    data = json.loads((Path(__file__).parent.parent / "stations.json").read_bytes())
     # Build the station mapping.
     stations: list[Station] = []
     for ensemble_data in data["ensembleList"]:
