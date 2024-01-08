@@ -101,7 +101,7 @@ class Radio:
         self.play()
 
     @locked
-    def shutdown(self) -> None:
+    def shutdown(self) -> None:  # pragma: no cover
         self.stop()
         logger.info("Goodby RadioPi...")
         subprocess.check_call(["poweroff", "-h"])
