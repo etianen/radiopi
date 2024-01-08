@@ -31,7 +31,7 @@ def init_gpio(radio: Radio) -> None:
     Device.pin_factory = PinFactory()
     # Enable toggle play switch.
     toggle_play_switch = Button(21)
-    toggle_play_switch.when_pressed = foo
+    toggle_play_switch.when_pressed = radio.toggle_play
     # Enable next station switch.
     next_station_switch = Button(16, hold_time=1, hold_repeat=True)
     next_station_switch.when_pressed = radio.next_station
