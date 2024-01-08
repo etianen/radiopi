@@ -19,7 +19,7 @@ ruff = "^0.1.11"
 radiopi = "radiopi:main"
 
 [tool.mypy]
-files = ["radiopi"]
+files = ["radiopi/**/*.py"]
 allow_redefinition = true
 explicit_package_bases = true
 namespace_packages = true
@@ -33,7 +33,7 @@ module = ["gpiozero.*"]
 ignore_missing_imports = true
 
 [tool.ruff]
-exclude = [".venv"]
+include = ["radiopi/**/*.py"]
 line-length = 120
 select = ["E", "F", "W", "I"]
 
