@@ -41,7 +41,7 @@ class Radio:
 
     def _cli(self, *args: str) -> None:
         logger.debug("Running `radio_cli`: %r", args)
-        if self._radio_cli_path is not None:
+        if self._radio_cli_path is not None:  # pragma: no cover
             subprocess.check_call((self._radio_cli_path, *args))
 
     @property
