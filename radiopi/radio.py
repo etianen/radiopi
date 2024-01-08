@@ -46,6 +46,11 @@ class Radio:
 
     @property
     @locked
+    def is_playing(self) -> bool:
+        return self._is_playing
+
+    @property
+    @locked
     def station(self) -> Station:
         return self.stations[self._station_index % len(self.stations)]
 

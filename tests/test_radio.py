@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from radiopi.radio import Radio
 
-def test_foo() -> None:
-    pass
+
+def test_starts_automatically(radio: Radio) -> None:
+    assert radio.is_playing
