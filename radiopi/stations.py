@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 
-@dataclasses.dataclass()
+@dataclasses.dataclass(frozen=True)
 class Station:
     __slots__ = ("frequency_index", "service_id", "component_id", "label")
     frequency_index: int
