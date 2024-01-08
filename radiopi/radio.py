@@ -23,7 +23,7 @@ class Radio:
         self.is_playing = False
         self.toggle_play()
 
-    def cli(self, *args: str) -> None:
+    def _cli(self, *args: str) -> None:
         logger.debug("Running `radio_cli`: %r", args)
         if self.radio_cli_path is not None:
             subprocess.check_call((self.radio_cli_path, *args))
@@ -32,13 +32,13 @@ class Radio:
         # Boot, if not playing.
         if not self.is_playing:
             logger.info("Booting radio...")
-            self.cli("--boot=D")
+            self._cli("--boot=D")
             self.is_playing = True
             logger.info("Radio booted!")
         # Tune to the station.
         station: Station = self.stations[self.station_index % len(self.stations)]
         logger.info(f"Tuning to {station.label}...")
-        self.cli(
+        self._cli(
             f"--component={station.component_id}",
             f"--service={station.service_id}",
             f"--frequency={station.frequency_index}",
@@ -51,7 +51,7 @@ class Radio:
         # Shutdown, if playing.
         if self.is_playing:
             logger.info("Shutting down radio...")
-            self.cli("--shutdown")
+            self._cli("--shutdown")
             self.is_playing = False
             logger.info("Radio shutdown!")
 
