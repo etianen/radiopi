@@ -23,6 +23,7 @@ def init_gpio(radio: Radio) -> None:
     logger.info("Initializing GPIO...")
     # Configure `gpiozero`.
     if PinFactory is MockFactory:
+        raise Exception("FOO")
         logger.warning("`RPi.GPIO` is not installed, using mock pin factory")
     Device.pin_factory = PinFactory()
     # Enable toggle play switch.
