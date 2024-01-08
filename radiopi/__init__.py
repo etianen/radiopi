@@ -13,7 +13,7 @@ def main() -> None:
     # Initialize radio.
     radio = Radio()
     # Initialize GPIO.
-    # We need to keep a reference to this around to stop the GC closing all the button references.
+    # We need to keep a reference to this around to prevent the GC closing all `gpiozero` references.
     gpio = GPIO(radio)  # noqa: F841
     # Wait for something to happen.
     try:
