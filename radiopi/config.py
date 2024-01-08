@@ -3,7 +3,7 @@ from __future__ import annotations
 import dataclasses
 
 
-@dataclasses.dataclass(kw_only=True)
+@dataclasses.dataclass()
 class Config:
     """
     Global RadioPi config.
