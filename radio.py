@@ -12,23 +12,22 @@ from radiopi.stations import Station, load_stations
 
 def main():
     radio = Radio()
-    init_gpio(radio)
-    # # Configure `gpiozero`.
-    # Device.pin_factory = RPiGPIOFactory()
-    # # Enable toggle play switch.
-    # toggle_play_switch = Button(21)
-    # toggle_play_switch.when_pressed = radio.toggle_play
-    # # Enable next station switch.
-    # next_station_switch = Button(16, hold_time=1, hold_repeat=True)
-    # next_station_switch.when_pressed = radio.next_station
-    # next_station_switch.when_held = radio.next_station
-    # # Enable previous station switch.
-    # prev_station_switch = Button(12, hold_time=1, hold_repeat=True)
-    # prev_station_switch.when_pressed = radio.prev_station
-    # prev_station_switch.when_held = radio.prev_station
-    # # Enable shutdown switch.
-    # shutdown_switch = Button(26, hold_time=1, hold_repeat=False)
-    # shutdown_switch.when_held = radio.shutdown
+    # Configure `gpiozero`.
+    Device.pin_factory = RPiGPIOFactory()
+    # Enable toggle play switch.
+    toggle_play_switch = Button(21)
+    toggle_play_switch.when_pressed = radio.toggle_play
+    # Enable next station switch.
+    next_station_switch = Button(16, hold_time=1, hold_repeat=True)
+    next_station_switch.when_pressed = radio.next_station
+    next_station_switch.when_held = radio.next_station
+    # Enable previous station switch.
+    prev_station_switch = Button(12, hold_time=1, hold_repeat=True)
+    prev_station_switch.when_pressed = radio.prev_station
+    prev_station_switch.when_held = radio.prev_station
+    # Enable shutdown switch.
+    shutdown_switch = Button(26, hold_time=1, hold_repeat=False)
+    shutdown_switch.when_held = radio.shutdown
     # Wait for something to happen.
     try:
         pause()
