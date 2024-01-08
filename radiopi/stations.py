@@ -45,7 +45,7 @@ def load_stations() -> list[Station]:
     return stations
 
 
-def main() -> None:
+def show_stations() -> None:
     # Create the table.
     table = Table(title="Stations")
     table.add_column("Label", style="bold")
@@ -63,7 +63,3 @@ def main() -> None:
     # Print the table.
     console = Console()
     console.print(table)
-
-
-if __name__ == "__main__":
-    main()
