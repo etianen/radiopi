@@ -18,7 +18,7 @@ class Station:
     label: str
 
 
-def load_stations(config: Config) -> list[Station]:
+def load_stations() -> list[Station]:
     # Load station data.
     data = json.loads(Path(config.station_list_path).read_bytes())
     # Build the station mapping.
@@ -45,23 +45,3 @@ def load_stations(config: Config) -> list[Station]:
                 stations.append(station)
     # All done!
     return stations
-
-
-def show_stations(config: Config) -> None:
-    # Create the table.
-    table = Table(title="Stations")
-    table.add_column("Label", style="bold")
-    table.add_column("Frequency index")
-    table.add_column("Service ID")
-    table.add_column("Component ID")
-    # Add all stations.
-    for station in load_stations():
-        table.add_row(
-            station.label,
-            str(station.frequency_index),
-            str(station.service_id),
-            str(station.component_id),
-        )
-    # Print the table.
-    console = Console()
-    console.print(table)

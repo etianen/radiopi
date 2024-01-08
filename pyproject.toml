@@ -9,7 +9,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.9"
 gpiozero = "^2.0"
-rich = "^13.7.0"
 "rpi.gpio" = { version = "^0.7.1", markers = "sys_platform == 'linux'" }
 
 [tool.poetry.group.dev.dependencies]
