@@ -13,7 +13,7 @@ try:
     # Try to use the real pin factory.
     from gpiozero.pins.rpigpio import RPiGPIOFactory as PinFactory
 except ImportError:
-    logger.warning("`RPi.GPIO` is not installed, using mock pin factory")
+    logger.warning("`RPi.GPIO` is not installed, using mock pin factory!")
     # Fall back to a mock pin factory.
     # We're either not running on an RPi, or important things are not installed!
     from gpiozero.pins.mock import MockFactory as PinFactory

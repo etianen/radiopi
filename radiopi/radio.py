@@ -31,7 +31,7 @@ class Radio:
         # See if `radio_cli` is installed.
         self._radio_cli_path = which("radio_cli")
         if self._radio_cli_path is None:
-            logger.warning("`radio_cli` is not installed, using mock CLI")
+            logger.warning("`radio_cli` is not installed, using mock radio CLI!")
         # Load all stations.
         self.stations: Sequence[Station] = load_stations()
         self._station_index: int = 0
