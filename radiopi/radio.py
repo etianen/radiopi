@@ -37,7 +37,7 @@ class Radio:
         self._station_index: int = 0
         # Start the radio.
         self._is_playing = False
-        self.toggle_play()
+        self.play()
 
     def _cli(self, *args: str) -> None:
         logger.debug("Running `radio_cli`: %r", args)
