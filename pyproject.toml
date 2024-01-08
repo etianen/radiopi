@@ -20,8 +20,16 @@ pytest-cov = "^4.1.0"
 [tool.poetry.scripts]
 radiopi = "radiopi:main"
 
+[tool.coverage.run]
+source = ["radiopi", "tests"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 100
+
 [tool.mypy]
-files = ["radiopi/**/*.py"]
+files = ["radiopi/**/*.py", "tests/**/*.py"]
 allow_redefinition = true
 explicit_package_bases = true
 namespace_packages = true
@@ -37,10 +45,10 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 console_output_style = "classic"
-addopts = "--tb native"
+addopts = "--tb=native --cov"
 
 [tool.ruff]
-include = ["radiopi/**/*.py"]
+include = ["radiopi/**/*.py", "tests/**/*.py"]
 line-length = 120
 select = ["E", "F", "W", "I"]
 
