@@ -16,7 +16,7 @@ jobs:
     - run: poetry check
     - run: poetry check --lock
     - run: poetry install
-    # Run lints.
+    # Run checks.
     - run: poetry run ruff check
     - run: poetry run ruff format --check
     - run: poetry run mypy
