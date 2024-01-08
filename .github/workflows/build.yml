@@ -11,3 +11,6 @@ jobs:
       with:
         python-version: "3.9"
     - run: pipx install poetry
+    - run: poetry check
+    - run: poetry check --lock
+    - run: poetry install
