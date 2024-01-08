@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import logging
-import warnings
 
 from gpiozero import Button, Device  # type: ignore[import-untyped]
+from gpiozero.pins.mock import MockFactory
 
 from radiopi.radio import Radio
+
+logger = logging.getLogger(__name__)
+
 
 try:
     # Try to use the real pin factory.
@@ -13,16 +16,14 @@ try:
 except ImportError:
     # Fall back to a mock pin factory.
     # We're either not running on an RPi, or important things are not installed!
-    warnings.warn(ImportWarning("`RPi.GPIO` is not installed, using mock pin factory"))
-    from gpiozero.pins.mock import MockFactory as PinFactory  # type: ignore[import-untyped]
-
-
-logger = logging.getLogger(__name__)
+    PinFactory = MockFactory
 
 
 def init_gpio(radio: Radio) -> None:
-    logger.info("Initializing GPIO")
+    logger.info("Initializing GPIO...")
     # Configure `gpiozero`.
+    if PinFactory is MockFactory:
+        logger.warning("`RPi.GPIO` is not installed, using mock pin factory")
     Device.pin_factory = PinFactory()
     # Enable toggle play switch.
     toggle_play_switch = Button(21)
@@ -38,3 +39,5 @@ def init_gpio(radio: Radio) -> None:
     # Enable shutdown switch.
     shutdown_switch = Button(26, hold_time=1, hold_repeat=False)
     shutdown_switch.when_held = radio.shutdown
+    # All done!
+    logger.info("GPIO initialized!")
