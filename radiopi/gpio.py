@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import logging
 
-from gpiozero import Button, Device  # type: ignore[import-untyped]
-from gpiozero.pins.mock import MockFactory  # type: ignore[import-untyped]
+from gpiozero import Button, Device
+from gpiozero.pins.mock import MockFactory
 
 from radiopi.radio import Radio
 
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 try:
     # Try to use the real pin factory.
-    from gpiozero.pins.rpigpio import RPiGPIOFactory as PinFactory  # type: ignore[import-untyped]
+    from gpiozero.pins.rpigpio import RPiGPIOFactory as PinFactory
 except ImportError:
     # Fall back to a mock pin factory.
     # We're either not running on an RPi, or important things are not installed!
