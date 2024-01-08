@@ -1,20 +1,16 @@
 from __future__ import annotations
 
+import logging
 import subprocess
-from signal import pause
 
-from gpiozero import Button, Device  # type: ignore[import-untyped]
-from gpiozero.pins.rpigpio import RPiGPIOFactory  # type: ignore[import-untyped]
-from rich.console import Console
+from radiopi.stations import Station, load_stations
 
-from stations import Station, load_stations
-
-RADIO_CLI = "/opt/DABBoard/radio_cli_v3.1.0"
+logger = logging.getLogger(__name__)
 
 
 class Radio:
-    def __init__(self) -> None:
-        self.console = Console()
+    def __init__(self, *, radio_cli_path: str) -> None:
+        self.radio_cli_path = radio_cli_path
         self.is_playing = False
         # Load all stations.
         self.stations: list[Station] = load_stations()
@@ -72,34 +68,3 @@ class Radio:
         self.stop()
         self.console.print("[cyan bold]Goodby RadioPi...[/]")
         subprocess.check_call(["poweroff", "-h"])
-
-
-def main():
-    radio = Radio()
-    # Configure `gpiozero`.
-    Device.pin_factory = RPiGPIOFactory()
-    # Enable toggle play switch.
-    toggle_play_switch = Button(21)
-    toggle_play_switch.when_pressed = radio.toggle_play
-    # Enable next station switch.
-    next_station_switch = Button(16, hold_time=1, hold_repeat=True)
-    next_station_switch.when_pressed = radio.next_station
-    next_station_switch.when_held = radio.next_station
-    # Enable previous station switch.
-    prev_station_switch = Button(12, hold_time=1, hold_repeat=True)
-    prev_station_switch.when_pressed = radio.prev_station
-    prev_station_switch.when_held = radio.prev_station
-    # Enable shutdown switch.
-    shutdown_switch = Button(26, hold_time=1, hold_repeat=False)
-    shutdown_switch.when_held = radio.shutdown
-    # Wait for something to happen.
-    try:
-        pause()
-    except KeyboardInterrupt:
-        pass
-    finally:
-        radio.stop()
-
-
-if __name__ == "__main__":
-    main()

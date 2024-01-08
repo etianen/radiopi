@@ -4,14 +4,10 @@ import dataclasses
 import json
 from pathlib import Path
 
-from rich.console import Console
-from rich.table import Table
-
-from radiopi.config import Config
-
 
 @dataclasses.dataclass()
 class Station:
+    __slots__ = ("frequency_index", "service_id", "component_id", "label")
     frequency_index: int
     service_id: int
     component_id: int
@@ -20,7 +16,7 @@ class Station:
 
 def load_stations() -> list[Station]:
     # Load station data.
-    data = json.loads(Path(config.station_list_path).read_bytes())
+    data = json.loads((Path(__file__).parent / "stations.json").read_bytes())
     # Build the station mapping.
     stations: list[Station] = []
     for ensemble_data in data["ensembleList"]:
