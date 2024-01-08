@@ -19,4 +19,5 @@ def main() -> None:
     # Parse args.
     args = vars(parser.parse_args())
     cmd = args.pop("cmd")
+    # Run command.
     cmd(**args)
