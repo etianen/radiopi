@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 
 from gpiozero import Button, Device  # type: ignore[import-untyped]
-from gpiozero.pins.mock import MockFactory
+from gpiozero.pins.mock import MockFactory  # type: ignore[import-untyped]
 
 from radiopi.radio import Radio
 
