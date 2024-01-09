@@ -7,7 +7,6 @@ from pathlib import Path
 
 @dataclasses.dataclass(frozen=True)
 class Station:
-    __slots__ = ("frequency_index", "service_id", "component_id", "label")
     frequency_index: int
     service_id: int
     component_id: int
