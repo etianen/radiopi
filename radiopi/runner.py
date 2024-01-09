@@ -2,11 +2,9 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from subprocess import check_call
-from typing import Literal, Protocol
+from typing import Protocol
 
 from radiopi.log import logger
-
-RunnerName = Literal["mock", "subprocess"]
 
 
 class Runner(Protocol):
@@ -23,7 +21,7 @@ def subprocess_runner(*args: str) -> None:
     check_call(args)
 
 
-RUNNERS: Mapping[RunnerName, Runner] = {
+RUNNERS: Mapping[str, Runner] = {
     "mock": mock_runner,
     "subprocess": subprocess_runner,
 }
