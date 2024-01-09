@@ -9,7 +9,7 @@ from radiopi.radio import radio_boot_args, radio_pause_args, radio_tune_args
 from tests import QueueRunner
 
 
-def test_plays_and_pauses(runner: QueueRunner) -> None:
+def test_plays_on_state_and_pauses_on_stop(runner: QueueRunner) -> None:
     with running(pin_factory_name="mock", runner=runner) as radio:
         # On start, the radio automatically boots and tunes.
         runner.assert_called(radio_boot_args())
@@ -18,7 +18,7 @@ def test_plays_and_pauses(runner: QueueRunner) -> None:
     runner.assert_called(radio_pause_args())
 
 
-def test_does_not_pause_if_paused(runner: QueueRunner) -> None:
+def test_does_not_pause_on_stop_if_paused(runner: QueueRunner) -> None:
     with running(pin_factory_name="mock", runner=runner) as radio:
         # On start, the radio automatically boots and tunes.
         runner.assert_called(radio_boot_args())
