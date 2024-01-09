@@ -58,7 +58,7 @@ class Radio:
     def running(self) -> Generator[Radio, None, None]:
         logger.info("Main: Running")
         with (
-            self._running_thread(self._radio_cli_target),
+            self._running_thread(self._radio_target, name="Radio"),
             self._initializing_buttons(),
         ):
             try:
@@ -73,23 +73,23 @@ class Radio:
         logger.info("Main: Stopped")
 
     @contextmanager
-    def _running_thread(self, target: Callable[[], None]) -> Generator[None, None, None]:
+    def _running_thread(self, target: Callable[[], None], name: str) -> Generator[None, None, None]:
         # Create thread.
-        logger.info("Thread: %s: Starting", target.__name__)
-        thread = Thread(target=target, daemon=True)
+        logger.info("Thread: %s: Starting", name)
+        thread = Thread(target=target, name=name, daemon=True)
         thread.start()
         try:
             # All done!
-            logger.info("Thread: %s: Started", target.__name__)
+            logger.info("Thread: %s: Started", name)
             yield
         finally:
             # Stop thread.
-            logger.info("Thread: %s: Stopping", target.__name__)
+            logger.info("Thread: %s: Stopping", name)
             thread.join(timeout=10.0)
             if thread.is_alive():  # pragma: no cover
-                logger.error("Thread: %s: Zombie", target.__name__)
+                logger.error("Thread: %s: Zombie", name)
             else:
-                logger.info("Thread: %s: Stopped", target.__name__)
+                logger.info("Thread: %s: Stopped", name)
 
     @contextmanager
     def _initializing_buttons(self) -> Generator[None, None, None]:
@@ -114,20 +114,22 @@ class Radio:
 
     # Thread targets.
 
-    def _radio_cli_target(self) -> None:
+    def _radio_target(self) -> None:
         prev_state = self.state
-        while True:
+        while not self._stopping:
             # Wait for notify.
             with self._condition:
-                while not self._stopping:
+                while True:
                     # Grab the new state.
                     state = self.state
-                    if state.is_playing != prev_state.is_playing or state.station_index != prev_state.station_index:
+                    if (
+                        self._stopping
+                        or state.is_playing != prev_state.is_playing
+                        or state.station_index != prev_state.station_index
+                    ):
                         break
                     # Wait for notify.
                     self._condition.wait()
-                else:
-                    break  # We're stopping.
             # Handle new state.
             if state.is_playing:
                 # Tune radio.
