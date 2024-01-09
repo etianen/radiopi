@@ -42,7 +42,7 @@ class Radio:
     def _set_state(self, state: State) -> None:
         logger.debug("Radio: State: Set: %r", state)
         self._state = state
-        self._condition.notify()
+        self._condition.notify_all()
 
     def play(self) -> None:
         with self._condition:
@@ -82,8 +82,7 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
             while True:
                 # Wait for a state change.
                 with radio._condition:
-                    while radio._state == prev_state:
-                        radio._condition.wait()
+                    radio._condition.wait()
                     state = radio._state
                 # Call the state watcher.
                 fn(prev_state, state, *args, **kwargs)
