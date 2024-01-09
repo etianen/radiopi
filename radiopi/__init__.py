@@ -12,7 +12,10 @@ from radiopi.pins import PinFactoryName, create_pin_factory
 # from radiopi.stations import load_stations
 
 
-def running(*, pin_factory_name: PinFactoryName) -> Generator[None, None, None]:
+def running(
+    *,
+    pin_factory_name: PinFactoryName,
+) -> Generator[None, None, None]:
     with create_pin_factory(pin_factory_name) as pin_factory:
         yield
 
