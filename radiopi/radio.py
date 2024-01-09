@@ -69,7 +69,6 @@ class Radio:
                 with self._condition:
                     self._stopping = True
                     self.state = dataclasses.replace(self.state, is_playing=False)
-                    self._condition.notify_all()
         # All done!
         logger.info("Main: Stopped")
 
@@ -125,6 +124,8 @@ class Radio:
                     state = self.state
                     if state.is_playing != prev_state.is_playing or state.station_index != prev_state.station_index:
                         break
+                    # Wait for notify.
+                    self._condition.wait()
                 else:
                     break  # We're stopping.
             # Handle new state.
