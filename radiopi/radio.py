@@ -15,13 +15,13 @@ C = TypeVar("C", bound=Callable[..., Any])
 logger = logging.getLogger(__name__)
 
 
-def _locked(fn: C) -> C:
+def locked(fn: C) -> C:
     @wraps(fn)
-    def _locked_wrapper(self: Radio, *args: Any, **kwargs: Any) -> Any:
+    def locked_wrapper(self: Radio, *args: Any, **kwargs: Any) -> Any:
         with self._lock:
             return fn(self, *args, **kwargs)
 
-    return _locked_wrapper  # type: ignore[return-value]
+    return locked_wrapper  # type: ignore[return-value]
 
 
 class Radio:
@@ -41,10 +41,20 @@ class Radio:
 
     def _cli(self, *args: str) -> None:
         logger.debug("Running `radio_cli`: %r", args)
-        if self._radio_cli_path is not None:
+        if self._radio_cli_path is not None:  # pragma: no cover
             subprocess.check_call((self._radio_cli_path, *args))
 
-    @_locked
+    @property
+    @locked
+    def is_playing(self) -> bool:
+        return self._is_playing
+
+    @property
+    @locked
+    def station(self) -> Station:
+        return self.stations[self._station_index % len(self.stations)]
+
+    @locked
     def play(self) -> None:
         # Boot, if not playing.
         if not self._is_playing:
@@ -53,7 +63,7 @@ class Radio:
             self._is_playing = True
             logger.info("Radio booted!")
         # Tune to the station.
-        station: Station = self.stations[self._station_index % len(self.stations)]
+        station: Station = self.station
         logger.info(f"Tuning to {station.label}...")
         self._cli(
             f"--component={station.component_id}",
@@ -64,7 +74,7 @@ class Radio:
         )
         logger.info(f"Playing {station.label}!")
 
-    @_locked
+    @locked
     def stop(self) -> None:
         # Shutdown, if playing.
         if self._is_playing:
@@ -73,25 +83,25 @@ class Radio:
             self._is_playing = False
             logger.info("Radio shutdown!")
 
-    @_locked
+    @locked
     def toggle_play(self) -> None:
         if self._is_playing:
             self.stop()
         else:
             self.play()
 
-    @_locked
+    @locked
     def next_station(self) -> None:
         self._station_index += 1
         self.play()
 
-    @_locked
+    @locked
     def prev_station(self) -> None:
         self._station_index -= 1
         self.play()
 
-    @_locked
-    def shutdown(self) -> None:
+    @locked
+    def shutdown(self) -> None:  # pragma: no cover
         self.stop()
         logger.info("Goodby RadioPi...")
         subprocess.check_call(["poweroff", "-h"])
