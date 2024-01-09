@@ -7,7 +7,7 @@ from contextlib import contextmanager
 from threading import Condition
 
 from radiopi.pins import PinFactory
-from radiopi.stations import Station, load_stations
+from radiopi.stations import Station
 from radiopi.subprocess import Run
 
 logger = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ class State:
 
 
 class Radio:
-    def __init__(self, *, pin_factory: PinFactory, run: Run) -> None:
+    def __init__(self, *, pin_factory: PinFactory, run: Run, stations: Sequence[Station]) -> None:
         self._pin_factory = pin_factory
         self._run = run
         # Initialize state.
@@ -29,7 +29,7 @@ class Radio:
         self._state = State(
             is_playing=False,
             station_index=0,
-            stations=load_stations(),
+            stations=stations,
         )
         self._stopping = False
 
