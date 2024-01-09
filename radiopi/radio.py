@@ -54,7 +54,10 @@ class Radio:
 
     @contextmanager
     def running(self) -> Generator[Radio, None, None]:
-        with self._initializing_buttons():
+        with (
+            self._initializing_buttons(),
+            self._running_thread(self._radio_cli_target),
+        ):
             yield self
 
     @contextmanager
@@ -82,16 +85,20 @@ class Radio:
     def _running_thread(self, target: Callable[[], None]) -> Generator[None, None, None]:
         # Create thread.
         logger.info("Thread: %s: Starting", target.__name__)
-        thread = Thread(target=target)
+        thread = Thread(target=target, daemon=True)
         thread.start()
         try:
             # All done!
             logger.info("Thread: %s: Started", target.__name__)
             yield
         finally:
+            # Stop thread.
             logger.info("Thread: %s: Stopping", target.__name__)
-            thread.join()
-            logger.info("Thread: %s: Stopped", target.__name__)
+            thread.join(timeout=10.0)
+            if thread.is_alive():  # pragma: no cover
+                logger.error("Thread: %s: Zombie", target.__name__)
+            else:
+                logger.info("Thread: %s: Stopped", target.__name__)
 
     # Thread targets.
 
