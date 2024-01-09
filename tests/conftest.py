@@ -21,14 +21,14 @@ def stations() -> Sequence[Station]:
     return load_stations()
 
 
-@pytest.fixture()
-def radio(stations: Sequence[Station]) -> Generator[Radio, None, None]:
-    # Create radio.
-    radio = Radio(
-        pin_factory=MockFactory(),
-        run=run_mock,
-        stations=stations,
-    )
-    # Run radio.
-    with radio.running():
-        yield radio
+# @pytest.fixture()
+# def radio(stations: Sequence[Station]) -> Generator[Radio, None, None]:
+#     # Create radio.
+#     radio = Radio(
+#         pin_factory=MockFactory(),
+#         run=run_mock,
+#         stations=stations,
+#     )
+#     # Run radio.
+#     with radio.running():
+#         yield radio

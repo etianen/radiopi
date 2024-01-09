@@ -1,11 +1,17 @@
 from __future__ import annotations
 
 import logging
+from pkgutil import resolve_name
 from typing import NewType
 
 PinFactory = NewType("PinFactory", object)
 
 logger = logging.getLogger(__name__)
+
+PIN_FACTORIES = {
+    "mock": "gpiozero.pins.mock:MockFactory",
+    "rpigpio": "gpiozero.pins.rpigpio:RPiGPIOFactory",
+}
 
 
 def discover_pin_factory() -> PinFactory:
