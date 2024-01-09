@@ -9,17 +9,26 @@ from typing import Any, TypeVar
 
 from typing_extensions import ParamSpec
 
-P = ParamSpec("P")
+from radiopi.log import log_contextmanager
 
-logger = logging.getLogger(__name__)
+P = ParamSpec("P")
+T = TypeVar("T")
 
 
 def daemon(*, name: str) -> Callable[[Callable[P, None]], Callable[P, AbstractContextManager[None]]]:
     def decorator(fn: Callable[P, None]) -> Callable[P, AbstractContextManager[None]]:
-        @contextmanager
         @wraps(fn)
+        @log_contextmanager(name=name)
+        @contextmanager
         def daemon_wrapper(*args: P.args, **kwargs: P.kwargs) -> Generator[None, None, None]:
-            yield
+            thread = Thread(daemon=True, name=name, target=fn, args=args, kwargs=kwargs)
+            thread.start()
+            try:
+                yield
+            finally:
+                thread.join(timeout=15.0)
+                if thread.is_alive():  # pragma: no cover
+                    raise RuntimeError(f"{name}: Zombie")
 
         return daemon_wrapper
 
