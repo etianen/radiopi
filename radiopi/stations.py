@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import dataclasses
 import json
+import logging
 from collections.abc import Sequence
 from pathlib import Path
+
+logger = logging.getLogger()
 
 
 @dataclasses.dataclass(frozen=True)
@@ -15,6 +18,7 @@ class Station:
 
 
 def load_stations() -> Sequence[Station]:
+    logger.info("Stations: Loading")
     # Load station data.
     data = json.loads((Path(__file__).parent.parent / "stations.json").read_bytes())
     # Build the station mapping.
@@ -40,4 +44,5 @@ def load_stations() -> Sequence[Station]:
                 # Store the mapping.
                 stations.append(station)
     # All done!
+    logger.info("Stations: Loaded")
     return stations

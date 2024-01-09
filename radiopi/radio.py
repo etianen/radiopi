@@ -9,8 +9,8 @@ from threading import Condition, Thread
 from gpiozero import Button
 
 from radiopi.pins import PinFactory
+from radiopi.run import Run
 from radiopi.stations import Station
-from radiopi.subprocess import Run
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +20,10 @@ class State:
     is_playing: bool
     station_index: int
     stations: Sequence[Station]
+
+    @property
+    def station(self) -> Station:
+        return self.stations[self.station_index % len(self.stations)]
 
 
 class Radio:
@@ -34,6 +38,8 @@ class Radio:
             stations=stations,
         )
         self._stopping = False
+
+    # State.
 
     @property
     def state(self) -> State:
@@ -62,6 +68,7 @@ class Radio:
                 logger.info("Stopping")
                 with self._condition:
                     self._stopping = True
+                    self.state = dataclasses.replace(self.state, is_playing=False)
                     self._condition.notify_all()
         # All done!
         logger.info("Stopped")
@@ -109,27 +116,36 @@ class Radio:
     # Thread targets.
 
     def _radio_cli_target(self) -> None:
-        prev_state = self._state
+        prev_state = self.state
         while True:
             # Wait for notify.
             with self._condition:
                 while not self._stopping:
                     # Grab the new state.
-                    if (
-                        self._state.is_playing != prev_state.is_playing
-                        or self._state.station_index != prev_state.station_index
-                    ):
-                        state = self._state
+                    state = self.state
+                    if state.is_playing != prev_state.is_playing or state.station_index != prev_state.station_index:
                         break
                 else:
                     break  # We're stopping.
             # Handle new state.
             if state.is_playing:
-                state
-                logger.info(
-                    "Radio: Tuning: %r",
+                # Tune radio.
+                station = state.station
+                logger.info("Radio: Tuning: %r", station)
+                self._run(
+                    (
+                        "radio_cli",
+                        "--boot=D",
+                        f"--component={station.component_id}",
+                        f"--service={station.service_id}",
+                        f"--frequency={station.frequency_index}",
+                        "--play",
+                        "--level=63",
+                    )
                 )
+                logger.info("Radio: Playing: %r", station)
             else:
+                # Shutdown radio.
                 logger.info("Radio: Shutting down")
                 self._run(("radio_cli", "--shutdown"))
                 logger.info("Radio: Shutdown")
@@ -138,26 +154,18 @@ class Radio:
 
     def on_toggle_play(self) -> None:
         with self._condition:
-            self.state = dataclasses.replace(
-                self._state,
-                is_playing=not self._state.is_playing,
-            )
+            state = self.state
+            self.state = dataclasses.replace(state, is_playing=not state.is_playing)
 
     def on_next_station(self) -> None:
         with self._condition:
-            self.state = dataclasses.replace(
-                self._state,
-                is_playing=True,
-                station_index=self._state.station_index + 1,
-            )
+            state = self.state
+            self.state = dataclasses.replace(state, is_playing=True, station_index=state.station_index + 1)
 
     def on_prev_station(self) -> None:
         with self._condition:
-            self.state = dataclasses.replace(
-                self._state,
-                is_playing=True,
-                station_index=self._state.station_index - 1,
-            )
+            state = self.state
+            self.state = dataclasses.replace(state, is_playing=True, station_index=state.station_index - 1)
 
     def on_shutdown(self) -> None:
         self._run(("poweroff", "-h"))
