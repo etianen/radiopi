@@ -27,12 +27,14 @@ def get_pin_factory() -> PinFactory:
 
 def buttons(*, pin_factory: PinFactory, radio: Radio) -> Generator[None, None, None]:
     logger.info("Initializing buttons...")
+    # Create buttons.
     with (
         Button(21, pin_factory=pin_factory) as toggle_play_button,
         Button(16, pin_factory=pin_factory, hold_time=1, hold_repeat=True) as next_station_button,
         Button(12, pin_factory=pin_factory, hold_time=1, hold_repeat=True) as prev_station_button,
         Button(26, pin_factory=pin_factory, hold_time=1, hold_repeat=False) as shutdown_button,
     ):
+        # All done!
         logger.info("Initialized buttons!")
         yield
 
