@@ -9,7 +9,7 @@ from threading import Condition, Thread
 from gpiozero import Button
 
 from radiopi.pins import PinFactory
-from radiopi.run import Run
+from radiopi.run import Runner
 from radiopi.stations import Station
 
 logger = logging.getLogger(__name__)
@@ -27,7 +27,7 @@ class State:
 
 
 class Radio:
-    def __init__(self, *, pin_factory: PinFactory, run: Run, stations: Sequence[Station]) -> None:
+    def __init__(self, *, pin_factory: PinFactory, run: Runner, stations: Sequence[Station]) -> None:
         self._pin_factory = pin_factory
         self._run = run
         # Initialize state.

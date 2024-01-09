@@ -38,7 +38,7 @@ class Radio:
         return self._state
 
     def _set_state(self, state: State) -> None:
-        logger.info("Radio: State: Set: %r", state)
+        logger.debug("Radio: State: Set: %r", state)
         self._state = state
         self._condition.notify()
 
