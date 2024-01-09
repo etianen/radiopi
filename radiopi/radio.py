@@ -35,7 +35,7 @@ class Radio:
         )
         self._stopping = False
 
-    def set_state(self, state: State) -> None:
+    def _set_state(self, state: State) -> None:
         # Set state and notify listeners.
         logger.debug("State: Set: %r", state)
         self._state = state
@@ -110,7 +110,7 @@ class Radio:
             with self._condition:
                 while not self._stopping:
                     # Grab the new state.
-                    if self.state != prev_state:
+                    if self._state.is_playing != prev_state:
                         state = self.state
                         break
                 else:
@@ -126,15 +126,29 @@ class Radio:
 
     def on_toggle_play(self) -> None:
         with self._condition:
-            self.set_state(dataclasses.replace(self._state, is_playing=not self._state.is_playing))
+            state = dataclasses.replace(
+                self._state,
+                is_playing=not self._state.is_playing,
+            )
+            self._set_state(state)
 
     def on_next_station(self) -> None:
         with self._condition:
-            self.state = dataclasses.replace(self._state, is_playing=True, station_index=self._state.station_index + 1)
+            state = dataclasses.replace(
+                self._state,
+                is_playing=True,
+                station_index=self._state.station_index + 1,
+            )
+            self._set_state(state)
 
     def on_prev_station(self) -> None:
         with self._condition:
-            self.state = dataclasses.replace(self._state, is_playing=True, station_index=self._state.station_index - 1)
+            state = dataclasses.replace(
+                self._state,
+                is_playing=True,
+                station_index=self._state.station_index - 1,
+            )
+            self._set_state(state)
 
     def on_shutdown(self) -> None:
         self._run(("poweroff", "-h"))
