@@ -11,15 +11,26 @@ from radiopi.pins import PinFactoryName, create_pin_factory
 # from radiopi.run import discover_run
 # from radiopi.stations import load_stations
 
+logger = logging.getLogger(__name__)
 
+
+@contextmanager
 def running(
     *,
     pin_factory_name: PinFactoryName,
 ) -> Generator[None, None, None]:
+    logger.info("Main: Starting")
     with (
         create_pin_factory(pin_factory_name) as pin_factory,
     ):
-        yield
+        # Run the context.
+        logger.info("Main: Started")
+        try:
+            yield
+        finally:
+            logger.info("Main: Stopping")
+    # All done!
+    logger.info("Main: Stopped")
 
 
 # def main() -> None:  # pragma: no cover
