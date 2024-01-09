@@ -32,12 +32,12 @@ class Radio:
         self._run = run
         # Initialize state.
         self._condition = Condition()
+        self._stopping = False
         self._state = State(
             is_playing=False,
             station_index=0,
             stations=stations,
         )
-        self._stopping = False
 
     # State.
 
