@@ -3,28 +3,16 @@ from __future__ import annotations
 import logging
 from collections.abc import Generator
 from contextlib import contextmanager
-from typing import NewType
 
 from gpiozero import Button
 
+from radiopi.pins import PinFactory
+from radiopi.radio import Radio
+
 logger = logging.getLogger(__name__)
 
-PinFactory = NewType("PinFactory", object)
 
-
-def get_pin_factory() -> PinFactory:
-    try:
-        # Try to use the real pin factory implementation.
-        from gpiozero.pins.rpigpio import RPiGPIOFactory as PinFactoryImpl
-    except (ImportError, RuntimeError):
-        logger.warning("`RPi.GPIO` is not available, using mock pin factory!")
-        # Fall back to a mock pin factory implementation.
-        # We're either not running on an RPi, or important things are not installed!
-        from gpiozero.pins.mock import MockFactory as PinFactoryImpl
-    # Create and return the pin factory.
-    return PinFactory(PinFactoryImpl())
-
-
+@contextmanager
 def buttons(*, pin_factory: PinFactory, radio: Radio) -> Generator[None, None, None]:
     logger.info("Initializing buttons...")
     # Create buttons.

@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from signal import pause
 
-from radiopi.gpio import GPIO
+from radiopi.buttons import GPIO
 from radiopi.radio import Radio
 
 

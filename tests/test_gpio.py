@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from radiopi.gpio import GPIO
+from radiopi.buttons import GPIO
 from radiopi.radio import Radio
 
 
