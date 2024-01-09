@@ -9,7 +9,7 @@ from typing import Optional
 
 from typing_extensions import Concatenate, ParamSpec, TypeAlias
 
-from radiopi.daemons import daemon
+from radiopi.daemon import daemon
 from radiopi.log import logger
 from radiopi.stations import Station
 
