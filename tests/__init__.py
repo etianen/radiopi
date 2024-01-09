@@ -1,22 +1,22 @@
 from __future__ import annotations
 
-from collections.abc import Generator, Sequence
+from collections.abc import Generator
 from contextlib import contextmanager
 from queue import SimpleQueue
 
 from radiopi import running as running_
 from radiopi.radio import Radio, radio_boot_args, radio_tune_args
-from radiopi.runner import Runner
+from radiopi.runner import Args, Runner
 
 
 class QueueRunner(Runner):
     def __init__(self) -> None:
-        self.queue: SimpleQueue[Sequence[str]] = SimpleQueue()
+        self.queue: SimpleQueue[Args] = SimpleQueue()
 
-    def _call(self, args: Sequence[str]) -> None:
+    def _call(self, args: Args) -> None:
         self.queue.put_nowait(args)
 
-    def assert_called(self, expected_args: Sequence[str]) -> None:
+    def assert_called(self, expected_args: Args) -> None:
         args = self.queue.get(timeout=1.0)
         assert args == expected_args
 

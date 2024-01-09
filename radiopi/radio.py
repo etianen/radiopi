@@ -11,7 +11,7 @@ from typing_extensions import Concatenate, ParamSpec, TypeAlias
 
 from radiopi.daemon import daemon
 from radiopi.log import logger
-from radiopi.runner import Runner
+from radiopi.runner import Args, Runner
 from radiopi.station import Station
 
 P = ParamSpec("P")
@@ -106,11 +106,11 @@ def radio_watcher(prev_state: State, state: State, runner: Runner) -> None:
         logger.info("Radio: Paused")
 
 
-def radio_boot_args() -> Sequence[str]:
+def radio_boot_args() -> Args:
     return ("radio_cli", "--boot=D")
 
 
-def radio_tune_args(station: Station) -> Sequence[str]:
+def radio_tune_args(station: Station) -> Args:
     return (
         "radio_cli",
         f"--component={station.component_id}",
@@ -121,5 +121,5 @@ def radio_tune_args(station: Station) -> Sequence[str]:
     )
 
 
-def radio_pause_args() -> Sequence[str]:
+def radio_pause_args() -> Args:
     return ("radio_cli", "--shutdown")
