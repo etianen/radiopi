@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import dataclasses
 import logging
-from collections.abc import Generator, Sequence
+from collections.abc import Callable, Generator, Sequence
 from contextlib import contextmanager
-from threading import Condition
+from threading import Condition, Thread
 
 from gpiozero import Button
 
@@ -75,8 +75,29 @@ class Radio:
             prev_station_button.when_held = self.on_prev_station
             shutdown_button.when_held = self.on_shutdown
             # All done!
-            logger.info("Buttons: Initalized")
+            logger.info("Buttons: Initialized")
             yield
+
+    @contextmanager
+    def _running_thread(self, target: Callable[[], None]) -> Generator[None, None, None]:
+        # Create thread.
+        logger.info("Thread: %s: Starting", target.__name__)
+        thread = Thread(target=target)
+        thread.start()
+        try:
+            # All done!
+            logger.info("Thread: %s: Started", target.__name__)
+            yield
+        finally:
+            logger.info("Thread: %s: Stopping", target.__name__)
+            thread.join()
+            logger.info("Thread: %s: Stopped", target.__name__)
+
+    # Thread targets.
+
+    def _radio_cli_target(self) -> None:
+        while True:
+            pass
 
     # Event handlers.
 
