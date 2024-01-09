@@ -6,7 +6,7 @@ from collections.abc import Generator
 from contextlib import contextmanager
 from signal import pause
 
-from radiopi.pins import PIN_FACTORIES, PinFactoryName, create_pin_factory
+from radiopi.pins import PIN_FACTORIES, create_pin_factory
 from radiopi.radio import Radio, State
 from radiopi.stations import load_stations
 
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 @contextmanager
 def running(
     *,
-    pin_factory_name: PinFactoryName,
+    pin_factory_name: str,
 ) -> Generator[Radio, None, None]:
     logger.info("Main: Starting")
     # Load data.
@@ -48,11 +48,9 @@ def main() -> None:  # pragma: no cover
     parser = ArgumentParser()
     parser.add_argument("--pin-factory", choices=PIN_FACTORIES, default="rpigpio")
     args = parser.parse_args()
-    # Configure radio.
-    pin_factory_name = PIN_FACTORIES[args.pin_factory]
-    logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
     # Run radio.
-    with running(pin_factory_name=pin_factory_name):
+    logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
+    with running(pin_factory_name=args.pin_factory):
         try:
             pause()
         except KeyboardInterrupt:

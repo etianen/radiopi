@@ -5,13 +5,12 @@ from collections.abc import Generator, Sequence
 import pytest
 
 from radiopi import running
-from radiopi.pins import MOCK_PIN_FACTORY_NAME
 from radiopi.radio import Radio
 
 
 @pytest.fixture()
 def radio() -> Generator[Radio, None, None]:
-    with running(pin_factory_name=MOCK_PIN_FACTORY_NAME) as machine:
+    with running(pin_factory_name="mock") as machine:
         yield machine
 
 
