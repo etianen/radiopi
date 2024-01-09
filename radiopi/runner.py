@@ -6,13 +6,12 @@ from typing import Literal, Protocol
 
 from radiopi.log import logger
 
+RunnerName = Literal["mock", "subprocess"]
+
 
 class Runner(Protocol):
     def __call__(self, *args: str) -> None:  # pragma: no cover
         ...
-
-
-RunnerName = Literal["mock", "subprocess"]
 
 
 def mock_runner(*args: str) -> None:

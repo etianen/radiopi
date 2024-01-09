@@ -5,8 +5,8 @@ from contextlib import AbstractContextManager
 from pkgutil import resolve_name
 from typing import Literal, NewType
 
-PinFactory = NewType("PinFactory", object)
 PinFactoryName = Literal["mock", "rpigpio"]
+PinFactory = NewType("PinFactory", object)
 
 PIN_FACTORIES: Mapping[PinFactoryName, str] = {
     "mock": "gpiozero.pins.mock:MockFactory",
