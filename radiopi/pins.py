@@ -5,15 +5,14 @@ from pkgutil import resolve_name
 from typing import NewType
 
 PinFactory = NewType("PinFactory", object)
-PinFactoryFactory = NewType("PinFactoryFactory", str)
-
+PinFactoryName = NewType("PinFactoryName", str)
 
 PIN_FACTORIES = {
-    "mock": PinFactoryFactory("gpiozero.pins.mock:MockFactory"),
-    "rpigpio": PinFactoryFactory("gpiozero.pins.rpigpio:RPiGPIOFactory"),
+    "mock": PinFactoryName("gpiozero.pins.mock:MockFactory"),
+    "rpigpio": PinFactoryName("gpiozero.pins.rpigpio:RPiGPIOFactory"),
 }
 
 
-def create_pin_factory(name: PinFactoryFactory) -> AbstractContextManager[PinFactory]:
-    pin_factory_cls: type[AbstractContextManager[PinFactory]] = resolve_name(PIN_FACTORIES[name])
+def create_pin_factory(pin_factory_name: PinFactoryName) -> AbstractContextManager[PinFactory]:
+    pin_factory_cls: type[AbstractContextManager[PinFactory]] = resolve_name(pin_factory_name)
     return pin_factory_cls()

@@ -1,12 +1,20 @@
 from __future__ import annotations
 
-# import logging
-# from signal import pause
+import logging
+from collections.abc import Generator
+from contextlib import contextmanager
 
-# from radiopi.pins import discover_pin_factory
+# from signal import pause
+from radiopi.pins import PinFactoryName, create_pin_factory
+
 # from radiopi.radio import Radio
 # from radiopi.run import discover_run
 # from radiopi.stations import load_stations
+
+
+def running(*, pin_factory_name: PinFactoryName) -> Generator[None, None, None]:
+    with create_pin_factory(pin_factory_name) as pin_factory:
+        yield
 
 
 # def main() -> None:  # pragma: no cover
