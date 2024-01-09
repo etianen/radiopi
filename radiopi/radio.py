@@ -34,7 +34,7 @@ class Radio:
         self._condition = Condition()
         self._stopping = False
         self._state = State(
-            is_playing=False,
+            is_playing=True,
             station_index=0,
             stations=stations,
         )
