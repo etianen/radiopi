@@ -6,5 +6,5 @@ from radiopi.pins import PinFactory
 
 
 def test_create_pin_factory(pin_factory: PinFactory) -> None:
-    # Ensure we're creating a `gpiozero` pin factory instance.
+    # Ensure we create a `gpiozero` pin factory.
     assert isinstance(pin_factory, Factory)
