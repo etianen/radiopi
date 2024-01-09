@@ -22,4 +22,7 @@ def main() -> None:  # pragma: no cover
     )
     # Run the radio.
     with radio.running():
-        pause()
+        try:
+            pause()
+        except KeyboardInterrupt:
+            pass
