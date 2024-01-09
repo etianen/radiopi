@@ -7,7 +7,7 @@ from radiopi.gpio import GPIO
 from radiopi.radio import Radio
 
 
-def main() -> None:
+def main() -> None:  # pragma: no cover
     # Configure logging.
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.DEBUG)
     # Initialize radio.
