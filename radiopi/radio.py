@@ -152,6 +152,8 @@ class Radio:
                 logger.info("Radio: Shutting down")
                 self._run(("radio_cli", "--shutdown"))
                 logger.info("Radio: Shutdown")
+            # Update prev state.
+            prev_state = state
 
     # Event handlers.
 
