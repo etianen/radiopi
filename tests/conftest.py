@@ -1,24 +1,22 @@
 from __future__ import annotations
 
-import logging
 from collections.abc import Generator, Sequence
 
 import pytest
-from gpiozero.pins.mock import MockFactory
 
-from radiopi.radio import Radio
-from radiopi.run import run_mock
+from radiopi.pins import PinFactory, create_pin_factory
 from radiopi.stations import Station, load_stations
-
-
-@pytest.fixture(scope="session", autouse=True)
-def logging_config() -> None:
-    logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.DEBUG)
 
 
 @pytest.fixture(scope="session")
 def stations() -> Sequence[Station]:
     return load_stations()
+
+
+@pytest.fixture()
+def pin_factory() -> Generator[PinFactory, None, None]:
+    with create_pin_factory("mock") as pin_factory:
+        yield pin_factory
 
 
 # @pytest.fixture()
