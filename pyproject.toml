@@ -9,7 +9,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.9"
 gpiozero = "^2.0"
-"rpi.gpio" = { version = "^0.7.1", markers = "sys_platform == 'linux' and platform_machine == 'armv6l'" }
+"rpi.gpio" = { version = "^0.7.1", markers = "sys_platform == 'linux'" }
+typing-extensions = "^4.9.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.8.0"
@@ -32,9 +33,7 @@ fail_under = 100
 files = ["radiopi/**/*.py", "tests/**/*.py"]
 allow_redefinition = true
 explicit_package_bases = true
-namespace_packages = true
 show_column_numbers = true
-show_error_codes = true
 strict = true
 platform = "linux"
 

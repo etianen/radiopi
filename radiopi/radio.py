@@ -1,107 +1,136 @@
 from __future__ import annotations
 
-import logging
-import subprocess
+import dataclasses
 from collections.abc import Callable, Sequence
+from contextlib import AbstractContextManager
 from functools import wraps
-from shutil import which
-from threading import RLock
-from typing import Any, TypeVar
+from threading import Condition
+from typing import Final
 
-from radiopi.stations import Station, load_stations
+from typing_extensions import Concatenate, ParamSpec, TypeAlias
 
-C = TypeVar("C", bound=Callable[..., Any])
+from radiopi.daemon import daemon
+from radiopi.log import logger
+from radiopi.runner import Args, Runner
+from radiopi.station import Station
 
-logger = logging.getLogger(__name__)
+P = ParamSpec("P")
 
 
-def locked(fn: C) -> C:
-    @wraps(fn)
-    def locked_wrapper(self: Radio, *args: Any, **kwargs: Any) -> Any:
-        with self._lock:
-            return fn(self, *args, **kwargs)
+@dataclasses.dataclass(frozen=True)
+class State:
+    playing: bool
+    station_index: int
+    stations: Sequence[Station]
+    stopping: bool
 
-    return locked_wrapper  # type: ignore[return-value]
+    @property
+    def station(self) -> Station:
+        return self.stations[self.station_index % len(self.stations)]
 
 
 class Radio:
-    def __init__(self) -> None:
-        logger.info("Hello RadioPi!")
-        self._lock = RLock()
-        # See if `radio_cli` is installed.
-        self._radio_cli_path = which("radio_cli")
-        if self._radio_cli_path is None:
-            logger.warning("`radio_cli` is not installed, using mock radio CLI!")
-        # Load all stations.
-        self.stations: Sequence[Station] = load_stations()
-        self._station_index: int = 0
-        # Start the radio.
-        self._is_playing = False
-        self.play()
-
-    def _cli(self, *args: str) -> None:
-        logger.debug("Running `radio_cli`: %r", args)
-        if self._radio_cli_path is not None:  # pragma: no cover
-            subprocess.check_call((self._radio_cli_path, *args))
+    def __init__(self, state: State) -> None:
+        self._init_state: Final = state
+        self._state = state
+        self._condition = Condition()
 
     @property
-    @locked
-    def is_playing(self) -> bool:
-        return self._is_playing
+    def state(self) -> State:
+        return self._state
 
-    @property
-    @locked
-    def station(self) -> Station:
-        return self.stations[self._station_index % len(self.stations)]
+    def _set_state(self, state: State) -> None:
+        logger.debug("Radio: State: Set: %r", state)
+        self._state = state
+        self._condition.notify_all()
 
-    @locked
     def play(self) -> None:
-        # Boot, if not playing.
-        if not self._is_playing:
-            logger.info("Booting radio...")
-            self._cli("--boot=D")
-            self._is_playing = True
-            logger.info("Radio booted!")
-        # Tune to the station.
-        station: Station = self.station
-        logger.info(f"Tuning to {station.label}...")
-        self._cli(
-            f"--component={station.component_id}",
-            f"--service={station.service_id}",
-            f"--frequency={station.frequency_index}",
-            "--play",
-            "--level=63",
-        )
-        logger.info(f"Playing {station.label}!")
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=True))
 
-    @locked
-    def stop(self) -> None:
-        # Shutdown, if playing.
-        if self._is_playing:
-            logger.info("Shutting down radio...")
-            self._cli("--shutdown")
-            self._is_playing = False
-            logger.info("Radio shutdown!")
+    def pause(self) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=False))
 
-    @locked
     def toggle_play(self) -> None:
-        if self._is_playing:
-            self.stop()
-        else:
-            self.play()
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=not self._state.playing))
 
-    @locked
     def next_station(self) -> None:
-        self._station_index += 1
-        self.play()
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=True, station_index=self._state.station_index + 1))
 
-    @locked
     def prev_station(self) -> None:
-        self._station_index -= 1
-        self.play()
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=True, station_index=self._state.station_index - 1))
 
-    @locked
-    def shutdown(self) -> None:  # pragma: no cover
-        self.stop()
-        logger.info("Goodby RadioPi...")
-        subprocess.check_call(["poweroff", "-h"])
+    def stop(self) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=False, stopping=True))
+
+
+WatcherCallable: TypeAlias = Callable[Concatenate[State, State, P], None]
+WatcherContextManagerCallable: TypeAlias = Callable[Concatenate[Radio, P], AbstractContextManager[None]]
+
+
+def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManagerCallable[P]]:
+    def decorator(fn: WatcherCallable[P]) -> WatcherContextManagerCallable[P]:
+        @wraps(fn)
+        @daemon(name=name)
+        def watcher_wrapper(radio: Radio, /, *args: P.args, **kwargs: P.kwargs) -> None:
+            prev_state: State = radio._init_state
+            while True:
+                # Wait for a state change.
+                with radio._condition:
+                    radio._condition.wait()
+                    state = radio._state
+                # Call the state watcher.
+                fn(prev_state, state, *args, **kwargs)
+                prev_state = state
+                # Possibly stop.
+                if state.stopping:
+                    break
+
+        return watcher_wrapper
+
+    return decorator
+
+
+@watcher(name="Radio")
+def radio_watcher(prev_state: State, state: State, runner: Runner) -> None:
+    if state.playing:
+        # Boot the radio.
+        if not prev_state.playing:
+            logger.info("Radio: Booting")
+            runner(radio_boot_args())
+            logger.info("Radio: Booted")
+        # Tune the radio.
+        station = state.station
+        if not prev_state.playing or station != prev_state.station:
+            logger.info("Radio: Tuning: %r", station)
+            runner(radio_tune_args(station))
+            logger.info("Radio: Tuned: %r", station)
+    elif prev_state.playing:
+        # Pause the radio.
+        logger.info("Radio: Pausing")
+        runner(radio_pause_args())
+        logger.info("Radio: Paused")
+
+
+def radio_boot_args() -> Args:
+    return ("radio_cli", "--boot=D")
+
+
+def radio_tune_args(station: Station) -> Args:
+    return (
+        "radio_cli",
+        f"--component={station.component_id}",
+        f"--service={station.service_id}",
+        f"--frequency={station.frequency_index}",
+        "--play",
+        "--level=63",
+    )
+
+
+def radio_pause_args() -> Args:
+    return ("radio_cli", "--shutdown")
