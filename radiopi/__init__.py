@@ -9,7 +9,7 @@ from signal import pause
 from radiopi.log import log_contextmanager
 from radiopi.pins import PIN_FACTORIES, PinFactoryName, create_pin_factory
 from radiopi.radio import Radio, State
-from radiopi.runner import RUNNERS, Runner
+from radiopi.runner import RUNNERS, Runner, create_runner
 from radiopi.stations import load_stations
 
 
@@ -43,7 +43,7 @@ def main() -> None:  # pragma: no cover
     args = parser.parse_args()
     # Run radio.
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
-    runner = RUNNERS[args.runner]
+    runner = create_runner(args.runner)
     with running(pin_factory_name=args.pin_factory, runner=runner):
         try:
             pause()
