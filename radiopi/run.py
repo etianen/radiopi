@@ -15,7 +15,7 @@ def discover_run() -> Run:
     # Try to use the real run implementation.
     if which("radio_cli") is None:
         # Fall back to a mock run implementation.
-        logger.warning("Run: `radio_cli` is not available, using mock run!")
+        logger.warning("Run: `radio_cli` not available, using mock run!")
         run_impl = run_mock
     else:
         # Use the real run implementation.
