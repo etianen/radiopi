@@ -4,9 +4,8 @@ from collections.abc import Generator
 
 import pytest
 
-from radiopi import running
 from radiopi.radio import Radio
-from tests import QueueRunner
+from tests import QueueRunner, running
 
 
 @pytest.fixture()
@@ -16,5 +15,5 @@ def runner() -> QueueRunner:
 
 @pytest.fixture()
 def radio(runner: QueueRunner) -> Generator[Radio, None, None]:
-    with running(pin_factory_name="mock", runner=runner) as radio:
+    with running(runner=runner) as radio:
         yield radio
