@@ -6,22 +6,19 @@ from collections.abc import Generator
 from contextlib import contextmanager
 from signal import pause
 
+from radiopi.log import log_contextmanager
 from radiopi.pins import PIN_FACTORIES, PinFactoryName, create_pin_factory
 from radiopi.radio import Radio, State
 from radiopi.stations import load_stations
 
-logger = logging.getLogger(__name__)
 
-
+@log_contextmanager(name="Main")
 @contextmanager
 def running(
     *,
     pin_factory_name: PinFactoryName,
 ) -> Generator[Radio, None, None]:
-    logger.info("Main: Starting")
-    # Load data.
     stations = load_stations()
-    # Create state machine.
     state = State(
         is_playing=True,
         station_index=0,
@@ -33,14 +30,7 @@ def running(
     with (
         create_pin_factory(pin_factory_name) as pin_factory,
     ):
-        # Run context.
-        logger.info("Main: Started")
-        try:
-            yield radio
-        finally:
-            logger.info("Main: Stopping")
-    # All done!
-    logger.info("Main: Stopped")
+        yield radio
 
 
 def main() -> None:  # pragma: no cover
