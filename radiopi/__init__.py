@@ -20,7 +20,7 @@ def main() -> None:  # pragma: no cover
         run=run,
         stations=stations,
     )
-    # Run the radio.
+    # Run radio.
     with radio.running():
         try:
             pause()

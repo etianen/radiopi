@@ -121,7 +121,7 @@ class Radio:
             station_index=0,
             stations=(),
         )
-        # Run the radio target loop.
+        # Run radio target loop.
         while True:
             # Wait for notify.
             with self._condition:
