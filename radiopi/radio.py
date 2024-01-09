@@ -59,6 +59,7 @@ class Radio:
 
     @contextmanager
     def _initializing_buttons(self) -> Generator[None, None, None]:
+        # Create buttons.
         logger.info("Buttons: Initalizing")
         with (
             Button(21, pin_factory=self._pin_factory) as toggle_play_button,
@@ -66,6 +67,27 @@ class Radio:
             Button(12, pin_factory=self._pin_factory, hold_time=1, hold_repeat=True) as prev_station_button,
             Button(26, pin_factory=self._pin_factory, hold_time=1, hold_repeat=False) as shutdown_button,
         ):
+            # Set event handlers.
+            toggle_play_button.when_pressed = self.on_toggle_play
+            next_station_button.when_pressed = self.on_next_station
+            next_station_button.when_held = self.on_next_station
+            prev_station_button.when_pressed = self.on_prev_station
+            prev_station_button.when_held = self.on_prev_station
+            shutdown_button.when_held = self.on_shutdown
             # All done!
             logger.info("Buttons: Initalized")
             yield
+
+    # Event handlers.
+
+    def on_toggle_play(self) -> None:
+        self.state = dataclasses.replace(self.state, is_playing=not self.state.is_playing)
+
+    def on_next_station(self) -> None:
+        self.state = dataclasses.replace(self.state, is_playing=True, station_index=self.state.station_index + 1)
+
+    def on_prev_station(self) -> None:
+        self.state = dataclasses.replace(self.state, is_playing=True, station_index=self.state.station_index - 1)
+
+    def on_shutdown(self) -> None:
+        self._run(("poweroff", "-h"))
