@@ -6,10 +6,15 @@ import pytest
 
 from radiopi import running
 from radiopi.radio import Radio
-from radiopi.runner import create_runner
+from tests import QueueRunner
 
 
 @pytest.fixture()
-def radio() -> Generator[Radio, None, None]:
-    with running(pin_factory_name="mock", runner=create_runner("mock")) as machine:
+def runner() -> QueueRunner:
+    return QueueRunner()
+
+
+@pytest.fixture()
+def radio(runner: QueueRunner) -> Generator[Radio, None, None]:
+    with running(pin_factory_name="mock", runner=runner) as machine:
         yield machine
