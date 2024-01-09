@@ -5,6 +5,7 @@ from collections.abc import Callable, Generator, Sequence
 from contextlib import AbstractContextManager
 from functools import wraps
 from threading import Condition
+from typing import Optional
 
 from typing_extensions import Concatenate, ParamSpec, TypeAlias
 
@@ -42,7 +43,7 @@ class Radio:
         self._condition.notify()
 
 
-WatcherCallable: TypeAlias = Callable[Concatenate[State, State, P], None]
+WatcherCallable: TypeAlias = Callable[Concatenate[Optional[State], State, P], None]
 WatcherContextManagerCallable: TypeAlias = Callable[Concatenate[Radio, P], AbstractContextManager[None]]
 
 
@@ -51,7 +52,16 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
         @wraps(fn)
         @daemon(name=name)
         def watcher_wrapper(radio: Radio, /, *args: P.args, **kwargs: P.kwargs) -> None:
-            pass
+            prev_state: State | None = None
+            while True:
+                # Wait for a state change.
+                with radio._condition:
+                    while radio._state == prev_state:
+                        radio._condition.wait()
+                    state = radio._state
+                # Call the state watcher.
+                fn(prev_state, state, *args, **kwargs)
+                prev_state = state
 
         return watcher_wrapper
 
