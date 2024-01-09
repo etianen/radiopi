@@ -52,6 +52,14 @@ class Radio:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=False))
 
+    def next_station(self) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=True, station_index=self._state.station_index + 1))
+
+    def prev_station(self) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=True, station_index=self._state.station_index - 1))
+
     def stop(self) -> None:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=False, stopping=True))
