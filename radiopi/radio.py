@@ -5,6 +5,7 @@ from collections.abc import Callable, Sequence
 from contextlib import AbstractContextManager
 from functools import wraps
 from threading import Condition
+from typing import Final
 
 from typing_extensions import Concatenate, ParamSpec, TypeAlias
 
@@ -30,7 +31,7 @@ class State:
 
 class Radio:
     def __init__(self, state: State) -> None:
-        self._init_state = state
+        self._init_state: Final = state
         self._state = state
         self._condition = Condition()
 
@@ -43,9 +44,13 @@ class Radio:
         self._state = state
         self._condition.notify()
 
+    def play(self) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=True))
+
     def stop(self) -> None:
         with self._condition:
-            self._set_state(dataclasses.replace(self._state, stopping=True))
+            self._set_state(dataclasses.replace(self._state, playing=False, stopping=True))
 
 
 WatcherCallable: TypeAlias = Callable[Concatenate[State, State, P], None]
