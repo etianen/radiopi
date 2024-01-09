@@ -10,6 +10,7 @@ from typing_extensions import ParamSpec, TypeAlias
 
 P = ParamSpec("P")
 T = TypeVar("T")
+
 ContextManagerCallable: TypeAlias = Callable[P, AbstractContextManager[T]]
 
 logger = logging.getLogger(__name__)
