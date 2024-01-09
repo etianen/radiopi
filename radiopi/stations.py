@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 import json
+from collections.abc import Sequence
 from pathlib import Path
 
 
@@ -13,7 +14,7 @@ class Station:
     label: str
 
 
-def load_stations() -> list[Station]:
+def load_stations() -> Sequence[Station]:
     # Load station data.
     data = json.loads((Path(__file__).parent.parent / "stations.json").read_bytes())
     # Build the station mapping.
