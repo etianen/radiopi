@@ -2,19 +2,19 @@ from __future__ import annotations
 
 import dataclasses
 import json
+from collections.abc import Sequence
 from pathlib import Path
 
 
 @dataclasses.dataclass(frozen=True)
 class Station:
-    __slots__ = ("frequency_index", "service_id", "component_id", "label")
     frequency_index: int
     service_id: int
     component_id: int
     label: str
 
 
-def load_stations() -> list[Station]:
+def load_stations() -> Sequence[Station]:
     # Load station data.
     data = json.loads((Path(__file__).parent.parent / "stations.json").read_bytes())
     # Build the station mapping.
@@ -40,4 +40,4 @@ def load_stations() -> list[Station]:
                 # Store the mapping.
                 stations.append(station)
     # All done!
-    return stations
+    return (*stations,)
