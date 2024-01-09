@@ -43,7 +43,7 @@ def main() -> None:  # pragma: no cover
     args = parser.parse_args()
     # Run radio.
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
-    runner = create_runner(args.runner)
+    runner = RUNNERS[args.runner]()
     with running(pin_factory_name=args.pin_factory, runner=runner):
         try:
             pause()

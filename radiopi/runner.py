@@ -3,11 +3,9 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from collections.abc import Mapping, Sequence
 from subprocess import check_call
-from typing import Literal, final
+from typing import final
 
 from radiopi.log import logger
-
-RunnerName = Literal["mock", "subprocess"]
 
 
 class Runner(ABC):
@@ -31,11 +29,7 @@ class SubprocessRunner(Runner):
         check_call(args)
 
 
-RUNNERS: Mapping[RunnerName, type[Runner]] = {
+RUNNERS: Mapping[str, type[Runner]] = {
     "mock": MockRunner,
     "subprocess": SubprocessRunner,
 }
-
-
-def create_runner(runner_name: RunnerName) -> Runner:
-    return RUNNERS[runner_name]()
