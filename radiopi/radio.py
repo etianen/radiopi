@@ -91,23 +91,35 @@ def radio_watcher(prev_state: State, state: State, runner: Runner) -> None:
         # Boot the radio.
         if not prev_state.playing:
             logger.info("Radio: Booting")
-            runner("radio_cli", "--boot=D")
+            runner(radio_boot_args())
             logger.info("Radio: Booted")
         # Tune the radio.
         station = state.station
         if not prev_state.playing or station != prev_state.station:
             logger.info("Radio: Tuning: %r", station)
-            runner(
-                "radio_cli",
-                f"--component={station.component_id}",
-                f"--service={station.service_id}",
-                f"--frequency={station.frequency_index}",
-                "--play",
-                "--level=63",
-            )
+            runner(radio_tune_args(station))
             logger.info("Radio: Tuned: %r", station)
     elif prev_state.playing:
         # Pause the radio.
         logger.info("Radio: Pausing")
-        runner("radio_cli", "--shutdown")
+        runner(radio_pause_args())
         logger.info("Radio: Paused")
+
+
+def radio_boot_args() -> Sequence[str]:
+    return ("radio_cli", "--boot=D")
+
+
+def radio_tune_args(station: Station) -> Sequence[str]:
+    return (
+        "radio_cli",
+        f"--component={station.component_id}",
+        f"--service={station.service_id}",
+        f"--frequency={station.frequency_index}",
+        "--play",
+        "--level=63",
+    )
+
+
+def radio_pause_args() -> Sequence[str]:
+    return ("radio_cli", "--shutdown")

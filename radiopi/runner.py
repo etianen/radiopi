@@ -12,7 +12,7 @@ RunnerName = Literal["mock", "subprocess"]
 
 class Runner(ABC):
     @final
-    def __call__(self, *args: str) -> None:
+    def __call__(self, args: Sequence[str]) -> None:
         logger.info("Runner: %s", " ".join(args))
         self._call(args)
 
