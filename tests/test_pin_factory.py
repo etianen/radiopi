@@ -6,5 +6,5 @@ from radiopi.pin_factory import create_pin_factory
 
 
 def test_create_pin_factory() -> None:
-    pin_factory = create_pin_factory("mock")
-    assert isinstance(pin_factory, Factory)
+    with create_pin_factory("mock") as pin_factory:
+        assert isinstance(pin_factory, Factory)

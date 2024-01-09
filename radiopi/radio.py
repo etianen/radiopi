@@ -30,6 +30,7 @@ class State:
 
 class Radio:
     def __init__(self, state: State) -> None:
+        self._init_state = state
         self._state = state
         self._condition = Condition()
 
@@ -50,20 +51,13 @@ class Radio:
 WatcherCallable: TypeAlias = Callable[Concatenate[State, State, P], None]
 WatcherContextManagerCallable: TypeAlias = Callable[Concatenate[Radio, P], AbstractContextManager[None]]
 
-NULL_STATE: State = State(
-    playing=False,
-    station_index=False,
-    stations=(),
-    stopping=False,
-)
-
 
 def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManagerCallable[P]]:
     def decorator(fn: WatcherCallable[P]) -> WatcherContextManagerCallable[P]:
         @wraps(fn)
         @daemon(name=name)
         def watcher_wrapper(radio: Radio, /, *args: P.args, **kwargs: P.kwargs) -> None:
-            prev_state: State = NULL_STATE
+            prev_state: State = radio._init_state
             while True:
                 # Wait for a state change.
                 with radio._condition:

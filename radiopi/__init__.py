@@ -22,7 +22,7 @@ def running(
 ) -> Generator[Radio, None, None]:
     stations = load_stations()
     state = State(
-        playing=True,
+        playing=False,
         station_index=0,
         stations=stations,
         stopping=False,
