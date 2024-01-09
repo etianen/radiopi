@@ -3,7 +3,7 @@ from __future__ import annotations
 from radiopi.radio import Radio
 
 
-def test_radio_state_initial(radio: Radio) -> None:
+def test_state_initial(radio: Radio) -> None:
     # The radio should be playing.
     assert radio.state.playing
     # The stations should be loaded.

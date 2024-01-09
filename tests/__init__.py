@@ -12,3 +12,7 @@ class QueueRunner(Runner):
 
     def _call(self, args: Sequence[str]) -> None:
         self.queue.put_nowait(args)
+
+    def assert_called(self, *expected_args: str) -> None:
+        args = self.queue.get(timeout=1.0)
+        assert args == expected_args

@@ -16,5 +16,5 @@ def runner() -> QueueRunner:
 
 @pytest.fixture()
 def radio(runner: QueueRunner) -> Generator[Radio, None, None]:
-    with running(pin_factory_name="mock", runner=runner) as machine:
-        yield machine
+    with running(pin_factory_name="mock", runner=runner) as radio:
+        yield radio
