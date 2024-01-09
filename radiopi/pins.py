@@ -6,6 +6,7 @@ from typing import NewType
 
 PinFactory = NewType("PinFactory", object)
 
+
 PIN_FACTORIES = {
     "mock": "gpiozero.pins.mock:MockFactory",
     "rpigpio": "gpiozero.pins.rpigpio:RPiGPIOFactory",
