@@ -45,4 +45,4 @@ def load_stations() -> Sequence[Station]:
                 stations.append(station)
     # All done!
     logger.info("Stations: Loaded")
-    return stations
+    return (*stations,)
