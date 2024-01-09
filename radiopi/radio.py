@@ -19,7 +19,7 @@ P = ParamSpec("P")
 
 @dataclasses.dataclass(frozen=True)
 class State:
-    is_playing: bool
+    playing: bool
     station_index: int
     stations: Sequence[Station]
     stopping: bool
