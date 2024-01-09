@@ -6,6 +6,8 @@ from collections.abc import Generator, Sequence
 from contextlib import contextmanager
 from threading import Condition
 
+from gpiozero import Button
+
 from radiopi.pins import PinFactory
 from radiopi.stations import Station
 from radiopi.subprocess import Run
@@ -33,6 +35,8 @@ class Radio:
         )
         self._stopping = False
 
+    # State.
+
     @property
     def state(self) -> State:
         return self._state
@@ -42,14 +46,26 @@ class Radio:
         with self._condition:
             if state != self._state:
                 # Update the state and notify listeners.
-                logger.debug("State update: %r", state)
+                logger.debug("State: Update: %r", state)
                 self._state = state
                 self._condition.notify()
 
+    # Context.
+
     @contextmanager
     def running(self) -> Generator[Radio, None, None]:
-        yield self
+        with self._initializing_buttons():
+            yield self
 
     @contextmanager
     def _initializing_buttons(self) -> Generator[None, None, None]:
-        yield
+        logger.info("Buttons: Initalizing")
+        with (
+            Button(21, pin_factory=self._pin_factory) as toggle_play_button,
+            Button(16, pin_factory=self._pin_factory, hold_time=1, hold_repeat=True) as next_station_button,
+            Button(12, pin_factory=self._pin_factory, hold_time=1, hold_repeat=True) as prev_station_button,
+            Button(26, pin_factory=self._pin_factory, hold_time=1, hold_repeat=False) as shutdown_button,
+        ):
+            # All done!
+            logger.info("Buttons: Initalized")
+            yield
