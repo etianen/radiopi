@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import dataclasses
-from collections.abc import Callable, Generator, Sequence
+from collections.abc import Callable, Sequence
 from contextlib import AbstractContextManager
 from functools import wraps
 from threading import Condition
