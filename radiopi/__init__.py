@@ -6,7 +6,7 @@ from collections.abc import Generator
 from contextlib import contextmanager
 from signal import pause
 
-from radiopi.pins import PIN_FACTORIES, create_pin_factory
+from radiopi.pins import PIN_FACTORIES, PinFactoryName, create_pin_factory
 from radiopi.radio import Radio, State
 from radiopi.stations import load_stations
 
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 @contextmanager
 def running(
     *,
-    pin_factory_name: str,
+    pin_factory_name: PinFactoryName,
 ) -> Generator[Radio, None, None]:
     logger.info("Main: Starting")
     # Load data.

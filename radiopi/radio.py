@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import dataclasses
+import logging
 from collections.abc import Sequence
 from threading import Condition
 
 from radiopi.stations import Station
+
+logger = logging.getLogger(__name__)
 
 
 @dataclasses.dataclass(frozen=True)
@@ -23,3 +26,11 @@ class Radio:
     def __init__(self, state: State) -> None:
         self._state = state
         self._condition = Condition()
+
+    @property
+    def state(self) -> State:
+        return self._state
+
+    def _set_state(self, state: State) -> None:
+        self._state = state
+        self._condition.notify()
