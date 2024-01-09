@@ -8,7 +8,7 @@ from signal import pause
 
 from radiopi.log import log_contextmanager
 from radiopi.pin_factory import PIN_FACTORIES, PinFactoryName, create_pin_factory
-from radiopi.radio import Radio, State
+from radiopi.radio import Radio, State, radio_watcher
 from radiopi.runner import RUNNERS, Runner, create_runner
 from radiopi.station import load_stations
 
@@ -31,6 +31,7 @@ def running(
     # Start contexts.
     with (
         create_pin_factory(pin_factory_name) as pin_factory,
+        radio_watcher(radio, runner),
     ):
         yield radio
 
