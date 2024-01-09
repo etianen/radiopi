@@ -52,6 +52,9 @@ class Radio:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=False))
 
+    def toggle_play(self) -> None:
+        pass
+
     def next_station(self) -> None:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=True, station_index=self._state.station_index + 1))

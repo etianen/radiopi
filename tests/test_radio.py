@@ -52,11 +52,20 @@ def test_play_play_pause(radio: Radio, runner: TestRunner) -> None:
 
 def test_next_station(radio: Radio, runner: TestRunner) -> None:
     radio.next_station()
-    # We're already booted, so we just retune.
+    # We're already booted, so we just tune.
     runner.assert_called(radio_tune_args(radio.state.stations[1]))
 
 
 def test_prev_station(radio: Radio, runner: TestRunner) -> None:
     radio.prev_station()
-    # We're already booted, so we just retune.
+    # We're already booted, so we just tune.
     runner.assert_called(radio_tune_args(radio.state.stations[-1]))
+
+
+def test_pause_next_station(radio: Radio, runner: TestRunner) -> None:
+    radio.pause()
+    runner.assert_called(radio_pause_args())
+    # Since we're paused, this will first boot, then tune.
+    radio.next_station()
+    runner.assert_called(radio_boot_args())
+    runner.assert_called(radio_tune_args(radio.state.stations[1]))
