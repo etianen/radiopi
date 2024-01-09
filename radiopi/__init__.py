@@ -16,7 +16,9 @@ def running(
     *,
     pin_factory_name: PinFactoryName,
 ) -> Generator[None, None, None]:
-    with create_pin_factory(pin_factory_name) as pin_factory:
+    with (
+        create_pin_factory(pin_factory_name) as pin_factory,
+    ):
         yield
 
 
