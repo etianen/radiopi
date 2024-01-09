@@ -42,7 +42,7 @@ class Radio:
         with self._condition:
             if state != self._state:
                 # Update the state and notify listeners.
-                logger.debug("State updated: %r", state)
+                logger.debug("State update: %r", state)
                 self._state = state
                 self._condition.notify()
 

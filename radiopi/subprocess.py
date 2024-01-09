@@ -10,5 +10,5 @@ logger = logging.getLogger(__name__)
 
 
 def run(cmd: Sequence[str]) -> None:
-    logger.info("Running `%s`", " ".join(cmd))
+    logger.info("Run: %s", " ".join(cmd))
     check_call(cmd)
