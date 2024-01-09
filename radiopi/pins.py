@@ -18,8 +18,9 @@ def discover_pin_factory() -> PinFactory:
         # Fall back to a mock pin factory implementation.
         # We're either not running on an RPi, or important things are not installed!
         from gpiozero.pins.mock import MockFactory as PinFactoryImpl
+    logger.info("Pin factory: Discovered: %s", PinFactoryImpl.__name__)
     # All done!
-    logger.info("Pin factory: %s: Initializing", PinFactoryImpl.__name__)
+    logger.info("Pin factory: Initializing")
     pin_factory = PinFactory(PinFactoryImpl())
-    logger.info("Pin factory: %s: Initialized", PinFactoryImpl.__name__)
+    logger.info("Pin factory: Initialized")
     return pin_factory
