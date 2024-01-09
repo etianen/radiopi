@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from radiopi.radio import Radio
-from radiopi.stations import Station
+from radiopi.station import Station
 
 
 def test_radio_state_initial(radio: Radio) -> None:

@@ -7,10 +7,10 @@ from contextlib import contextmanager
 from signal import pause
 
 from radiopi.log import log_contextmanager
-from radiopi.pins import PIN_FACTORIES, PinFactoryName, create_pin_factory
+from radiopi.pin_factory import PIN_FACTORIES, PinFactoryName, create_pin_factory
 from radiopi.radio import Radio, State
 from radiopi.runner import RUNNERS, Runner, create_runner
-from radiopi.stations import load_stations
+from radiopi.station import load_stations
 
 
 @log_contextmanager(name="Main")

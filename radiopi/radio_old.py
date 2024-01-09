@@ -8,9 +8,9 @@ from threading import Condition, Thread
 
 from gpiozero import Button
 
-from radiopi.pins import PinFactory
+from radiopi.pin_factory import PinFactory
 from radiopi.runner import Runner
-from radiopi.stations import Station
+from radiopi.station import Station
 
 logger = logging.getLogger(__name__)
 

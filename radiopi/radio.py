@@ -11,7 +11,7 @@ from typing_extensions import Concatenate, ParamSpec, TypeAlias
 
 from radiopi.daemon import daemon
 from radiopi.log import logger
-from radiopi.stations import Station
+from radiopi.station import Station
 
 P = ParamSpec("P")
 
