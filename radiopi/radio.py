@@ -11,6 +11,7 @@ from typing_extensions import Concatenate, ParamSpec, TypeAlias
 
 from radiopi.daemon import daemon
 from radiopi.log import logger
+from radiopi.runner import Runner
 from radiopi.station import Station
 
 P = ParamSpec("P")
@@ -62,7 +63,15 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
                 # Call the state watcher.
                 fn(prev_state, state, *args, **kwargs)
                 prev_state = state
+                # Possibly stop.
+                if state.stopping:
+                    break
 
         return watcher_wrapper
 
     return decorator
+
+
+@watcher(name="Radio")
+def radio_watcher(prev_state: State | None, state: State, runner: Runner) -> None:
+    pass
