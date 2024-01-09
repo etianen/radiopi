@@ -5,17 +5,17 @@ from queue import Empty
 import pytest
 
 from radiopi.radio import Radio, radio_boot_args, radio_pause_args, radio_tune_args
-from tests import TestRunner, running
+from tests import QueueRunner, running
 
 
-def test_running_pause_on_stop(runner: TestRunner) -> None:
+def test_running_pause_on_stop(runner: QueueRunner) -> None:
     with running(runner=runner):
         pass
     # On stop, the radio automatically pauses.
     runner.assert_called(radio_pause_args())
 
 
-def test_running_pause_on_stop_already_paused(runner: TestRunner) -> None:
+def test_running_pause_on_stop_already_paused(runner: QueueRunner) -> None:
     with running(runner=runner) as radio:
         # Pause the radio.
         radio.pause()
@@ -25,12 +25,22 @@ def test_running_pause_on_stop_already_paused(runner: TestRunner) -> None:
         runner.queue.get_nowait()
 
 
-def test_pause(radio: Radio, runner: TestRunner) -> None:
+def test_pause(radio: Radio, runner: QueueRunner) -> None:
     radio.pause()
     runner.assert_called(radio_pause_args())
 
 
-def test_pause_pause_play(radio: Radio, runner: TestRunner) -> None:
+def test_toggle_play(radio: Radio, runner: QueueRunner) -> None:
+    # This will pause the radio.
+    radio.toggle_play()
+    runner.assert_called(radio_pause_args())
+    # This will start the radio playing.
+    radio.toggle_play()
+    runner.assert_called(radio_boot_args())
+    runner.assert_called(radio_tune_args(radio.state.stations[0]))
+
+
+def test_pause_pause_play(radio: Radio, runner: QueueRunner) -> None:
     radio.pause()
     runner.assert_called(radio_pause_args())
     # This second pause does nothing, since we're already paused.
@@ -41,7 +51,7 @@ def test_pause_pause_play(radio: Radio, runner: TestRunner) -> None:
     runner.assert_called(radio_tune_args(radio.state.stations[0]))
 
 
-def test_play_play_pause(radio: Radio, runner: TestRunner) -> None:
+def test_play_play_pause(radio: Radio, runner: QueueRunner) -> None:
     # These plays do nothing, since we're already playing.
     radio.play()
     radio.play()
@@ -50,19 +60,19 @@ def test_play_play_pause(radio: Radio, runner: TestRunner) -> None:
     runner.assert_called(radio_pause_args())
 
 
-def test_next_station(radio: Radio, runner: TestRunner) -> None:
+def test_next_station(radio: Radio, runner: QueueRunner) -> None:
     radio.next_station()
     # We're already booted, so we just tune.
     runner.assert_called(radio_tune_args(radio.state.stations[1]))
 
 
-def test_prev_station(radio: Radio, runner: TestRunner) -> None:
+def test_prev_station(radio: Radio, runner: QueueRunner) -> None:
     radio.prev_station()
     # We're already booted, so we just tune.
     runner.assert_called(radio_tune_args(radio.state.stations[-1]))
 
 
-def test_pause_next_station(radio: Radio, runner: TestRunner) -> None:
+def test_pause_next_station(radio: Radio, runner: QueueRunner) -> None:
     radio.pause()
     runner.assert_called(radio_pause_args())
     # Since we're paused, this will first boot, then tune.

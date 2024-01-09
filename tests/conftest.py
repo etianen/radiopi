@@ -5,15 +5,15 @@ from collections.abc import Generator
 import pytest
 
 from radiopi.radio import Radio
-from tests import TestRunner, running
+from tests import QueueRunner, running
 
 
 @pytest.fixture()
-def runner() -> TestRunner:
-    return TestRunner()
+def runner() -> QueueRunner:
+    return QueueRunner()
 
 
 @pytest.fixture()
-def radio(runner: TestRunner) -> Generator[Radio, None, None]:
+def radio(runner: QueueRunner) -> Generator[Radio, None, None]:
     with running(runner=runner) as radio:
         yield radio
