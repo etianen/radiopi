@@ -18,10 +18,10 @@ class QueueRunner(Runner):
         args = self.queue.get(timeout=1.0)
         assert args == expected_args
 
-    def assert_booted(self) -> None:
+    def assert_radio_booted(self) -> None:
         self.assert_called("radio_cli", "--boot=D")
 
-    def assert_tuned(self, station: Station) -> None:
+    def assert_radio_tuned(self, station: Station) -> None:
         self.assert_called(
             "radio_cli",
             f"--component={station.component_id}",
