@@ -9,7 +9,7 @@ from gpiozero import Button
 from radiopi.log import log_contextmanager
 from radiopi.pin_factory import PinFactory
 from radiopi.radio import Radio
-from radiopi.runner import Args, Runner
+from radiopi.runner import Runner
 
 
 @log_contextmanager(name="Buttons")
