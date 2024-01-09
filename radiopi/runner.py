@@ -12,12 +12,12 @@ RunnerName = Literal["mock", "subprocess"]
 
 class Runner(ABC):
     @final
-    def __call__(self, *args: str) -> None:  # pragma: no cover
+    def __call__(self, *args: str) -> None:
         logger.info("Runner: %s", " ".join(args))
         self._call(args)
 
     @abstractmethod
-    def _call(self, args: Sequence[str]) -> None:
+    def _call(self, args: Sequence[str]) -> None:  # pragma: no cover
         raise NotImplementedError
 
 
