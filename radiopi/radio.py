@@ -48,6 +48,10 @@ class Radio:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=True))
 
+    def pause(self) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=False))
+
     def stop(self) -> None:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=False, stopping=True))
@@ -91,7 +95,7 @@ def radio_watcher(prev_state: State, state: State, runner: Runner) -> None:
             logger.info("Radio: Booted")
         # Tune the radio.
         station = state.station
-        if station != prev_state.station:
+        if not prev_state.playing or station != prev_state.station:
             logger.info("Radio: Tuning: %r", station)
             runner(
                 "radio_cli",
@@ -103,7 +107,7 @@ def radio_watcher(prev_state: State, state: State, runner: Runner) -> None:
             )
             logger.info("Radio: Tuned: %r", station)
     elif prev_state.playing:
-        # Shutdown the radio.
-        logger.info("Radio: Shutting down")
+        # Pause the radio.
+        logger.info("Radio: Pausing")
         runner("radio_cli", "--shutdown")
-        logger.info("Radio: Shut down")
+        logger.info("Radio: Paused")
