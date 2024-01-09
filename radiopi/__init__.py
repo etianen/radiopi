@@ -33,7 +33,10 @@ def running(
         create_pin_factory(pin_factory_name) as pin_factory,
         radio_watcher(radio, runner),
     ):
-        yield radio
+        try:
+            yield radio
+        finally:
+            radio.stop()
 
 
 def main() -> None:  # pragma: no cover

@@ -43,6 +43,10 @@ class Radio:
         self._state = state
         self._condition.notify()
 
+    def stop(self) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, stopping=True))
+
 
 WatcherCallable: TypeAlias = Callable[Concatenate[Optional[State], State, P], None]
 WatcherContextManagerCallable: TypeAlias = Callable[Concatenate[Radio, P], AbstractContextManager[None]]
