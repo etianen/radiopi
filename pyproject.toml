@@ -10,6 +10,7 @@ readme = "README.md"
 python = "^3.9"
 gpiozero = "^2.0"
 "rpi.gpio" = { version = "^0.7.1", markers = "sys_platform == 'linux'" }
+typing-extensions = "^4.9.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.8.0"
