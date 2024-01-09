@@ -3,5 +3,5 @@ from __future__ import annotations
 from radiopi.radio import Radio
 
 
-def test_shutdown(radio: Radio) -> None:
+def test_noop(radio: Radio) -> None:
     pass
