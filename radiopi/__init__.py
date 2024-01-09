@@ -9,7 +9,7 @@ from signal import pause
 from radiopi.log import log_contextmanager
 from radiopi.pins import PIN_FACTORIES, PinFactoryName, create_pin_factory
 from radiopi.radio import Radio, State
-from radiopi.runner import RUNNERS, Runner, create_runner
+from radiopi.runner import RUNNERS, Runner
 from radiopi.stations import load_stations
 
 
