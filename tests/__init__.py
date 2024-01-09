@@ -30,3 +30,6 @@ class QueueRunner(Runner):
             "--play",
             "--level=63",
         )
+
+    def assert_radio_paused(self) -> None:
+        self.assert_called("radio_cli", "--shutdown")
