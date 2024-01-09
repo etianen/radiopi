@@ -9,7 +9,7 @@ from radiopi.radio import Radio, radio_boot_args, radio_tune_args
 from radiopi.runner import Args, Runner
 
 
-class QueueRunner(Runner):
+class TestRunner(Runner):
     def __init__(self) -> None:
         self.queue: SimpleQueue[Args] = SimpleQueue()
 
@@ -22,7 +22,7 @@ class QueueRunner(Runner):
 
 
 @contextmanager
-def running(*, runner: QueueRunner) -> Generator[Radio, None, None]:
+def running(*, runner: TestRunner) -> Generator[Radio, None, None]:
     with running_(pin_factory_name="mock", runner=runner) as radio:
         # On start, the radio automatically boots and tunes.
         runner.assert_called(radio_boot_args())

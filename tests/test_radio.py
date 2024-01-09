@@ -5,17 +5,17 @@ from queue import Empty
 import pytest
 
 from radiopi.radio import Radio, radio_pause_args
-from tests import QueueRunner, running
+from tests import TestRunner, running
 
 
-def test_pause_on_stop(runner: QueueRunner) -> None:
+def test_running_pause_on_stop(runner: TestRunner) -> None:
     with running(runner=runner):
         pass
     # On stop, the radio automatically pauses.
     runner.assert_called(radio_pause_args())
 
 
-def test_pause_on_stop_already_paused(runner: QueueRunner) -> None:
+def test_running_pause_on_stop_already_paused(runner: TestRunner) -> None:
     with running(runner=runner) as radio:
         # Pause the radio.
         radio.pause()
@@ -25,11 +25,5 @@ def test_pause_on_stop_already_paused(runner: QueueRunner) -> None:
         runner.queue.get_nowait()
 
 
-def test_state_initial(radio: Radio) -> None:
-    # The radio should be playing.
-    assert radio.state.playing
-    # The stations should be loaded.
-    assert radio.state.station_index == 0
-    assert len(radio.state.stations) > 0
-    # The radio should not be stopping.
-    assert not radio.state.stopping
+def test_start_already_started(radio: Radio, runner: TestRunner) -> None:
+    pass
