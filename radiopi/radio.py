@@ -115,23 +115,22 @@ class Radio:
     # Thread targets.
 
     def _radio_target(self) -> None:
-        prev_state = self.state
-        while not self._stopping:
+        stopping = False
+        prev_state = State(
+            is_playing=False,
+            station_index=0,
+            stations=(),
+        )
+        # Run the radio target loop.
+        while True:
             # Wait for notify.
             with self._condition:
-                while True:
-                    # Grab the new state.
-                    state = self.state
-                    if (
-                        self._stopping
-                        or state.is_playing != prev_state.is_playing
-                        or state.station_index != prev_state.station_index
-                    ):
-                        break
-                    # Wait for notify.
+                while self._stopping == stopping and self._state == prev_state:
                     self._condition.wait()
-            # Handle new state.
-            if state.is_playing:
+                stopping = self._stopping
+                state = self._state
+            # Handle tune.
+            if state.is_playing and (not prev_state.is_playing or prev_state.station_index != state.station_index):
                 # Tune radio.
                 station = state.station
                 logger.info("Radio: Tuning: %r", station)
@@ -147,29 +146,32 @@ class Radio:
                     )
                 )
                 logger.info("Radio: Playing: %r", station)
-            else:
-                # Shutdown radio.
+            # Handle shutdown.
+            if not state.is_playing and prev_state.is_playing:
                 logger.info("Radio: Shutting down")
                 self._run(("radio_cli", "--shutdown"))
                 logger.info("Radio: Shutdown")
             # Update prev state.
             prev_state = state
+            # Consider stopping.
+            if stopping:
+                break
 
     # Event handlers.
 
     def on_toggle_play(self) -> None:
         with self._condition:
-            state = self.state
+            state = self._state
             self.state = dataclasses.replace(state, is_playing=not state.is_playing)
 
     def on_next_station(self) -> None:
         with self._condition:
-            state = self.state
+            state = self._state
             self.state = dataclasses.replace(state, is_playing=True, station_index=state.station_index + 1)
 
     def on_prev_station(self) -> None:
         with self._condition:
-            state = self.state
+            state = self._state
             self.state = dataclasses.replace(state, is_playing=True, station_index=state.station_index - 1)
 
     def on_shutdown(self) -> None:
