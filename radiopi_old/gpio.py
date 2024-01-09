@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 try:
     # Try to use the real pin factory.
     from gpiozero.pins.rpigpio import RPiGPIOFactory as PinFactory
-except ImportError:
-    logger.warning("`RPi.GPIO` is not installed, using mock pin factory!")
+except (ImportError, RuntimeError):
+    logger.warning("`RPi.GPIO` is not available, using mock pin factory!")
     # Fall back to a mock pin factory.
     # We're either not running on an RPi, or important things are not installed!
     from gpiozero.pins.mock import MockFactory as PinFactory
