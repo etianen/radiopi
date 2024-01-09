@@ -35,7 +35,12 @@ class Radio:
         )
         self._stopping = False
 
-    def _set_state(self, state: State) -> None:
+    @property
+    def state(self) -> State:
+        return self._state
+
+    @state.setter
+    def state(self, state: State) -> None:
         # Set state and notify listeners.
         logger.debug("State: Set: %r", state)
         self._state = state
@@ -45,7 +50,7 @@ class Radio:
 
     @contextmanager
     def running(self) -> Generator[Radio, None, None]:
-        logger.info("Radio: Running")
+        logger.info("Running")
         with (
             self._running_thread(self._radio_cli_target),
             self._initializing_buttons(),
@@ -54,12 +59,12 @@ class Radio:
                 yield self
             finally:
                 # Notify stopping.
-                logger.info("Radio: Stopping")
+                logger.info("Stopping")
                 with self._condition:
                     self._stopping = True
                     self._condition.notify_all()
         # All done!
-        logger.info("Radio: Stopped")
+        logger.info("Stopped")
 
     @contextmanager
     def _running_thread(self, target: Callable[[], None]) -> Generator[None, None, None]:
@@ -104,51 +109,55 @@ class Radio:
     # Thread targets.
 
     def _radio_cli_target(self) -> None:
-        prev_state = self.state
+        prev_state = self._state
         while True:
             # Wait for notify.
             with self._condition:
                 while not self._stopping:
                     # Grab the new state.
-                    if self._state.is_playing != prev_state:
-                        state = self.state
+                    if (
+                        self._state.is_playing != prev_state.is_playing
+                        or self._state.station_index != prev_state.station_index
+                    ):
+                        state = self._state
                         break
                 else:
-                    # We're stopping.
-                    break
+                    break  # We're stopping.
             # Handle new state.
-            if state.is_playing != pre:
-                pass
+            if state.is_playing:
+                state
+                logger.info(
+                    "Radio: Tuning: %r",
+                )
             else:
-                pass
+                logger.info("Radio: Shutting down")
+                self._run(("radio_cli", "--shutdown"))
+                logger.info("Radio: Shutdown")
 
     # Event handlers.
 
     def on_toggle_play(self) -> None:
         with self._condition:
-            state = dataclasses.replace(
+            self.state = dataclasses.replace(
                 self._state,
                 is_playing=not self._state.is_playing,
             )
-            self._set_state(state)
 
     def on_next_station(self) -> None:
         with self._condition:
-            state = dataclasses.replace(
+            self.state = dataclasses.replace(
                 self._state,
                 is_playing=True,
                 station_index=self._state.station_index + 1,
             )
-            self._set_state(state)
 
     def on_prev_station(self) -> None:
         with self._condition:
-            state = dataclasses.replace(
+            self.state = dataclasses.replace(
                 self._state,
                 is_playing=True,
                 station_index=self._state.station_index - 1,
             )
-            self._set_state(state)
 
     def on_shutdown(self) -> None:
         self._run(("poweroff", "-h"))
