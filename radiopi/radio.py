@@ -56,7 +56,7 @@ class Radio:
 
     @contextmanager
     def running(self) -> Generator[Radio, None, None]:
-        logger.info("Running")
+        logger.info("Main: Running")
         with (
             self._running_thread(self._radio_cli_target),
             self._initializing_buttons(),
@@ -65,13 +65,13 @@ class Radio:
                 yield self
             finally:
                 # Notify stopping.
-                logger.info("Stopping")
+                logger.info("Main: Stopping")
                 with self._condition:
                     self._stopping = True
                     self.state = dataclasses.replace(self.state, is_playing=False)
                     self._condition.notify_all()
         # All done!
-        logger.info("Stopped")
+        logger.info("Main: Stopped")
 
     @contextmanager
     def _running_thread(self, target: Callable[[], None]) -> Generator[None, None, None]:
