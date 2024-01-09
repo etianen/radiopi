@@ -4,6 +4,7 @@ from collections.abc import Sequence
 from queue import SimpleQueue
 
 from radiopi.runner import Runner
+from radiopi.station import Station
 
 
 class QueueRunner(Runner):
@@ -16,3 +17,16 @@ class QueueRunner(Runner):
     def assert_called(self, *expected_args: str) -> None:
         args = self.queue.get(timeout=1.0)
         assert args == expected_args
+
+    def assert_booted(self) -> None:
+        self.assert_called("radio_cli", "--boot=D")
+
+    def assert_tuned(self, station: Station) -> None:
+        self.assert_called(
+            "radio_cli",
+            f"--component={station.component_id}",
+            f"--service={station.service_id}",
+            f"--frequency={station.frequency_index}",
+            "--play",
+            "--level=63",
+        )
