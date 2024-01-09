@@ -5,7 +5,6 @@ from collections.abc import Callable, Sequence
 from contextlib import AbstractContextManager
 from functools import wraps
 from threading import Condition
-from typing import Optional
 
 from typing_extensions import Concatenate, ParamSpec, TypeAlias
 
@@ -48,8 +47,15 @@ class Radio:
             self._set_state(dataclasses.replace(self._state, stopping=True))
 
 
-WatcherCallable: TypeAlias = Callable[Concatenate[Optional[State], State, P], None]
+WatcherCallable: TypeAlias = Callable[Concatenate[State, State, P], None]
 WatcherContextManagerCallable: TypeAlias = Callable[Concatenate[Radio, P], AbstractContextManager[None]]
+
+NULL_STATE: State = State(
+    playing=False,
+    station_index=False,
+    stations=(),
+    stopping=False,
+)
 
 
 def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManagerCallable[P]]:
@@ -57,7 +63,7 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
         @wraps(fn)
         @daemon(name=name)
         def watcher_wrapper(radio: Radio, /, *args: P.args, **kwargs: P.kwargs) -> None:
-            prev_state: State | None = None
+            prev_state: State = NULL_STATE
             while True:
                 # Wait for a state change.
                 with radio._condition:
@@ -77,5 +83,28 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
 
 
 @watcher(name="Radio")
-def radio_watcher(prev_state: State | None, state: State, runner: Runner) -> None:
-    pass
+def radio_watcher(prev_state: State, state: State, runner: Runner) -> None:
+    if state.playing:
+        # Boot the radio.
+        if not prev_state.playing:
+            logger.info("Radio: Booting")
+            runner("radio_cli", "--boot=D")
+            logger.info("Radio: Booted")
+        # Tune the radio.
+        station = state.station
+        if station != prev_state.station:
+            logger.info("Radio: Tuning: %r", station)
+            runner(
+                "radio_cli",
+                f"--component={station.component_id}",
+                f"--service={station.service_id}",
+                f"--frequency={station.frequency_index}",
+                "--play",
+                "--level=63",
+            )
+            logger.info("Radio: Tuned: %r", station)
+    elif prev_state.playing:
+        # Shutdown the radio.
+        logger.info("Radio: Shutting down")
+        runner("radio_cli", "--shutdown")
+        logger.info("Radio: Shut down")
