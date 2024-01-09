@@ -18,7 +18,7 @@ class Runner(ABC):
 
     @abstractmethod
     def _call(self, args: Sequence[str]) -> None:
-        pass
+        raise NotImplementedError
 
 
 class MockRunner(Runner):
