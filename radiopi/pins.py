@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from contextlib import AbstractContextManager
 from pkgutil import resolve_name
 from typing import NewType
@@ -7,9 +8,12 @@ from typing import NewType
 PinFactory = NewType("PinFactory", object)
 PinFactoryName = NewType("PinFactoryName", str)
 
-PIN_FACTORIES = {
-    "mock": PinFactoryName("gpiozero.pins.mock:MockFactory"),
-    "rpigpio": PinFactoryName("gpiozero.pins.rpigpio:RPiGPIOFactory"),
+MOCK_PIN_FACTORY_NAME = PinFactoryName("gpiozero.pins.mock:MockFactory")
+RPIGPIO_PIN_FACTORY_NAME = PinFactoryName("gpiozero.pins.rpigpio:RPiGPIOFactory")
+
+PIN_FACTORIES: Mapping[str, PinFactoryName] = {
+    "mock": MOCK_PIN_FACTORY_NAME,
+    "rpigpio": RPIGPIO_PIN_FACTORY_NAME,
 }
 
 

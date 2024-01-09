@@ -4,19 +4,15 @@ from collections.abc import Generator, Sequence
 
 import pytest
 
-from radiopi.pins import PinFactory, create_pin_factory
-from radiopi.stations import Station, load_stations
-
-
-@pytest.fixture(scope="session")
-def stations() -> Sequence[Station]:
-    return load_stations()
+from radiopi import running
+from radiopi.pins import MOCK_PIN_FACTORY_NAME
+from radiopi.radio import Radio
 
 
 @pytest.fixture()
-def pin_factory() -> Generator[PinFactory, None, None]:
-    with create_pin_factory("mock") as pin_factory:
-        yield pin_factory
+def radio() -> Generator[Radio, None, None]:
+    with running(pin_factory_name=MOCK_PIN_FACTORY_NAME) as machine:
+        yield machine
 
 
 # @pytest.fixture()
