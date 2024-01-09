@@ -35,30 +35,50 @@ class Radio:
         )
         self._stopping = False
 
-    # State.
-
-    @property
-    def state(self) -> State:
-        return self._state
-
-    @state.setter
-    def state(self, state: State) -> None:
-        with self._condition:
-            if state != self._state:
-                # Update the state and notify listeners.
-                logger.debug("State: Update: %r", state)
-                self._state = state
-                self._condition.notify()
+    def set_state(self, state: State) -> None:
+        # Set state and notify listeners.
+        logger.debug("State: Set: %r", state)
+        self._state = state
+        self._condition.notify_all()
 
     # Context.
 
     @contextmanager
     def running(self) -> Generator[Radio, None, None]:
+        logger.info("Radio: Running")
         with (
-            self._initializing_buttons(),
             self._running_thread(self._radio_cli_target),
+            self._initializing_buttons(),
         ):
-            yield self
+            try:
+                yield self
+            finally:
+                # Notify stopping.
+                logger.info("Radio: Stopping")
+                with self._condition:
+                    self._stopping = True
+                    self._condition.notify_all()
+        # All done!
+        logger.info("Radio: Stopped")
+
+    @contextmanager
+    def _running_thread(self, target: Callable[[], None]) -> Generator[None, None, None]:
+        # Create thread.
+        logger.info("Thread: %s: Starting", target.__name__)
+        thread = Thread(target=target, daemon=True)
+        thread.start()
+        try:
+            # All done!
+            logger.info("Thread: %s: Started", target.__name__)
+            yield
+        finally:
+            # Stop thread.
+            logger.info("Thread: %s: Stopping", target.__name__)
+            thread.join(timeout=10.0)
+            if thread.is_alive():  # pragma: no cover
+                logger.error("Thread: %s: Zombie", target.__name__)
+            else:
+                logger.info("Thread: %s: Stopped", target.__name__)
 
     @contextmanager
     def _initializing_buttons(self) -> Generator[None, None, None]:
@@ -81,41 +101,40 @@ class Radio:
             logger.info("Buttons: Initialized")
             yield
 
-    @contextmanager
-    def _running_thread(self, target: Callable[[], None]) -> Generator[None, None, None]:
-        # Create thread.
-        logger.info("Thread: %s: Starting", target.__name__)
-        thread = Thread(target=target, daemon=True)
-        thread.start()
-        try:
-            # All done!
-            logger.info("Thread: %s: Started", target.__name__)
-            yield
-        finally:
-            # Stop thread.
-            logger.info("Thread: %s: Stopping", target.__name__)
-            thread.join(timeout=10.0)
-            if thread.is_alive():  # pragma: no cover
-                logger.error("Thread: %s: Zombie", target.__name__)
-            else:
-                logger.info("Thread: %s: Stopped", target.__name__)
-
     # Thread targets.
 
     def _radio_cli_target(self) -> None:
+        prev_state = self.state
         while True:
-            pass
+            # Wait for notify.
+            with self._condition:
+                while not self._stopping:
+                    # Grab the new state.
+                    if self.state != prev_state:
+                        state = self.state
+                        break
+                else:
+                    # We're stopping.
+                    break
+            # Handle new state.
+            if state.is_playing != pre:
+                pass
+            else:
+                pass
 
     # Event handlers.
 
     def on_toggle_play(self) -> None:
-        self.state = dataclasses.replace(self.state, is_playing=not self.state.is_playing)
+        with self._condition:
+            self.set_state(dataclasses.replace(self._state, is_playing=not self._state.is_playing))
 
     def on_next_station(self) -> None:
-        self.state = dataclasses.replace(self.state, is_playing=True, station_index=self.state.station_index + 1)
+        with self._condition:
+            self.state = dataclasses.replace(self._state, is_playing=True, station_index=self._state.station_index + 1)
 
     def on_prev_station(self) -> None:
-        self.state = dataclasses.replace(self.state, is_playing=True, station_index=self.state.station_index - 1)
+        with self._condition:
+            self.state = dataclasses.replace(self._state, is_playing=True, station_index=self._state.station_index - 1)
 
     def on_shutdown(self) -> None:
         self._run(("poweroff", "-h"))
