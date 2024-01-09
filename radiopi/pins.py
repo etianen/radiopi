@@ -3,9 +3,9 @@ from __future__ import annotations
 import logging
 from typing import NewType
 
-logger = logging.getLogger(__name__)
-
 PinFactory = NewType("PinFactory", object)
+
+logger = logging.getLogger(__name__)
 
 
 def get_pin_factory() -> PinFactory:
