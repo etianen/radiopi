@@ -20,7 +20,7 @@ LEDControllerName = Literal["mock", "pwm"]
 class LEDController(AbstractContextManager["LEDController"]):
     @abstractmethod
     def __init__(self, pin: int, *, pin_factory: PinFactory) -> None:
-        ...
+        raise NotImplementedError
 
     @property
     @abstractmethod
