@@ -35,23 +35,33 @@ def leds(*, pin_factory: PinFactory) -> Generator[LEDs, None, None]:
 
 
 @watcher(name="LEDs")
-def playing_watcher(prev_state: State, state: State, *, leds: LEDs) -> None:
+def leds_watcher(prev_state: State, state: State, *, leds: LEDs) -> None:
     if state.playing:
-        # Fade in the play button.
+        # Fade in the LEDs.
         if not prev_state.playing:
-            for leds.play_led.value in fade(0.0, 1.0):
-                pass
+            for value in fade(0.0, 1.0):
+                leds.play_led.value = value
+                leds.next_station_led.value = value
+                leds.prev_station_led.value = value
+        # Pulse the next station button.
+        elif prev_state.station_index % len(prev_state.stations) == state.station_index % len(state.stations) - 1:
+            for value in pulse(1.0, 0.0):
+                leds.next_station_led.value = value
+        # Pulse the prev station button.
+        elif prev_state.station_index % len(prev_state.stations) == state.station_index % len(state.stations) + 1:
+            for value in pulse(1.0, 0.0):
+                leds.prev_station_led.value = value
+        # Pulse both the station buttons.
+        elif prev_state.station != state.station:
+            for value in pulse(1.0, 0.0):
+                leds.next_station_led.value = value
+                leds.prev_station_led.value = value
     elif prev_state.playing:
-        # Fade out the play button.
+        # Fade out the LEDs.
         for leds.play_led.value in fade(1.0, 0.0):
-            pass
-
-
-@watcher(name="LEDs")
-def station_watcher(prev_state: State, state: State, *, leds: LEDs) -> None:
-    if state.playing:
-        if not prev_state.playing:
-            pass
+            leds.play_led.value = value
+            leds.next_station_led.value = value
+            leds.prev_station_led.value = value
 
 
 def fade(
@@ -67,3 +77,14 @@ def fade(
         yield from_value + value_interval * n
         sleep(sleep_interval)
     yield to_value
+
+
+def pulse(
+    from_value: float,
+    to_value: float,
+    *,
+    steps: int = 100,
+    duration: float = 0.3,
+) -> Generator[float, None, None]:
+    yield from fade(from_value, to_value, steps=steps / 2, duration=duration / 2)
+    yield from fade(to_value, from_value, steps=steps / 2, duration=duration / 2)
