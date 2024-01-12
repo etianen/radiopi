@@ -131,7 +131,7 @@ def radio_tune_args(station: Station) -> Args:
         f"--service={station.service_id}",
         f"--frequency={station.frequency_index}",
         "--play",
-        "--level=63",
+        "--level=32",
     )
 
 
