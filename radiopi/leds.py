@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import dataclasses
-from collections.abc import Generator
+from abc import ABC, abstractmethod
+from collections.abc import Generator, Iterable
 from contextlib import contextmanager
 from time import sleep
 
@@ -12,25 +13,34 @@ from radiopi.pin_factory import PinFactory
 from radiopi.radio import State, watcher
 
 
+class LEDController(ABC):
+    def __init__(self, led: PWMLED) -> None:
+        self.led = led
+
+    @abstractmethod
+    def set_value(self, value: float) -> None:
+        pass
+
+
 @dataclasses.dataclass(frozen=True)
 class LEDs:
-    play_led: PWMLED
-    next_station_led: PWMLED
-    prev_station_led: PWMLED
+    play_led: LEDController
+    next_station_led: LEDController
+    prev_station_led: LEDController
 
 
 @log_contextmanager(name="Buttons")
 @contextmanager
-def create_leds(*, pin_factory: PinFactory) -> Generator[LEDs, None, None]:
+def create_leds(*, led_controller_cls: type[LEDController], pin_factory: PinFactory) -> Generator[LEDs, None, None]:
     with (
         PWMLED(1, pin_factory=pin_factory) as play_led,
         PWMLED(2, pin_factory=pin_factory) as next_station_led,
         PWMLED(3, pin_factory=pin_factory) as prev_station_led,
     ):
         yield LEDs(
-            play_led=play_led,
-            next_station_led=next_station_led,
-            prev_station_led=prev_station_led,
+            play_led=led_controller_cls(play_led),
+            next_station_led=led_controller_cls(next_station_led),
+            prev_station_led=led_controller_cls(prev_station_led),
         )
 
 
@@ -39,29 +49,25 @@ def leds_watcher(prev_state: State, state: State, *, leds: LEDs) -> None:
     if state.playing:
         # Fade in the LEDs.
         if not prev_state.playing:
-            for value in fade(0.0, 1.0):
-                leds.play_led.value = value
-                leds.next_station_led.value = value
-                leds.prev_station_led.value = value
+            transition(fade(0.0, 1.0), leds.play_led, leds.next_station_led, leds.prev_station_led)
         # Pulse the next station button.
         elif prev_state.station_index % len(prev_state.stations) == state.station_index % len(state.stations) - 1:
-            for value in pulse(1.0, 0.0):
-                leds.next_station_led.value = value
+            transition(pulse(1.0, 0.0), leds.next_station_led)
         # Pulse the prev station button.
         elif prev_state.station_index % len(prev_state.stations) == state.station_index % len(state.stations) + 1:
-            for value in pulse(1.0, 0.0):
-                leds.prev_station_led.value = value
+            transition(pulse(1.0, 0.0), leds.prev_station_led)
         # Pulse both the station buttons.
         elif prev_state.station != state.station:
-            for value in pulse(1.0, 0.0):
-                leds.next_station_led.value = value
-                leds.prev_station_led.value = value
+            transition(pulse(1.0, 0.0), leds.next_station_led, leds.prev_station_led)
     elif prev_state.playing:
         # Fade out the LEDs.
-        for leds.play_led.value in fade(1.0, 0.0):
-            leds.play_led.value = value
-            leds.next_station_led.value = value
-            leds.prev_station_led.value = value
+        transition(fade(1.0, 0.0), leds.play_led, leds.next_station_led, leds.prev_station_led)
+
+
+def transition(values: Iterable[float], *leds: LEDController) -> None:
+    for value in values:
+        for led in leds:
+            led.set_value(value)
 
 
 def fade(
