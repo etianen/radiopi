@@ -47,7 +47,7 @@ class MockLEDController(LEDController):
 
     @property
     def value(self) -> float:
-        return self._value
+        raise NotImplementedError
 
     @value.setter
     def value(self, value: float) -> None:
