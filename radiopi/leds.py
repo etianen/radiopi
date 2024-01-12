@@ -5,7 +5,7 @@ from collections.abc import Generator
 from contextlib import contextmanager
 from time import sleep
 
-from gpiozero import PWMLED
+from gpiozero import LED, PWMLED
 
 from radiopi.log import log_contextmanager
 from radiopi.pin_factory import PinFactory
@@ -23,9 +23,9 @@ class LEDs:
 @contextmanager
 def create_leds(*, pin_factory: PinFactory) -> Generator[LEDs, None, None]:
     with (
-        PWMLED(1, pin_factory=pin_factory) as play_led,
-        PWMLED(2, pin_factory=pin_factory) as next_station_led,
-        PWMLED(3, pin_factory=pin_factory) as prev_station_led,
+        LED(1, pin_factory=pin_factory) as play_led,
+        LED(2, pin_factory=pin_factory) as next_station_led,
+        LED(3, pin_factory=pin_factory) as prev_station_led,
     ):
         yield LEDs(
             play_led=play_led,
