@@ -131,5 +131,5 @@ def pulse(
     steps: int = 100,
     duration: float,
 ) -> Generator[float, None, None]:
-    yield from fade(from_value, to_value, steps=steps // 2, duration=duration / 2.0)
-    yield from fade(to_value, from_value, steps=steps // 2, duration=duration / 2.0)
+    yield from fade(from_value, to_value, steps=steps, duration=duration)
+    yield from fade(to_value, from_value, steps=steps, duration=duration)
