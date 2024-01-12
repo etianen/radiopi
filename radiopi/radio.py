@@ -82,8 +82,11 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
             while True:
                 # Wait for a state change.
                 with radio._condition:
-                    radio._condition.wait()
-                    state = radio._state
+                    while True:
+                        state = radio._state
+                        if state != prev_state:
+                            break
+                        radio._condition.wait()
                 # Call the state watcher.
                 fn(prev_state, state, *args, **kwargs)
                 prev_state = state
