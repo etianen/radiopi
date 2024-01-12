@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import dataclasses
 from abc import abstractmethod
-from collections.abc import Generator, Iterable, Mapping
-from contextlib import AbstractContextManager, contextmanager
+from collections.abc import Generator, Mapping
+from contextlib import AbstractContextManager, closing, contextmanager
 from time import sleep
 from types import TracebackType
 from typing import Literal
@@ -102,10 +102,11 @@ def leds_watcher(prev_state: State, state: State, *, leds: LEDs) -> None:
         transition(fade(1.0, 0.0), leds.play_led, leds.next_station_led, leds.prev_station_led)
 
 
-def transition(values: Iterable[float], *leds: LEDController) -> None:
-    for value in values:
-        for led in leds:
-            led.value = value
+def transition(values: Generator[float, None, None], *leds: LEDController) -> None:
+    with closing(values):
+        for value in values:
+            for led in leds:
+                led.value = value
 
 
 def fade(
