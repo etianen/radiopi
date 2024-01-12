@@ -3,6 +3,7 @@ from __future__ import annotations
 import dataclasses
 from collections.abc import Generator
 from contextlib import contextmanager
+from math import ceil, floor
 from time import sleep
 
 from gpiozero import PWMLED
@@ -21,7 +22,7 @@ class LEDs:
 
 @log_contextmanager(name="Buttons")
 @contextmanager
-def leds(*, pin_factory: PinFactory) -> Generator[LEDs, None, None]:
+def create_leds(*, pin_factory: PinFactory) -> Generator[LEDs, None, None]:
     with (
         PWMLED(1, pin_factory=pin_factory) as play_led,
         PWMLED(2, pin_factory=pin_factory) as next_station_led,
@@ -86,5 +87,5 @@ def pulse(
     steps: int = 100,
     duration: float = 0.3,
 ) -> Generator[float, None, None]:
-    yield from fade(from_value, to_value, steps=steps / 2, duration=duration / 2)
-    yield from fade(to_value, from_value, steps=steps / 2, duration=duration / 2)
+    yield from fade(from_value, to_value, steps=floor(steps / 2), duration=duration / 2.0)
+    yield from fade(to_value, from_value, steps=ceil(steps / 2) - 1, duration=duration / 2.0)
