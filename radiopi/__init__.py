@@ -33,7 +33,7 @@ def running(
     with (
         create_pin_factory(pin_factory_name) as pin_factory,
         buttons(pin_factory=pin_factory, radio=radio, runner=runner),
-        radio_watcher(radio, runner),
+        radio_watcher(radio, runner=runner),
     ):
         radio.play()
         try:

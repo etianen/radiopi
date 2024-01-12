@@ -97,7 +97,7 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
 
 
 @watcher(name="Radio")
-def radio_watcher(prev_state: State, state: State, runner: Runner) -> None:
+def radio_watcher(prev_state: State, state: State, *, runner: Runner) -> None:
     if state.playing:
         # Boot the radio.
         if not prev_state.playing:
