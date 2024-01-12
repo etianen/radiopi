@@ -24,7 +24,7 @@ class QueueRunner(Runner):
 
 @contextmanager
 def running(*, runner: QueueRunner) -> Generator[Radio, None, None]:
-    with running_(led_controller_cls=MockLEDController, pin_factory_name="mock", runner=runner) as radio:
+    with running_(duration=0.0, led_controller_cls=MockLEDController, pin_factory_name="mock", runner=runner) as radio:
         # On start, the radio automatically boots and tunes.
         runner.assert_called(radio_boot_args())
         runner.assert_called(radio_tune_args(radio.state.stations[0]))

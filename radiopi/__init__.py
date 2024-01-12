@@ -19,6 +19,7 @@ from radiopi.station import load_stations
 @contextmanager
 def running(
     *,
+    duration: float,
     led_controller_cls: type[LEDController],
     pin_factory_name: PinFactoryName,
     runner: Runner,
@@ -37,7 +38,7 @@ def running(
         create_buttons(pin_factory=pin_factory, radio=radio, runner=runner),
         create_leds(led_controller_cls=led_controller_cls, pin_factory=pin_factory) as leds,
         radio_watcher(radio, runner=runner),
-        leds_watcher(radio, leds=leds),
+        leds_watcher(radio, duration=duration, leds=leds),
     ):
         radio.play()
         try:
@@ -57,7 +58,7 @@ def main() -> None:  # pragma: no cover
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
     led_controller_cls = LED_CONTROLLERS[args.led_controller]
     runner = create_runner(args.runner)
-    with running(led_controller_cls=led_controller_cls, pin_factory_name=args.pin_factory, runner=runner):
+    with running(duration=0.3, led_controller_cls=led_controller_cls, pin_factory_name=args.pin_factory, runner=runner):
         try:
             pause()
         except KeyboardInterrupt:
