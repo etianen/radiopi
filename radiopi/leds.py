@@ -88,15 +88,15 @@ def leds_watcher(prev_state: State, state: State, *, duration: float, leds: LEDs
         # Fade in the LEDs.
         if not prev_state.playing:
             transition(fade(0.0, 1.0, duration=duration), leds.play_led, leds.next_station_led, leds.prev_station_led)
-        # Pulse the next station button.
+        # Pulse the play and next station buttons.
         elif prev_state.station_index == state.station_index - 1:
-            transition(pulse(1.0, 0.0, duration=duration), leds.next_station_led)
-        # Pulse the prev station button.
+            transition(pulse(1.0, 0.0, duration=duration), leds.play_led, leds.next_station_led)
+        # Pulse the play and prev station buttons.
         elif prev_state.station_index == state.station_index + 1:
-            transition(pulse(1.0, 0.0, duration=duration), leds.prev_station_led)
-        # Pulse both the station buttons.
+            transition(pulse(1.0, 0.0, duration=duration), leds.play_led, leds.prev_station_led)
+        # Pulse the LEDs.
         elif prev_state.station != state.station:  # pragma: no cover
-            transition(pulse(1.0, 0.0, duration=duration), leds.next_station_led, leds.prev_station_led)
+            transition(pulse(1.0, 0.0, duration=duration), leds.play_led, leds.next_station_led, leds.prev_station_led)
     elif prev_state.playing:
         # Fade out the LEDs.
         transition(fade(1.0, 0.0, duration=duration), leds.play_led, leds.next_station_led, leds.prev_station_led)
