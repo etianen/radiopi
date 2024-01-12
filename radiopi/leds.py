@@ -3,7 +3,6 @@ from __future__ import annotations
 import dataclasses
 from collections.abc import Generator
 from contextlib import contextmanager
-from math import ceil, floor
 from time import sleep
 
 from gpiozero import PWMLED
@@ -87,5 +86,5 @@ def pulse(
     steps: int = 100,
     duration: float = 0.3,
 ) -> Generator[float, None, None]:
-    yield from fade(from_value, to_value, steps=floor(steps / 2), duration=duration / 2.0)
-    yield from fade(to_value, from_value, steps=ceil(steps / 2) - 1, duration=duration / 2.0)
+    yield from fade(from_value, to_value, steps=steps // 2, duration=duration / 2.0)
+    yield from fade(to_value, from_value, steps=steps // 2 - 1, duration=duration / 2.0)
