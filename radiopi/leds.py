@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import dataclasses
-from abc import ABC, abstractmethod
-from collections.abc import Generator, Iterable
-from contextlib import contextmanager
+from abc import abstractmethod
+from collections.abc import Generator, Iterable, Mapping
+from contextlib import AbstractContextManager, contextmanager
 from time import sleep
+from types import TracebackType
+from typing import Literal
 
 from gpiozero import PWMLED
 
@@ -12,14 +14,50 @@ from radiopi.log import log_contextmanager
 from radiopi.pin_factory import PinFactory
 from radiopi.radio import State, watcher
 
+LEDControllerName = Literal["mock", "pwm"]
 
-class LEDController(ABC):
-    def __init__(self, led: PWMLED) -> None:
-        self.led = led
 
+class LEDController(AbstractContextManager["LEDController"]):
     @abstractmethod
-    def set_value(self, value: float) -> None:
+    def __init__(self, pin: int, *, pin_factory: PinFactory) -> None:
+        ...
+
+    @property
+    @abstractmethod
+    def value(self) -> float:
+        raise NotImplementedError
+
+    @value.setter
+    @abstractmethod
+    def value(self, value: float) -> None:
+        raise NotImplementedError
+
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> bool | None:
         pass
+
+
+class MockLEDController(LEDController):
+    def __init__(self, pin: int, *, pin_factory: PinFactory) -> None:
+        self._value = 0.0
+
+    @property
+    def value(self) -> float:
+        return self._value
+
+    @value.setter
+    def value(self, value: float) -> None:
+        self._value = value
+
+
+LED_CONTROLLERS: Mapping[LEDControllerName, type[LEDController]] = {
+    "mock": MockLEDController,
+    "pwm": PWMLED,
+}
 
 
 @dataclasses.dataclass(frozen=True)
@@ -33,14 +71,14 @@ class LEDs:
 @contextmanager
 def create_leds(*, led_controller_cls: type[LEDController], pin_factory: PinFactory) -> Generator[LEDs, None, None]:
     with (
-        PWMLED(1, pin_factory=pin_factory) as play_led,
-        PWMLED(2, pin_factory=pin_factory) as next_station_led,
-        PWMLED(3, pin_factory=pin_factory) as prev_station_led,
+        led_controller_cls(13, pin_factory=pin_factory) as play_led,
+        led_controller_cls(6, pin_factory=pin_factory) as next_station_led,
+        led_controller_cls(5, pin_factory=pin_factory) as prev_station_led,
     ):
         yield LEDs(
-            play_led=led_controller_cls(play_led),
-            next_station_led=led_controller_cls(next_station_led),
-            prev_station_led=led_controller_cls(prev_station_led),
+            play_led=play_led,
+            next_station_led=next_station_led,
+            prev_station_led=prev_station_led,
         )
 
 
@@ -67,7 +105,7 @@ def leds_watcher(prev_state: State, state: State, *, leds: LEDs) -> None:
 def transition(values: Iterable[float], *leds: LEDController) -> None:
     for value in values:
         for led in leds:
-            led.set_value(value)
+            led.value = value
 
 
 def fade(
