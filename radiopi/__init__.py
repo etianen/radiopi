@@ -60,7 +60,7 @@ def main() -> None:  # pragma: no cover
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
     with running(
         duration=0.3,
-        led_controller_name=args.led_controller_name,
+        led_controller_name=args.led_controller,
         pin_factory_name=args.pin_factory,
         runner_name=args.runner,
     ):
