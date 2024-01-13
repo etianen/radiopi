@@ -32,6 +32,9 @@ class AwaitLog(logging.Handler):
     def assert_runner_called(self, args: Args) -> None:
         self(logging.INFO, "Runner:", extra={"radiopi.runner.args": args})
 
+    def assert_led_value(self, name: str, value: float) -> None:
+        self(logging.DEBUG, f"LED: {name}: Value: {value}")
+
     def __call__(self, level: int, message: str, /, extra: Mapping[str, object] | None = None) -> None:
         while True:
             # Wait for a log record.
