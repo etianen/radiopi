@@ -35,7 +35,6 @@ exclude_lines = [
     "assert False",
 ]
 
-
 [tool.mypy]
 files = ["radiopi/**/*.py", "tests/**/*.py"]
 allow_redefinition = true
@@ -51,6 +50,7 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 console_output_style = "classic"
+log_level = "DEBUG"
 addopts = "--tb=native --cov"
 
 [tool.ruff]
