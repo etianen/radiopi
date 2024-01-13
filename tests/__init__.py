@@ -45,6 +45,14 @@ class AwaitLog(logging.Handler):
 
 
 class ExpectedLog(ABC):
+    @classmethod
+    def runner_call(cls, args: Args) -> ExpectedLog:
+        return LogMessage(level=logging.INFO, message=f"Runner: {' '.join(args)}")
+
+    @classmethod
+    def led_value(cls, name: str, value: float) -> ExpectedLog:
+        return LogMessage(level=logging.DEBUG, message=f"LED: {name}: Value: {value}")
+
     @abstractmethod
     def satisfied(self, log: LogMessage) -> bool:
         raise NotImplementedError
@@ -64,14 +72,6 @@ class ExpectedLog(ABC):
 class LogMessage(ExpectedLog):
     level: int
     message: str
-
-    @classmethod
-    def runner_call(cls, args: Args) -> LogMessage:
-        return LogMessage(level=logging.INFO, message=f"Runner: {' '.join(args)}")
-
-    @classmethod
-    def led_value(cls, name: str, value: float) -> LogMessage:
-        return LogMessage(level=logging.DEBUG, message=f"LED: {name}: Value: {value}")
 
     def satisfied(self, log: LogMessage) -> bool:
         return log == self
