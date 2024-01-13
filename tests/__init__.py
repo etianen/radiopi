@@ -8,6 +8,7 @@ from contextlib import contextmanager
 from queue import Empty, SimpleQueue
 
 from radiopi import running as running_
+from radiopi.log import logger
 from radiopi.radio import Radio, radio_boot_args, radio_pause_args, radio_tune_args
 from radiopi.runner import Args
 from radiopi.station import Station
