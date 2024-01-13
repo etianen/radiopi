@@ -27,21 +27,21 @@ def running() -> Generator[Radio, None, None]:
 class AwaitLog(logging.Handler):
     def __init__(self) -> None:
         super().__init__()
-        self.records: SimpleQueue[logging.LogRecord] = SimpleQueue()
+        self.records: SimpleQueue[LogMessage] = SimpleQueue()
 
     def emit(self, record: logging.LogRecord) -> None:
-        self.records.put(record)
+        self.records.put(LogMessage(level=record.levelno, message=record.getMessage()))
 
     def __call__(self, expected_log: ExpectedLog) -> None:
         # Wait for all message groups to be satisfied.
         while True:
             # Wait for a log record.
             try:
-                record = self.records.get(timeout=0.1)
+                log_message = self.records.get(timeout=0.1)
             except Empty:
                 raise AssertionError(f"Did not log:\n\n{expected_log}")
             # Check the log record.
-            if expected_log.satisfied(LogMessage(level=record.levelno, message=record.getMessage())):
+            if expected_log.satisfied(log_message):
                 return
 
 
@@ -75,7 +75,7 @@ class ExpectedLog(ABC):
 
     @classmethod
     def radio_pause(cls) -> ExpectedLog:
-        return cls.runner_call(radio_pause_args())
+        return cls.runner_call(radio_pause_args()) | cls.led_fade("Play", 0.0)
 
     # Interface.
 
