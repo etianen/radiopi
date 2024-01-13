@@ -8,7 +8,6 @@ from contextlib import contextmanager
 from queue import Empty, SimpleQueue
 
 from radiopi import running as running_
-from radiopi.log import logger
 from radiopi.radio import Radio, radio_boot_args, radio_pause_args, radio_tune_args
 from radiopi.runner import Args
 from radiopi.station import Station
@@ -40,7 +39,7 @@ class AwaitLog(logging.Handler):
             try:
                 log_message = self.records.get(timeout=0.1)
             except Empty:
-                raise AssertionError(f"Did not log:\n\n{expected_log}")
+                raise AssertionError(f"Did not log:\n\n{expected_log}") from None
             # Check the log record.
             if expected_log.satisfied(log_message):
                 return
@@ -114,7 +113,7 @@ class SerialExpectedLog(ExpectedLog):
     def satisfied(self, log: LogMessage) -> bool:
         if self.expected_logs[0].satisfied(log):
             self.expected_logs.pop(0)
-        return bool(self.expected_logs)
+        return not self.expected_logs
 
     def __str__(self) -> str:  # pragma: no cover
         return "\n".join(map(str, self.expected_logs))
@@ -126,7 +125,7 @@ class ParallelExpectedLog(ExpectedLog):
 
     def satisfied(self, log: LogMessage) -> bool:
         self.expected_logs = [expected_log for expected_log in self.expected_logs if not expected_log.satisfied(log)]
-        return bool(self.expected_logs)
+        return not self.expected_logs
 
     def __str__(self) -> str:  # pragma: no cover
         return " | ".join(map(str, self.expected_logs))
