@@ -8,7 +8,7 @@ from contextlib import contextmanager
 from queue import Empty, SimpleQueue
 
 from radiopi import running as running_
-from radiopi.radio import Radio, radio_boot_args, radio_tune_args
+from radiopi.radio import Radio, radio_boot_args, radio_pause_args, radio_tune_args
 from radiopi.runner import Args
 from radiopi.station import Station
 
@@ -67,6 +67,10 @@ class ExpectedLog(ABC):
     @classmethod
     def radio_tune(cls, station: Station) -> ExpectedLog:
         return cls.runner_call(radio_tune_args(station))
+
+    @classmethod
+    def radio_pause(cls) -> ExpectedLog:
+        return cls.runner_call(radio_pause_args())
 
     # Interface.
 
