@@ -11,7 +11,7 @@ from radiopi.leds import LED_CONTROLLERS, LEDController, create_leds, leds_watch
 from radiopi.log import log_contextmanager
 from radiopi.pin_factory import PIN_FACTORIES, PinFactoryName, create_pin_factory
 from radiopi.radio import Radio, State, radio_watcher
-from radiopi.runner import RUNNERS, Runner, create_runner
+from radiopi.runner import RUNNERS, RunnerName, create_runner
 from radiopi.station import load_stations
 
 
@@ -22,7 +22,7 @@ def running(
     duration: float,
     led_controller_cls: type[LEDController],
     pin_factory_name: PinFactoryName,
-    runner: Runner,
+    runner_name: RunnerName,
 ) -> Generator[Radio, None, None]:
     stations = load_stations()
     state = State(
@@ -32,6 +32,7 @@ def running(
         stopping=False,
     )
     radio = Radio(state)
+    runner = create_runner(runner_name)
     # Start contexts.
     with (
         create_pin_factory(pin_factory_name) as pin_factory,
@@ -57,8 +58,12 @@ def main() -> None:  # pragma: no cover
     # Run radio.
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
     led_controller_cls = LED_CONTROLLERS[args.led_controller]
-    runner = create_runner(args.runner)
-    with running(duration=0.3, led_controller_cls=led_controller_cls, pin_factory_name=args.pin_factory, runner=runner):
+    with running(
+        duration=0.3,
+        led_controller_cls=led_controller_cls,
+        pin_factory_name=args.pin_factory,
+        runner_name=args.runner,
+    ):
         try:
             pause()
         except KeyboardInterrupt:
