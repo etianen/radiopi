@@ -60,7 +60,11 @@ class ExpectedLog(ABC):
 
     @classmethod
     def led_fade(cls, name: str, from_value: float, to_value: float) -> ExpectedLog:
-        return cls.led_value(name, to_value)
+        return cls.led_value(name, from_value) > cls.led_value(name, to_value)
+
+    @classmethod
+    def led_pulse(cls, name: str, from_value: float, to_value: float) -> ExpectedLog:
+        return cls.led_fade(name, from_value, to_value) > cls.led_fade(name, to_value, from_value)
 
     # Radio helpers.
 
