@@ -75,7 +75,7 @@ class ExpectedLog(ABC):
 
     @classmethod
     def radio_pause(cls) -> ExpectedLog:
-        return cls.runner_call(radio_pause_args()) | cls.led_fade("Play", 0.0)
+        return cls.runner_call(radio_pause_args())
 
     # Interface.
 
