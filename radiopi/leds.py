@@ -41,7 +41,7 @@ class MockLEDController(LEDController):
         pass
 
 
-class PWMLEDController(LEDController):
+class PWMLEDController(LEDController):  # pragma: no cover
     def __init__(self, pin: int, *, pin_factory: PinFactory) -> None:
         self.led = PWMLED(pin, pin_factory=pin_factory)
 
