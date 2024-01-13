@@ -88,6 +88,12 @@ class ExpectedLog(ABC):
             cls.led_value("Play", 1.0) | cls.led_value("Next station", 1.0) | cls.led_value("Prev station", 1.0)
         )
 
+    @classmethod
+    def ux_pause(cls) -> ExpectedLog:
+        return cls.radio_pause() | (
+            cls.led_value("Play", 0.0) | cls.led_value("Next station", 0.0) | cls.led_value("Prev station", 0.0)
+        )
+
     # Interface.
 
     @abstractmethod
