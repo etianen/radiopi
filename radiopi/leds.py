@@ -21,36 +21,40 @@ class LEDController(ABC):
     def __init__(self, pin: int, *, pin_factory: PinFactory) -> None:
         raise NotImplementedError
 
-    @property
     @abstractmethod
-    def value(self) -> float:
+    def set_value(self, value: float) -> None:
         raise NotImplementedError
 
-    @value.setter
     @abstractmethod
-    def value(self, value: float) -> None:
+    def close(self) -> None:
         raise NotImplementedError
+
+
+class MockLEDController(LEDController):
+    def __init__(self, pin: int, *, pin_factory: PinFactory) -> None:
+        pass
+
+    def set_value(self, value: float) -> None:
+        pass
 
     def close(self) -> None:
         pass
 
 
-class MockLEDController(LEDController):
+class PWMLEDController(LEDController):
     def __init__(self, pin: int, *, pin_factory: PinFactory) -> None:
-        self._value = 0.0
+        self.led = PWMLED(pin, pin_factory=pin_factory)
 
-    @property
-    def value(self) -> float:
-        raise NotImplementedError
+    def set_value(self, value: float) -> None:
+        self.led.value = value
 
-    @value.setter
-    def value(self, value: float) -> None:
-        self._value = value
+    def close(self) -> None:
+        self.led.close()
 
 
 LED_CONTROLLERS: Mapping[LEDControllerName, type[LEDController]] = {
     "mock": MockLEDController,
-    "pwm": PWMLED,
+    "pwm": PWMLEDController,
 }
 
 
@@ -100,7 +104,7 @@ def transition(values: Generator[float, None, None], *leds: LEDController) -> No
     with closing(values):
         for value in values:
             for led in leds:
-                led.value = value
+                led.set_value(value)
 
 
 def fade(
