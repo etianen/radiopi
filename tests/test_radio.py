@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from queue import Empty
-
 import pytest
 
 from radiopi.radio import Radio, radio_boot_args, radio_pause_args, radio_tune_args
