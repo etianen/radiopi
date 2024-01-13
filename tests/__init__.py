@@ -82,11 +82,10 @@ class ExpectedLog(ABC):
 
     # UX helpers.
 
-    def ux_play(cls, station: Station) -> ExpectedLog:
+    @classmethod
+    def ux_tune(cls, station: Station) -> ExpectedLog:
         return (cls.radio_boot() > cls.radio_tune(station)) | (
-            cls.led_fade("Play", 0.0, 1.0)
-            | cls.led_fade("Next station", 0.0, 1.0)
-            | cls.led_fade("Prev station", 0.0, 1.0)
+            cls.led_value("Play", 1.0) | cls.led_value("Next station", 1.0) | cls.led_value("Prev station", 1.0)
         )
 
     # Interface.
