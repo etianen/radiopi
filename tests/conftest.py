@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-import logging
 from collections.abc import Generator
 
 import pytest
 
+from radiopi.log import logger
 from radiopi.radio import Radio, radio_boot_args, radio_tune_args
 from tests import AwaitLog, running
 
@@ -12,7 +12,6 @@ from tests import AwaitLog, running
 @pytest.fixture()
 def await_log() -> Generator[AwaitLog, None, None]:
     handler = AwaitLog()
-    logger = logging.getLogger()
     logger.addHandler(handler)
     try:
         yield handler

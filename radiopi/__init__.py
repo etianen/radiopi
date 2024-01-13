@@ -40,7 +40,7 @@ def running(
         create_buttons(pin_factory=pin_factory, radio=radio, runner=runner),
         create_leds(led_controller_cls=led_controller_cls, pin_factory=pin_factory) as leds,
         radio_watcher(radio, runner=runner),
-        leds_watcher(radio, duration=duration, leds=leds),
+        leds_watcher(radio, led_controller_cls=led_controller_cls, leds=leds),
     ):
         radio.play()
         try:
