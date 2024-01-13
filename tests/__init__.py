@@ -30,7 +30,7 @@ class AwaitLog(logging.Handler):
         self.records.put(record)
 
     def assert_runner_called(self, args: Args) -> None:
-        self(logging.INFO, "Runner:", extra={"radiopi.runner.args": args})
+        self(logging.INFO, f"Runner: {' '.join(args)}")
 
     def assert_led_value(self, name: str, value: float) -> None:
         self(logging.DEBUG, f"LED: {name}: Value: {value}")
@@ -41,12 +41,7 @@ class AwaitLog(logging.Handler):
             try:
                 record = self.records.get(timeout=0.1)
             except Empty:
-                extra_str = f" {extra!r}" if extra else ""
-                raise AssertionError(f"Did not log: [{logging.getLevelName(level)}] {message}{extra_str}")
+                raise AssertionError(f"Did not log: [{logging.getLevelName(level)}] {message}")
             # Check the log record.
-            if (
-                record.levelno == level
-                and record.getMessage().startswith(message)
-                and (extra is None or all(getattr(record, key, object()) == value for key, value in extra.items()))
-            ):
+            if record.levelno == level and record.getMessage() == message:
                 break

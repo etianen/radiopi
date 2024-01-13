@@ -17,7 +17,7 @@ Args: TypeAlias = Sequence[str]
 class Runner(ABC):
     @final
     def __call__(self, args: Args) -> None:
-        logger.info("Runner: %s", " ".join(args), extra={"radiopi.runner.args": args})
+        logger.info("Runner: %s", " ".join(args))
         self._call(args)
 
     @abstractmethod
