@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 import logging
+from abc import ABC, abstractmethod
 from collections.abc import Generator
 from contextlib import contextmanager
 from queue import Empty, SimpleQueue
@@ -30,34 +31,69 @@ class AwaitLog(logging.Handler):
     def emit(self, record: logging.LogRecord) -> None:
         self.records.put(record)
 
-    def __call__(self, *expected_logs: ExpectedLog) -> None:
-        expected_logs = set(expected_logs)
+    def __call__(self, expected_log: ExpectedLog) -> None:
         # Wait for all message groups to be satisfied.
-        while expected_logs:
+        while True:
             # Wait for a log record.
             try:
                 record = self.records.get(timeout=0.1)
             except Empty:
-                message_groups_str = "\n".join(map(str, expected_logs))
-                raise AssertionError(f"Did not log:\n\n{message_groups_str}")
+                raise AssertionError(f"Did not log:\n\n{expected_log}")
             # Check the log record.
-            record_log = ExpectedLog(level=record.levelno, message=record.getMessage())
-            if record_log in expected_logs:
-                expected_logs.remove(record_log)
+            if expected_log.satisfied(LogMessage(level=record.levelno, message=record.getMessage())):
+                return
 
 
-@dataclasses.dataclass(frozen=True)
-class ExpectedLog:
+class ExpectedLog(ABC):
+    @abstractmethod
+    def satisfied(self, log: LogMessage) -> bool:
+        raise NotImplementedError
+
+    @abstractmethod
+    def __str__(self) -> str:
+        raise NotImplementedError
+
+
+@dataclasses.dataclass()
+class LogMessage(ExpectedLog):
     level: int
     message: str
 
     @classmethod
-    def runner_call(cls, args: Args) -> ExpectedLog:
-        return ExpectedLog(level=logging.INFO, message=f"Runner: {' '.join(args)}")
+    def runner_call(cls, args: Args) -> LogMessage:
+        return LogMessage(level=logging.INFO, message=f"Runner: {' '.join(args)}")
 
     @classmethod
-    def led_value(cls, name: str, value: float) -> ExpectedLog:
-        return ExpectedLog(level=logging.DEBUG, message=f"LED: {name}: Value: {value}")
+    def led_value(cls, name: str, value: float) -> LogMessage:
+        return LogMessage(level=logging.DEBUG, message=f"LED: {name}: Value: {value}")
 
-    def __str__(self) -> str:
+    def satisfied(self, log: LogMessage) -> bool:
+        return log == self
+
+    def __str__(self) -> str:  # pragma: no cover
         return f"[{logging.getLevelName(self.level)}] {self.message}"
+
+
+@dataclasses.dataclass()
+class SerialExpectedLog(ExpectedLog):
+    expected_logs: list[ExpectedLog]
+
+    def satisfied(self, log: LogMessage) -> bool:
+        if self.expected_logs[0].satisfied(log):
+            self.expected_logs.pop(0)
+        return bool(self.expected_logs)
+
+    def __str__(self) -> str:  # pragma: no cover
+        return "\n".join(map(str, self.expected_logs))
+
+
+@dataclasses.dataclass()
+class ParallelExpectedLog(ExpectedLog):
+    expected_logs: list[ExpectedLog]
+
+    def satisfied(self, log: LogMessage) -> bool:
+        self.expected_logs = [expected_log for expected_log in self.expected_logs if not expected_log.satisfied(log)]
+        return bool(self.expected_logs)
+
+    def __str__(self) -> str:  # pragma: no cover
+        return " | ".join(map(str, self.expected_logs))
