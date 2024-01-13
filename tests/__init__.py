@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from collections.abc import Generator, Mapping
+from collections.abc import Generator
 from contextlib import contextmanager
 from queue import Empty, SimpleQueue
 
@@ -30,18 +30,18 @@ class AwaitLog(logging.Handler):
         self.records.put(record)
 
     def assert_runner_called(self, args: Args) -> None:
-        self(logging.INFO, f"Runner: {' '.join(args)}")
+        self(f"[INFO] Runner: {' '.join(args)}")
 
     def assert_led_value(self, name: str, value: float) -> None:
-        self(logging.DEBUG, f"LED: {name}: Value: {value}")
+        self(f"[DEBUG] LED: {name}: Value: {value}")
 
-    def __call__(self, level: int, message: str, /, extra: Mapping[str, object] | None = None) -> None:
+    def __call__(self, message: str) -> None:
         while True:
             # Wait for a log record.
             try:
                 record = self.records.get(timeout=0.1)
             except Empty:
-                raise AssertionError(f"Did not log: [{logging.getLevelName(level)}] {message}")
+                raise AssertionError(f"Did not log: {message}")
             # Check the log record.
-            if record.levelno == level and record.getMessage() == message:
+            if f"[{logging.getLevelName(record.levelno)}] {record.getMessage()}" == message:
                 break
