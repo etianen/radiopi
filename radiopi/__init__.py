@@ -7,7 +7,7 @@ from contextlib import contextmanager
 from signal import pause
 
 from radiopi.buttons import create_buttons
-from radiopi.leds import LED_CONTROLLERS, LEDController, create_leds, leds_watcher
+from radiopi.leds import LED_CONTROLLERS, LEDControllerName, create_leds, leds_watcher
 from radiopi.log import log_contextmanager
 from radiopi.pin_factory import PIN_FACTORIES, PinFactoryName, create_pin_factory
 from radiopi.radio import Radio, State, radio_watcher
@@ -20,7 +20,7 @@ from radiopi.station import load_stations
 def running(
     *,
     duration: float,
-    led_controller_cls: type[LEDController],
+    led_controller_name: LEDControllerName,
     pin_factory_name: PinFactoryName,
     runner_name: RunnerName,
 ) -> Generator[Radio, None, None]:
@@ -31,6 +31,7 @@ def running(
         stations=stations,
         stopping=False,
     )
+    led_controller_cls = LED_CONTROLLERS[led_controller_name]
     radio = Radio(state)
     runner = create_runner(runner_name)
     # Start contexts.
@@ -57,10 +58,9 @@ def main() -> None:  # pragma: no cover
     args = parser.parse_args()
     # Run radio.
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
-    led_controller_cls = LED_CONTROLLERS[args.led_controller]
     with running(
         duration=0.3,
-        led_controller_cls=led_controller_cls,
+        led_controller_name=args.led_controller_name,
         pin_factory_name=args.pin_factory,
         runner_name=args.runner,
     ):

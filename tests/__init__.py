@@ -6,7 +6,6 @@ from contextlib import contextmanager
 from queue import Empty, SimpleQueue
 
 from radiopi import running as running_
-from radiopi.leds import MockLEDController
 from radiopi.radio import Radio
 from radiopi.runner import Args
 
@@ -15,7 +14,7 @@ from radiopi.runner import Args
 def running() -> Generator[Radio, None, None]:
     with running_(
         duration=0.0,
-        led_controller_cls=MockLEDController,
+        led_controller_name="mock",
         pin_factory_name="mock",
         runner_name="mock",
     ) as radio:
