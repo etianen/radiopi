@@ -80,6 +80,15 @@ class ExpectedLog(ABC):
     def radio_pause(cls) -> ExpectedLog:
         return cls.runner_call(radio_pause_args())
 
+    # UX helpers.
+
+    def ux_play(cls, station: Station) -> ExpectedLog:
+        return (cls.radio_boot() > cls.radio_tune(station)) | (
+            cls.led_fade("Play", 0.0, 1.0)
+            | cls.led_fade("Next station", 0.0, 1.0)
+            | cls.led_fade("Prev station", 0.0, 1.0)
+        )
+
     # Interface.
 
     @abstractmethod
