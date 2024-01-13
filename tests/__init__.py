@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 from collections.abc import Generator
 from contextlib import contextmanager
+from itertools import chain
 from queue import Empty, SimpleQueue
 
 from radiopi import running as running_
@@ -35,13 +36,20 @@ class AwaitLog(logging.Handler):
     def assert_led_value(self, name: str, value: float) -> None:
         self(f"[DEBUG] LED: {name}: Value: {value}")
 
-    def __call__(self, message: str) -> None:
-        while True:
+    def __call__(self, *messages: str | tuple[str]) -> None:
+        # Normalize message groups.
+        message_groups: list[set[str]] = [set((m,) if isinstance(m, str) else m) for m in messages]
+        # Wait for all message groups to be satisfied.
+        while message_groups:
             # Wait for a log record.
             try:
                 record = self.records.get(timeout=0.1)
             except Empty:
-                raise AssertionError(f"Did not log: {message}")
+                message_groups_str = "\n".join(chain.from_iterable(message_groups))
+                raise AssertionError(f"Did not log:\n\n{message_groups_str}")
             # Check the log record.
-            if f"[{logging.getLevelName(record.levelno)}] {record.getMessage()}" == message:
-                break
+            record_str = f"[{logging.getLevelName(record.levelno)}] {record.getMessage()}"
+            if record_str in message_groups[0]:
+                message_groups[0].remove(record_str)
+                if not message_groups[0]:
+                    message_groups.pop(0)
