@@ -53,6 +53,12 @@ class ExpectedLog(ABC):
     def __str__(self) -> str:
         raise NotImplementedError
 
+    def __or__(self, other: ExpectedLog) -> ExpectedLog:
+        return ParallelExpectedLog([self, other])
+
+    def __gt__(self, other: ExpectedLog) -> ExpectedLog:
+        return SerialExpectedLog([self, other])
+
 
 @dataclasses.dataclass()
 class LogMessage(ExpectedLog):
