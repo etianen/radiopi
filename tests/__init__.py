@@ -45,13 +45,19 @@ class AwaitLog(logging.Handler):
 
 
 class ExpectedLog(ABC):
+    # Runner helpers.
+
     @classmethod
     def runner_call(cls, args: Args) -> ExpectedLog:
         return LogMessage(level=logging.INFO, message=f"Runner: {' '.join(args)}")
 
+    # LED helpers.
+
     @classmethod
     def led_value(cls, name: str, value: float) -> ExpectedLog:
         return LogMessage(level=logging.DEBUG, message=f"LED: {name}: Value: {value}")
+
+    # Interface.
 
     @abstractmethod
     def satisfied(self, log: LogMessage) -> bool:
