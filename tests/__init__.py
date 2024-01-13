@@ -55,14 +55,19 @@ class ExpectedLog(ABC):
     # LED helpers.
 
     @classmethod
-    def led_value(cls, name: str, value: float) -> ExpectedLog:
+    def led_fade(cls, name: str, value: float) -> ExpectedLog:
         return LogMessage(level=logging.DEBUG, message=f"LED: {name}: Value: {value}")
 
     # Radio helpers.
 
     @classmethod
     def radio_boot(cls) -> ExpectedLog:
-        return cls.runner_call(radio_boot_args())
+        return (
+            cls.runner_call(radio_boot_args())
+            | cls.led_fade("Play", 1.0)
+            | cls.led_fade("Next station", 1.0)
+            | cls.led_fade("Prev station", 1.0)
+        )
 
     @classmethod
     def radio_tune(cls, station: Station) -> ExpectedLog:
