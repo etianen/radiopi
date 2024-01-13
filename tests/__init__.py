@@ -8,7 +8,7 @@ from contextlib import contextmanager
 from queue import Empty, SimpleQueue
 
 from radiopi import running as running_
-from radiopi.radio import Radio
+from radiopi.radio import Radio, radio_boot_args
 from radiopi.runner import Args
 
 
@@ -56,6 +56,12 @@ class ExpectedLog(ABC):
     @classmethod
     def led_value(cls, name: str, value: float) -> ExpectedLog:
         return LogMessage(level=logging.DEBUG, message=f"LED: {name}: Value: {value}")
+
+    # Radio helpers.
+
+    @classmethod
+    def radio_boot(cls) -> ExpectedLog:
+        return cls.runner_call(radio_boot_args())
 
     # Interface.
 

@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import pytest
 
-from radiopi.radio import Radio, radio_boot_args, radio_pause_args, radio_tune_args
+from radiopi.radio import Radio, radio_pause_args, radio_tune_args
 from tests import AwaitLog, ExpectedLog, running
 
 
 def test_running_pause_on_stop(await_log: AwaitLog) -> None:
     with running() as radio:
         # On start, the radio will boot and tune.
-        await_log(ExpectedLog.runner_call(radio_boot_args()))
+        await_log(ExpectedLog.radio_boot())
         await_log(ExpectedLog.runner_call(radio_tune_args(radio.state.stations[0])))
     # On stop, the radio automatically pauses.
     await_log(ExpectedLog.runner_call(radio_pause_args()))
@@ -18,7 +18,7 @@ def test_running_pause_on_stop(await_log: AwaitLog) -> None:
 def test_running_pause_on_stop_already_paused(await_log: AwaitLog) -> None:
     with running() as radio:
         # On start, the radio will boot and tune.
-        await_log(ExpectedLog.runner_call(radio_boot_args()))
+        await_log(ExpectedLog.radio_boot())
         await_log(ExpectedLog.runner_call(radio_tune_args(radio.state.stations[0])))
         # Pause the radio.
         radio.pause()
@@ -39,7 +39,7 @@ def test_toggle_play(radio: Radio, await_log: AwaitLog) -> None:
     await_log(ExpectedLog.runner_call(radio_pause_args()))
     # This will start the radio playing.
     radio.toggle_play()
-    await_log(ExpectedLog.runner_call(radio_boot_args()))
+    await_log(ExpectedLog.radio_boot())
     await_log(ExpectedLog.runner_call(radio_tune_args(radio.state.stations[0])))
 
 
@@ -50,7 +50,7 @@ def test_pause_pause_play(radio: Radio, await_log: AwaitLog) -> None:
     radio.pause()
     # This play results in an action.
     radio.play()
-    await_log(ExpectedLog.runner_call(radio_boot_args()))
+    await_log(ExpectedLog.radio_boot())
     await_log(ExpectedLog.runner_call(radio_tune_args(radio.state.stations[0])))
 
 
@@ -80,5 +80,5 @@ def test_pause_next_station(radio: Radio, await_log: AwaitLog) -> None:
     await_log(ExpectedLog.runner_call(radio_pause_args()))
     # Since we're paused, this will first boot, then tune.
     radio.next_station()
-    await_log(ExpectedLog.runner_call(radio_boot_args()))
+    await_log(ExpectedLog.radio_boot())
     await_log(ExpectedLog.runner_call(radio_tune_args(radio.state.stations[1])))
