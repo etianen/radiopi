@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import dataclasses
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from collections.abc import Generator, Mapping
-from contextlib import AbstractContextManager, closing, contextmanager
+from contextlib import closing, contextmanager
 from time import sleep
-from types import TracebackType
 from typing import Literal
 
 from gpiozero import PWMLED
@@ -17,7 +16,7 @@ from radiopi.radio import State, watcher
 LEDControllerName = Literal["mock", "pwm"]
 
 
-class LEDController(AbstractContextManager["LEDController"]):
+class LEDController(ABC):
     @abstractmethod
     def __init__(self, pin: int, *, pin_factory: PinFactory) -> None:
         raise NotImplementedError
@@ -32,12 +31,7 @@ class LEDController(AbstractContextManager["LEDController"]):
     def value(self, value: float) -> None:
         raise NotImplementedError
 
-    def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        traceback: TracebackType | None,
-    ) -> bool | None:
+    def close(self) -> None:
         pass
 
 
@@ -71,9 +65,9 @@ class LEDs:
 @contextmanager
 def create_leds(*, led_controller_cls: type[LEDController], pin_factory: PinFactory) -> Generator[LEDs, None, None]:
     with (
-        led_controller_cls(13, pin_factory=pin_factory) as play_led,
-        led_controller_cls(6, pin_factory=pin_factory) as next_station_led,
-        led_controller_cls(5, pin_factory=pin_factory) as prev_station_led,
+        closing(led_controller_cls(13, pin_factory=pin_factory)) as play_led,
+        closing(led_controller_cls(6, pin_factory=pin_factory)) as next_station_led,
+        closing(led_controller_cls(5, pin_factory=pin_factory)) as prev_station_led,
     ):
         yield LEDs(
             play_led=play_led,
