@@ -14,7 +14,7 @@ from radiopi.runner import Runner
 
 @log_contextmanager(name="Buttons")
 @contextmanager
-def buttons(*, pin_factory: PinFactory, radio: Radio, runner: Runner) -> Generator[None, None, None]:
+def create_buttons(*, pin_factory: PinFactory, radio: Radio, runner: Runner) -> Generator[None, None, None]:
     with (
         Button(21, pin_factory=pin_factory) as toggle_play_button,
         Button(16, pin_factory=pin_factory, hold_time=1, hold_repeat=True) as next_station_button,
