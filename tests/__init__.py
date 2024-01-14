@@ -85,13 +85,17 @@ class ExpectedLog(ABC):
     @classmethod
     def ux_tune(cls, station: Station) -> ExpectedLog:
         return (cls.radio_boot() > cls.radio_tune(station)) | (
-            cls.led_value("Play", 1.0) | cls.led_value("Next station", 1.0) | cls.led_value("Prev station", 1.0)
+            cls.led_fade("Play", 0.0, 1.0)
+            | cls.led_fade("Next station", 0.0, 1.0)
+            | cls.led_fade("Prev station", 0.0, 1.0)
         )
 
     @classmethod
     def ux_pause(cls) -> ExpectedLog:
         return cls.radio_pause() | (
-            cls.led_value("Play", 0.0) | cls.led_value("Next station", 0.0) | cls.led_value("Prev station", 0.0)
+            cls.led_fade("Play", 1.0, 0.0)
+            | cls.led_fade("Next station", 1.0, 0.0)
+            | cls.led_fade("Prev station", 1.0, 0.0)
         )
 
     # Interface.
@@ -133,7 +137,7 @@ class SerialExpectedLog(ExpectedLog):
         return not self.expected_logs
 
     def __str__(self) -> str:  # pragma: no cover
-        return "\n".join(map(str, self.expected_logs))
+        return f"({' > '.join(map(str, self.expected_logs))})"
 
 
 @dataclasses.dataclass()
@@ -145,4 +149,4 @@ class ParallelExpectedLog(ExpectedLog):
         return not self.expected_logs
 
     def __str__(self) -> str:  # pragma: no cover
-        return " | ".join(map(str, self.expected_logs))
+        return f"({' | '.join(map(str, self.expected_logs))})"

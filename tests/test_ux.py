@@ -19,7 +19,7 @@ def radio(await_log: AwaitLog) -> Generator[Radio, None, None]:
 
 def test_pause(radio: Radio, await_log: AwaitLog) -> None:
     radio.pause()
-    await_log(ExpectedLog.ux_pause())
+    await_log(ExpectedLog.radio_pause())
 
 
 def test_toggle_play(radio: Radio, await_log: AwaitLog) -> None:

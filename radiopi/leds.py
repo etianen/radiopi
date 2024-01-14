@@ -39,7 +39,7 @@ class LEDController(ABC):
 
 class MockLEDController(LEDController):
     transition_duration: ClassVar[float] = 0.0
-    transition_steps: ClassVar[int] = 0
+    transition_steps: ClassVar[int] = 1
 
     def _set_value(self, value: float) -> None:
         pass
