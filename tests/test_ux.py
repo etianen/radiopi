@@ -68,3 +68,11 @@ def test_pause_next_station(radio: Radio, await_log: AwaitLog) -> None:
     # Since we're paused, this will first boot, then tune.
     radio.next_station()
     await_log(ExpectedLog.ux_tune(radio.state.stations[1]))
+
+
+def test_pause_prev_station(radio: Radio, await_log: AwaitLog) -> None:
+    radio.pause()
+    await_log(ExpectedLog.ux_pause())
+    # Since we're paused, this will first boot, then tune.
+    radio.prev_station()
+    await_log(ExpectedLog.ux_tune(radio.state.stations[-1]))
