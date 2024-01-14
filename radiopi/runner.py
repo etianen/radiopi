@@ -21,7 +21,7 @@ class Runner(ABC):
         self._call(args)
 
     @abstractmethod
-    def _call(self, args: Args) -> None:  # pragma: no cover
+    def _call(self, args: Args) -> None:
         raise NotImplementedError
 
 

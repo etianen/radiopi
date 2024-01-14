@@ -40,7 +40,6 @@ class Radio:
         return self._state
 
     def _set_state(self, state: State) -> None:
-        logger.debug("Radio: State: Set: %r", state)
         self._state = state
         self._condition.notify_all()
 
@@ -55,6 +54,10 @@ class Radio:
     def toggle_play(self) -> None:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=not self._state.playing))
+
+    def retune(self, station_index: int) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=True, station_index=station_index))
 
     def next_station(self) -> None:
         with self._condition:
@@ -82,8 +85,11 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
             while True:
                 # Wait for a state change.
                 with radio._condition:
-                    radio._condition.wait()
-                    state = radio._state
+                    while True:
+                        state = radio._state
+                        if state != prev_state:
+                            break
+                        radio._condition.wait()
                 # Call the state watcher.
                 fn(prev_state, state, *args, **kwargs)
                 prev_state = state
@@ -97,7 +103,7 @@ def watcher(*, name: str) -> Callable[[WatcherCallable[P]], WatcherContextManage
 
 
 @watcher(name="Radio")
-def radio_watcher(prev_state: State, state: State, runner: Runner) -> None:
+def radio_watcher(prev_state: State, state: State, *, runner: Runner) -> None:
     if state.playing:
         # Boot the radio.
         if not prev_state.playing:
@@ -128,7 +134,7 @@ def radio_tune_args(station: Station) -> Args:
         f"--service={station.service_id}",
         f"--frequency={station.frequency_index}",
         "--play",
-        "--level=63",
+        "--level=32",
     )
 
 

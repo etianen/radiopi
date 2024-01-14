@@ -28,6 +28,12 @@ source = ["radiopi", "tests"]
 show_missing = true
 skip_covered = true
 fail_under = 100
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "raise AssertionError",
+    "assert False",
+]
 
 [tool.mypy]
 files = ["radiopi/**/*.py", "tests/**/*.py"]
@@ -44,6 +50,7 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 console_output_style = "classic"
+log_level = "DEBUG"
 addopts = "--tb=native --cov"
 
 [tool.ruff]
