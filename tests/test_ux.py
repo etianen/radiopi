@@ -50,6 +50,12 @@ def test_play_play_pause(radio: Radio, await_log: AwaitLog) -> None:
     await_log(ExpectedLog.ux_pause())
 
 
+def test_retune(radio: Radio, await_log: AwaitLog) -> None:
+    radio.retune(3)
+    # We're already booted, so we just tune.
+    await_log(ExpectedLog.ux_retune(radio.state.stations[3]))
+
+
 def test_next_station(radio: Radio, await_log: AwaitLog) -> None:
     radio.next_station()
     # We're already booted, so we just tune.
