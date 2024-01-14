@@ -55,6 +55,10 @@ class Radio:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=not self._state.playing))
 
+    def retune(self, station_index: int) -> None:
+        with self._condition:
+            self._set_state(dataclasses.replace(self._state, playing=True, station_index=station_index))
+
     def next_station(self) -> None:
         with self._condition:
             self._set_state(dataclasses.replace(self._state, playing=True, station_index=self._state.station_index + 1))

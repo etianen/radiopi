@@ -101,6 +101,14 @@ class ExpectedLog(ABC):
         )
 
     @classmethod
+    def ux_next_station(cls, station: Station) -> ExpectedLog:
+        return cls.radio_tune(station) | cls.led_pulse("Play", 1.0, 0.0) | cls.led_pulse("Next station", 1.0, 0.0)
+
+    @classmethod
+    def ux_prev_station(cls, station: Station) -> ExpectedLog:
+        return cls.radio_tune(station) | cls.led_pulse("Play", 1.0, 0.0) | cls.led_pulse("Prev station", 1.0, 0.0)
+
+    @classmethod
     def ux_pause(cls) -> ExpectedLog:
         return (
             cls.radio_pause()
