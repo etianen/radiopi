@@ -75,6 +75,10 @@ class LEDs:
     next_station_led: LEDController
     prev_station_led: LEDController
 
+    @property
+    def all_leds(self) -> Sequence[LEDController]:
+        return (self.play_led, self.next_station_led, self.prev_station_led)
+
 
 @log_contextmanager(name="Buttons")
 @contextmanager
@@ -98,13 +102,7 @@ def leds_watcher(prev_state: State, state: State, *, led_controller_cls: type[LE
     if state.playing:
         # Fade in the LEDs.
         if not prev_state.playing:
-            transition(
-                fade(0.0, 1.0, steps=steps),
-                leds.play_led,
-                leds.next_station_led,
-                leds.prev_station_led,
-                duration=duration,
-            )
+            transition(fade(0.0, 1.0, steps=steps), *leds.all_leds, duration=duration)
         # Pulse the play and next station buttons.
         elif prev_state.station_index == state.station_index - 1:
             transition(pulse(1.0, 0.0, steps=steps), leds.play_led, leds.next_station_led, duration=duration)
@@ -113,18 +111,10 @@ def leds_watcher(prev_state: State, state: State, *, led_controller_cls: type[LE
             transition(pulse(1.0, 0.0, steps=steps), leds.play_led, leds.prev_station_led, duration=duration)
         # Pulse the LEDs.
         elif prev_state.station != state.station:
-            transition(
-                pulse(1.0, 0.0, steps=steps),
-                leds.play_led,
-                leds.next_station_led,
-                leds.prev_station_led,
-                duration=duration,
-            )
+            transition(pulse(1.0, 0.0, steps=steps), *leds.all_leds, duration=duration)
     elif prev_state.playing:
         # Fade out the LEDs.
-        transition(
-            fade(1.0, 0.0, steps=steps), leds.play_led, leds.next_station_led, leds.prev_station_led, duration=duration
-        )
+        transition(fade(1.0, 0.0, steps=steps), *leds.all_leds, duration=duration)
 
 
 def transition(values: Sequence[float], *leds: LEDController, duration: float) -> None:
