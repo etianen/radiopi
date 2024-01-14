@@ -7,7 +7,8 @@ from contextlib import contextmanager
 from signal import pause
 
 from radiopi.buttons import create_buttons
-from radiopi.leds import LED_CONTROLLERS, LEDControllerName, create_leds, leds_watcher
+from radiopi.led_controller import LED_CONTROLLERS, LEDControllerName
+from radiopi.leds import create_leds, leds_watcher
 from radiopi.log import log_contextmanager
 from radiopi.pin_factory import PIN_FACTORIES, PinFactoryName, create_pin_factory
 from radiopi.radio import Radio, State, radio_watcher
