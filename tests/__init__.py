@@ -84,16 +84,27 @@ class ExpectedLog(ABC):
 
     @classmethod
     def ux_tune(cls, station: Station) -> ExpectedLog:
-        return (cls.radio_boot() > cls.radio_tune(station)) | (
-            cls.led_fade("Play", 0.0, 1.0)
+        return (
+            (cls.radio_boot() > cls.radio_tune(station))
+            | cls.led_fade("Play", 0.0, 1.0)
             | cls.led_fade("Next station", 0.0, 1.0)
             | cls.led_fade("Prev station", 0.0, 1.0)
         )
 
     @classmethod
+    def ux_retune(cls, station: Station) -> ExpectedLog:
+        return (
+            cls.radio_tune(station)
+            | cls.led_pulse("Play", 1.0, 0.0)
+            | cls.led_pulse("Next station", 1.0, 0.0)
+            | cls.led_pulse("Prev station", 1.0, 0.0)
+        )
+
+    @classmethod
     def ux_pause(cls) -> ExpectedLog:
-        return cls.radio_pause() | (
-            cls.led_fade("Play", 1.0, 0.0)
+        return (
+            cls.radio_pause()
+            | cls.led_fade("Play", 1.0, 0.0)
             | cls.led_fade("Next station", 1.0, 0.0)
             | cls.led_fade("Prev station", 1.0, 0.0)
         )
