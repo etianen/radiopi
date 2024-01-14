@@ -112,7 +112,7 @@ def leds_watcher(prev_state: State, state: State, *, led_controller_cls: type[LE
         elif prev_state.station_index == state.station_index + 1:
             transition(pulse(1.0, 0.0, steps=steps), leds.play_led, leds.prev_station_led, duration=duration)
         # Pulse the LEDs.
-        elif prev_state.station != state.station:  # pragma: no cover
+        elif prev_state.station != state.station:
             transition(
                 pulse(1.0, 0.0, steps=steps),
                 leds.play_led,
