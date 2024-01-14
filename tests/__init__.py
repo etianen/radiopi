@@ -151,8 +151,10 @@ class SerialExpectedLog(ExpectedLog):
     expected_logs: list[ExpectedLog]
 
     def satisfied(self, log: LogMessage) -> bool:
+        # If the next expected log is satisfied, remove it.
         if self.expected_logs[0].satisfied(log):
             self.expected_logs.pop(0)
+        # If there are no more expected logs, we're satisfied.
         return not self.expected_logs
 
     def __str__(self) -> str:  # pragma: no cover
@@ -164,7 +166,9 @@ class ParallelExpectedLog(ExpectedLog):
     expected_logs: list[ExpectedLog]
 
     def satisfied(self, log: LogMessage) -> bool:
+        # If the any expected log is satisfied, remove it.
         self.expected_logs = [expected_log for expected_log in self.expected_logs if not expected_log.satisfied(log)]
+        # If there are no more expected logs, we're satisfied.
         return not self.expected_logs
 
     def __str__(self) -> str:  # pragma: no cover
