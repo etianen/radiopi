@@ -7,7 +7,7 @@ Environment=PYTHONUNBUFFERED=1
 ExecStart=/opt/radiopi/.venv/bin/radiopi
 KillSignal=SIGINT
 User=root
-WorkingDirectory/opt/radiopi
+WorkingDirectory=/opt/radiopi
 
 [Install]
 WantedBy=multi-user.target
