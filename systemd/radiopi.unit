@@ -1,0 +1,12 @@
+[Unit]
+Description=All we hear is RadioPi...
+After=multi-user.target
+
+[Service]
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/radiopi/.venv/bin/radiopi
+User=root
+WorkingDirectory/opt/radiopi
+
+[Install]
+WantedBy=multi-user.target
