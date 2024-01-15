@@ -5,6 +5,7 @@ description = "RadioPi control daemon"
 authors = ["Dave Hall <dave@etianen.com>"]
 license = "UNLICENCED"
 readme = "README.md"
+packages = [{ include = "radiopi" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
