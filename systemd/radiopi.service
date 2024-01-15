@@ -1,5 +1,5 @@
 [Unit]
-Description=All we hear is RadioPi...
+Description=RadioPi control daemon
 After=multi-user.target
 
 [Service]
