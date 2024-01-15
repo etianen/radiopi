@@ -5,6 +5,7 @@ After=multi-user.target
 [Service]
 Environment=PYTHONUNBUFFERED=1
 ExecStart=/opt/radiopi/.venv/bin/radiopi
+KillSignal=SIGINT
 User=root
 WorkingDirectory/opt/radiopi
 
