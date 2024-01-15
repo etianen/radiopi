@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "radiopi"
 version = "0.1.0"
-description = "All we hear is RadioPi..."
+description = "RadioPi control daemon"
 authors = ["Dave Hall <dave@etianen.com>"]
 license = "UNLICENCED"
 readme = "README.md"
