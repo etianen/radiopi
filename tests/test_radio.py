@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import pytest
 from logot import Logot
 
 from tests import logged, running
@@ -24,5 +23,4 @@ def test_running_pause_on_stop_already_paused(logot: Logot) -> None:
         radio.pause()
         logot.wait_for(logged.radio_pause())
     # On stop, since the radio is already paused, nothing needs to be done.
-    with pytest.raises(AssertionError):
-        logot.wait_for(logged.radio_pause())
+    logot.assert_not_logged(logged.radio_pause())
