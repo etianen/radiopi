@@ -140,6 +140,20 @@ files = [
 ]
 
 [[package]]
+name = "logot"
+version = "0.1.0"
+description = "Log-based testing"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "logot-0.1.0-py3-none-any.whl", hash = "sha256:eefca5b1979b2c6d5d09b5ae2bc11c0641114e603e94463ff4de0933cf69dc38"},
+    {file = "logot-0.1.0.tar.gz", hash = "sha256:fabb396d264131591d9b4a97fdfb166c8c35b16865b7d4d7d722222a032da5f1"},
+]
+
+[package.extras]
+pytest = ["pytest (>=7.4.4,<8.0.0)"]
+
+[[package]]
 name = "mypy"
 version = "1.8.0"
 description = "Optional static typing for Python"
@@ -345,4 +359,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "627df9a7d2be7594e1349860e622d5c29989b890a53bbc9e4309629390125a43"
+content-hash = "7c5ffa3d390d11c90ea938013bc63b480eb9552c484e200c024ef6df82c4c56a"
