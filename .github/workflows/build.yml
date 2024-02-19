@@ -6,7 +6,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
     # Install toolchain.
     - run: pipx install poetry
     - uses: actions/setup-python@v5
@@ -22,10 +23,22 @@ jobs:
         echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
         echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
     # Install dependencies.
-    - run: poetry install
+    - name: Install dependencies
+      run: poetry install
     # Run checks.
-    - run: ruff check
-    - run: ruff format --check
-    - run: mypy
+    - name: Check (ruff)
+      run: ruff check
+    - name: Check (ruff format)
+      run: ruff format --check
+    - name: Check (mypy)
+      run: mypy
     # Run tests.
-    - run: pytest
+    - name: Test
+      run: coverage run -m pytest
+    # Report coverage.
+    - name: Report coverage
+      run: coverage report
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

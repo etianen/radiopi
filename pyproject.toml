@@ -16,11 +16,11 @@ gpiozero = "^2.0"
 typing-extensions = "^4.9.0"
 
 [tool.poetry.group.dev.dependencies]
+coverage = "^7.4.1"
 logot = "^1.1.1"
 mypy = "^1.8.0"
-ruff = "^0.2.2"
 pytest = "^8.0.1"
-pytest-cov = "^4.1.0"
+ruff = "^0.2.2"
 
 [tool.poetry.scripts]
 radiopi = "radiopi:main"
@@ -55,7 +55,7 @@ ignore_missing_imports = true
 testpaths = ["tests"]
 console_output_style = "classic"
 log_level = "DEBUG"
-addopts = "--tb=native  --import-mode=importlib --cov"
+addopts = "--tb=native  --import-mode=importlib"
 
 [tool.ruff]
 include = ["radiopi/**/*.py", "tests/**/*.py"]
