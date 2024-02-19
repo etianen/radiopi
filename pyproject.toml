@@ -14,7 +14,7 @@ gpiozero = "^2.0"
 typing-extensions = "^4.9.0"
 
 [tool.poetry.group.dev.dependencies]
-logot = "^0.1.0"
+logot = "^1.1.1"
 mypy = "^1.8.0"
 ruff = "^0.1.11"
 pytest = "^7.4.4"
