@@ -55,7 +55,7 @@ ignore_missing_imports = true
 testpaths = ["tests"]
 console_output_style = "classic"
 log_level = "DEBUG"
-addopts = "--tb=native  --import-mode=importlib --cov"
+addopts = "--tb=native  --import-mode=importlib"
 
 [tool.ruff]
 include = ["radiopi/**/*.py", "tests/**/*.py"]
