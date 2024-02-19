@@ -3,7 +3,7 @@ name: Build
 on: push
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -13,13 +13,19 @@ jobs:
       with:
         python-version: "3.9"
         cache: "poetry"
-    # Install dependencies.
+    # Run pre-install checks.
     - run: poetry check
     - run: poetry check --lock
+    # Activate venv.
+    - run: |
+        VIRTUAL_ENV=$(poetry env info --path)
+        echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
+        echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
+    # Install dependencies.
     - run: poetry install
     # Run checks.
-    - run: poetry run ruff check
-    - run: poetry run ruff format --check
-    - run: poetry run mypy
+    - run: ruff check
+    - run: ruff format --check
+    - run: mypy
     # Run tests.
-    - run: poetry run pytest
+    - run: pytest
