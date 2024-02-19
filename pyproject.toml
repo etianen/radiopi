@@ -3,8 +3,10 @@ name = "radiopi"
 version = "0.1.0"
 description = "RadioPi control daemon"
 authors = ["Dave Hall <dave@etianen.com>"]
-license = "UNLICENCED"
+license = "MIT"
 readme = "README.md"
+repository = "https://github.com/etianen/radiopi"
+classifiers = ["Private :: Do not Upload"]
 packages = [{ include = "radiopi" }]
 
 [tool.poetry.dependencies]
@@ -53,11 +55,13 @@ ignore_missing_imports = true
 testpaths = ["tests"]
 console_output_style = "classic"
 log_level = "DEBUG"
-addopts = "--tb=native --cov"
+addopts = "--tb=native  --import-mode=importlib --cov"
 
 [tool.ruff]
 include = ["radiopi/**/*.py", "tests/**/*.py"]
 line-length = 120
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "I"]
 
 [build-system]
