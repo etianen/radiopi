@@ -7,4 +7,4 @@ As a personal side project, `radiopi` does not support any versions for security
 
 ## Reporting a vulnerability
 
-Please report vulnerabilities privately via [GitHub Security](https://github.com/etianen/logot/security).
+Please report vulnerabilities privately via [GitHub Security](https://github.com/etianen/radiopi/security).
