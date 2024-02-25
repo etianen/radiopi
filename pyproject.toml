@@ -1,4 +1,5 @@
 [tool.poetry]
+package-mode = false
 name = "radiopi"
 version = "0.1.0"
 description = "RadioPi control daemon"
@@ -6,8 +7,6 @@ authors = ["Dave Hall <dave@etianen.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/etianen/radiopi"
-classifiers = ["Private :: Do not Upload"]
-packages = [{ include = "radiopi" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
