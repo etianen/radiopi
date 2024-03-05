@@ -17,7 +17,7 @@ typing-extensions = "^4.10.0"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.4.3"
-logot = "^1.1.1"
+logot = "^1.2.0"
 mypy = "^1.8.0"
 pytest = "^8.0.2"
 ruff = "^0.2.2"
