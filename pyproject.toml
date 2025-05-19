@@ -20,7 +20,7 @@ coverage = "^7.8.0"
 logot = "^1.4.0"
 mypy = "^1.15.0"
 pytest = "^8.3.5"
-ruff = "^0.11.9"
+ruff = "^0.11.10"
 
 [tool.poetry.scripts]
 radiopi = "radiopi:main"
