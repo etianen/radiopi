@@ -13,7 +13,7 @@ packages = [{ include = "radiopi" }]
 python = "^3.9"
 gpiozero = "^2.0"
 "rpi.gpio" = { version = "^0.7.1", markers = "sys_platform == 'linux'" }
-typing-extensions = "^4.13.2"
+typing-extensions = "^4.14.0"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.8.2"
