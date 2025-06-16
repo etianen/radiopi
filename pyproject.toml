@@ -16,7 +16,7 @@ gpiozero = "^2.0"
 typing-extensions = "^4.13.2"
 
 [tool.poetry.group.dev.dependencies]
-coverage = "^7.8.2"
+coverage = "^7.9.1"
 logot = "^1.4.0"
 mypy = "^1.15.0"
 pytest = "^8.3.5"
